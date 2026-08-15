@@ -1,0 +1,101 @@
+:root {
+  --text: #2d2a32;
+  --text-muted: #6b6375;
+  --bg: #ffffff;
+  --border: #d9d7dd;
+  --accent: #7c3aed;
+  --accent-bg: #f3ebff;
+  --danger: #b91c1c;
+
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+
+  font: 16px/1.5 var(--sans);
+  color: var(--text);
+  background: var(--bg);
+  color-scheme: light dark;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #e5e3e8;
+    --text-muted: #a29daa;
+    --bg: #17161b;
+    --border: #38363f;
+    --accent: #c084fc;
+    --accent-bg: #2a2033;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin: 0 0 0.5rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+  margin: 0 0 0.5rem;
+}
+
+/* Touch-friendly form controls — instructors and students both use this on phones/tablets. */
+input,
+select,
+button {
+  font: inherit;
+  font-size: 1rem;
+  min-height: 2.75rem;
+}
+
+button {
+  cursor: pointer;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+  padding: 0 1rem;
+}
+
+button:hover {
+  border-color: var(--accent);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button[type="submit"] {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+input,
+select {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0 0.6rem;
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: var(--accent);
+}
+
+table {
+  width: 100%;
+}
+
+th,
+td {
+  border-bottom: 1px solid var(--border);
+}
