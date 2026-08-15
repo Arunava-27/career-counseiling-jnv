@@ -3,7 +3,11 @@ services:
     name: career-counseling
     runtime: node
     plan: free
-    buildCommand: npm install && npm run build
+    # --include=dev is required here: Render sets NODE_ENV=production during the build
+    # step too (not just at runtime), and npm skips devDependencies (vite, typescript,
+    # tsx, etc.) by default in that mode — without this flag the build fails with
+    # "Cannot find module 'vite'".
+    buildCommand: npm install --include=dev && npm run build
     startCommand: npm start
     envVars:
       - key: NODE_ENV
