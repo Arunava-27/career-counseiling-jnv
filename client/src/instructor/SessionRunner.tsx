@@ -24,13 +24,21 @@ export function SessionRunner() {
   }, [sessionId]);
 
   useEffect(() => {
+    const port = window.location.port ? `:${window.location.port}` : "";
+
+    // If this page was reached via anything other than localhost — a public domain when
+    // deployed, or a LAN IP typed directly on the local network — that address is already
+    // exactly what a student's device should use too, so use it as-is with no lookup.
+    if (window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+      setLanUrl(`${window.location.protocol}//${window.location.host}`);
+      return;
+    }
+
+    // Only when the instructor's own browser is on localhost (their laptop, offline
+    // classroom setup) do we need to substitute a LAN IP a phone/smartboard can actually
+    // reach — localhost on THIS machine means nothing on another device.
     api.serverInfo().then((info) => {
       const host = info.lanAddresses[0] ?? window.location.hostname;
-      // Use the port this page itself was loaded on, not the API server's port — in dev mode
-      // those differ (Vite serves the app, Express only serves /api), so pointing students at
-      // the API server's port gives them a 404 instead of the join page. Whatever port got us
-      // this page is guaranteed to actually serve the app.
-      const port = window.location.port ? `:${window.location.port}` : "";
       setLanUrl(`${window.location.protocol}//${host}${port}`);
     });
   }, []);
