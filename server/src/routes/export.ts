@@ -48,8 +48,9 @@ exportRouter.get("/sessions.csv", async (_req, res) => {
 exportRouter.get("/poll-responses.csv", async (_req, res) => {
   const rows = (await db
     .prepare(
-      `SELECT s.session_number, c.name as class_section_name, p.title as poll_title,
+      `SELECT s.session_number, c.name as session_class_section_name, p.title as poll_title,
               pq.text as question_text, part.display_name as participant_name,
+              part.class_name, part.section, part.roll_number,
               pr.answer_json, pr.submitted_at
        FROM poll_responses pr
        JOIN poll_questions pq ON pq.id = pr.question_id
@@ -61,10 +62,23 @@ exportRouter.get("/poll-responses.csv", async (_req, res) => {
     )
     .all()) as Record<string, unknown>[];
 
-  const flattened = rows.map((r) => ({
-    ...r,
-    answer: JSON.parse(String(r.answer_json)),
-  }));
+  // Prefers the student's own stated class/section over the session's, falling back for older
+  // records taken before that was captured per-student.
+  const flattened = rows.map((r) => {
+    const className = r.class_name as string | null;
+    const section = r.section as string | null;
+    const classSection = className || section ? [className, section].filter(Boolean).join(" ") : r.session_class_section_name;
+    return {
+      session_number: r.session_number,
+      class_section_name: classSection,
+      roll_number: r.roll_number,
+      poll_title: r.poll_title,
+      question_text: r.question_text,
+      participant_name: r.participant_name,
+      answer: JSON.parse(String(r.answer_json)),
+      submitted_at: r.submitted_at,
+    };
+  });
 
   sendCsv(
     res,
@@ -72,6 +86,7 @@ exportRouter.get("/poll-responses.csv", async (_req, res) => {
     toCsv(flattened, [
       "session_number",
       "class_section_name",
+      "roll_number",
       "poll_title",
       "question_text",
       "participant_name",
@@ -84,9 +99,9 @@ exportRouter.get("/poll-responses.csv", async (_req, res) => {
 exportRouter.get("/assessment-results.csv", async (_req, res) => {
   const rows = (await db
     .prepare(
-      `SELECT s.session_number, c.name as class_section_name, ai.name as instrument_name,
-              part.display_name as participant_name, ar.answers_json, ar.submitted_at,
-              aq.id as question_id, aq.scoring_dimension
+      `SELECT s.session_number, c.name as session_class_section_name, ai.name as instrument_name,
+              part.display_name as participant_name, part.class_name, part.section, part.roll_number,
+              ar.answers_json, ar.submitted_at, aq.id as question_id, aq.scoring_dimension
        FROM assessment_responses ar
        JOIN assessment_instruments ai ON ai.id = ar.instrument_id
        JOIN sessions s ON s.id = ar.session_id
@@ -97,21 +112,28 @@ exportRouter.get("/assessment-results.csv", async (_req, res) => {
     )
     .all()) as {
     session_number: number;
-    class_section_name: string | null;
+    session_class_section_name: string | null;
     instrument_name: string;
     participant_name: string;
+    class_name: string | null;
+    section: string | null;
+    roll_number: string | null;
     answers_json: string;
     submitted_at: string;
     question_id: number;
     scoring_dimension: string | null;
   }[];
 
-  // One row per (participant, dimension) with the answered value for that question.
+  // One row per (participant, dimension) with the answered value for that question. Prefers
+  // the student's own stated class/section (mandatory per-student now) over the session's,
+  // falling back for older records taken before that was captured individually.
   const flattened = rows.map((r) => {
     const answers = JSON.parse(r.answers_json) as Record<string, string>;
+    const classSection = r.class_name || r.section ? [r.class_name, r.section].filter(Boolean).join(" ") : r.session_class_section_name;
     return {
       session_number: r.session_number,
-      class_section_name: r.class_section_name,
+      class_section_name: classSection,
+      roll_number: r.roll_number,
       instrument_name: r.instrument_name,
       participant_name: r.participant_name,
       scoring_dimension: r.scoring_dimension,
@@ -126,6 +148,7 @@ exportRouter.get("/assessment-results.csv", async (_req, res) => {
     toCsv(flattened, [
       "session_number",
       "class_section_name",
+      "roll_number",
       "instrument_name",
       "participant_name",
       "scoring_dimension",

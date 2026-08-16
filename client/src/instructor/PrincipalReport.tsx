@@ -12,7 +12,7 @@ export function PrincipalReport() {
   }, []);
 
   return (
-    <div style={{ padding: "1.5rem", fontFamily: "sans-serif", maxWidth: "900px", margin: "0 auto" }}>
+    <div style={{ padding: "1.5rem", fontFamily: "var(--sans)", maxWidth: "900px", margin: "0 auto" }}>
       <style>{`
         @media print {
           .no-print { display: none !important; }
@@ -20,28 +20,34 @@ export function PrincipalReport() {
         }
         .report-input {
           border: none;
-          border-bottom: 1px dashed #999;
+          border-bottom: 1px dashed var(--border-strong);
           font: inherit;
           text-align: center;
           width: 100%;
           background: transparent;
+          color: var(--text);
         }
         table.report-table { border-collapse: collapse; width: 100%; margin-bottom: 2rem; }
         table.report-table th, table.report-table td {
-          border: 1px solid #ccc;
-          padding: 0.4rem 0.6rem;
+          border: 1px solid var(--border-strong);
+          padding: 0.45rem 0.7rem;
           text-align: left;
           font-size: 0.9rem;
         }
-        table.report-table th { background: #f5f5f5; }
+        table.report-table th { background: var(--surface-2); }
+        table.report-table tbody tr:nth-child(even) { background: var(--surface-2); }
       `}</style>
 
-      <div className="no-print" style={{ display: "flex", justifyContent: "space-between", marginBottom: "1rem" }}>
-        <Link to="/console">&larr; Back to Dashboard</Link>
-        <button onClick={() => window.print()}>Print / Save as PDF</button>
+      <div className="no-print topbar">
+        <Link className="back-link" to="/console" style={{ marginBottom: 0 }}>
+          ← Back to Dashboard
+        </Link>
+        <button className="btn-primary" onClick={() => window.print()}>
+          🖨️ Print / Save as PDF
+        </button>
       </div>
 
-      <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+      <div style={{ textAlign: "center", marginBottom: "1.75rem" }}>
         <input
           className="report-input"
           style={{ fontSize: "1.4rem", fontWeight: "bold" }}
@@ -54,17 +60,17 @@ export function PrincipalReport() {
           value={programmeLabel}
           onChange={(e) => setProgrammeLabel(e.target.value)}
         />
-        <h2 style={{ marginTop: "0.8rem" }}>Psychometric Assessment Report</h2>
-        <p style={{ fontSize: "0.85rem", color: "#666" }}>
-          Generated {new Date().toLocaleDateString()} &middot; {report.reduce((n, i) => n + i.participants.length, 0)}{" "}
-          total responses across {report.length} instrument{report.length === 1 ? "" : "s"}
+        <h2 style={{ marginTop: "0.9rem" }}>Psychometric Assessment Report</h2>
+        <p className="muted">
+          Generated {new Date().toLocaleDateString()} · {report.reduce((n, i) => n + i.participants.length, 0)} total
+          responses across {report.length} instrument{report.length === 1 ? "" : "s"}
         </p>
       </div>
 
       {report.map((instrument) => (
-        <div key={instrument.instrument_id}>
+        <div key={instrument.instrument_id} className="card" style={{ marginBottom: "1.25rem" }}>
           <h3>{instrument.name}</h3>
-          {instrument.description && <p style={{ fontSize: "0.85rem", color: "#666" }}>{instrument.description}</p>}
+          {instrument.description && <p className="muted" style={{ marginBottom: "0.7rem" }}>{instrument.description}</p>}
           <table className="report-table">
             <thead>
               <tr>
@@ -91,7 +97,7 @@ export function PrincipalReport() {
               ))}
               {instrument.participants.length === 0 && (
                 <tr>
-                  <td colSpan={4 + instrument.dimensions.length} style={{ color: "#999" }}>
+                  <td colSpan={4 + instrument.dimensions.length} className="empty-state">
                     No responses recorded yet.
                   </td>
                 </tr>
@@ -101,7 +107,19 @@ export function PrincipalReport() {
         </div>
       ))}
 
-      {report.length === 0 && <p>No assessment instruments found.</p>}
+      {report.length === 0 && <p className="empty-state">No assessment instruments found.</p>}
+
+      <div style={{ marginTop: "3.5rem", display: "flex", justifyContent: "space-between", gap: "2rem" }}>
+        <div style={{ flex: 1, textAlign: "center" }}>
+          <div style={{ borderTop: "1px solid var(--text)", paddingTop: "0.4rem" }}>Instructor Signature</div>
+        </div>
+        <div style={{ flex: 1, textAlign: "center" }}>
+          <div style={{ borderTop: "1px solid var(--text)", paddingTop: "0.4rem" }}>Date</div>
+        </div>
+        <div style={{ flex: 1, textAlign: "center" }}>
+          <div style={{ borderTop: "1px solid var(--text)", paddingTop: "0.4rem" }}>Principal's Signature &amp; Seal</div>
+        </div>
+      </div>
     </div>
   );
 }

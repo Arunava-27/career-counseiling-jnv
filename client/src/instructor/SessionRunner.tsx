@@ -53,9 +53,11 @@ export function SessionRunner() {
 
   if (!session) {
     return (
-      <div style={{ padding: "1.5rem", fontFamily: "sans-serif" }}>
-        <p>Loading session...</p>
-        <Link to="/console">Back to Dashboard</Link>
+      <div className="page">
+        <p className="muted">Loading session…</p>
+        <Link className="back-link" to="/console">
+          ← Back to Dashboard
+        </Link>
       </div>
     );
   }
@@ -63,40 +65,95 @@ export function SessionRunner() {
   const joinUrl = lanUrl && session.join_code ? `${lanUrl}/join?code=${session.join_code}` : null;
 
   return (
-    <div style={{ padding: "1.5rem", fontFamily: "sans-serif" }}>
-      <Link to="/console">&larr; Back to Dashboard</Link>
-      <h1>
-        Session {session.session_number}: {session.topic_title}
-      </h1>
-      <p>
-        {session.class_section_name} &mdash; {session.instructor_name}
-      </p>
+    <div className="page">
+      <Link className="back-link" to="/console">
+        ← Back to Dashboard
+      </Link>
+
+      <div className="topbar" style={{ marginBottom: "0.5rem" }}>
+        <div>
+          <h1>
+            Session {session.session_number}: {session.topic_title ?? "Psychometry Test"}
+          </h1>
+          <p className="muted">
+            {[session.class_section_name, session.instructor_name].filter(Boolean).join(" · ") || " "}
+          </p>
+        </div>
+        <div className="row">
+          {!session.topic_id && <span className="badge badge-accent">🧭 Psychometry only</span>}
+          {session.status !== "in_progress" && (
+            <span className="badge badge-neutral">{session.status.replace("_", " ")}</span>
+          )}
+        </div>
+      </div>
 
       {session.status === "in_progress" && (
-        <div style={{ display: "flex", gap: "2rem", alignItems: "flex-start", marginTop: "1rem" }}>
-          <div>
-            <h2>Join Code: {session.join_code}</h2>
-            {joinUrl && <QRCodeSVG value={joinUrl} size={220} />}
-            {joinUrl && <p style={{ fontSize: "0.85rem", wordBreak: "break-all" }}>{joinUrl}</p>}
+        <div
+          className="row"
+          style={{ alignItems: "stretch", gap: "1rem", flexWrap: "wrap", marginTop: "1rem" }}
+        >
+          <div className="card" style={{ flex: "0 0 auto", textAlign: "center" }}>
+            <h2>Join Code</h2>
+            <div
+              style={{
+                fontSize: "1.8rem",
+                fontWeight: 800,
+                letterSpacing: "0.12em",
+                color: "var(--accent)",
+                margin: "0.2rem 0 0.7rem",
+              }}
+            >
+              {session.join_code}
+            </div>
+            {joinUrl && (
+              <div style={{ background: "#fff", padding: "0.6rem", borderRadius: "var(--radius-sm)", display: "inline-block" }}>
+                <QRCodeSVG value={joinUrl} size={180} />
+              </div>
+            )}
+            {joinUrl && (
+              <p className="faint" style={{ marginTop: "0.6rem", maxWidth: "220px", wordBreak: "break-all" }}>
+                {joinUrl}
+              </p>
+            )}
           </div>
-          <div>
+          <div className="card" style={{ flex: "1 1 240px" }}>
             <h2>Participants ({participants.length})</h2>
-            <ul>
-              {participants.map((p) => (
-                <li key={p.id}>
-                  {p.display_name}
-                  {p.roll_number && ` (${p.roll_number})`}
-                </li>
-              ))}
-            </ul>
+            {participants.length === 0 ? (
+              <p className="empty-state">No one has joined yet.</p>
+            ) : (
+              <ul style={{ margin: 0, paddingLeft: "1.1rem" }}>
+                {participants.map((p) => (
+                  <li key={p.id} style={{ marginBottom: "0.2rem" }}>
+                    {p.display_name}
+                    {(p.class_name || p.section || p.roll_number) && (
+                      <span className="faint">
+                        {" — "}
+                        {[p.class_name && `Class ${p.class_name}`, p.section && `Sec ${p.section}`, p.roll_number && `Roll ${p.roll_number}`]
+                          .filter(Boolean)
+                          .join(", ")}
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       )}
 
-      {session.status !== "in_progress" && <p>This session is {session.status}.</p>}
+      {session.status !== "in_progress" && (
+        <div className="empty-state" style={{ marginTop: "1rem" }}>
+          This session is {session.status.replace("_", " ")}.
+        </div>
+      )}
 
-      {session.status === "in_progress" && <TopicContent topicId={session.topic_id} />}
-      {session.status === "in_progress" && <PollManager sessionId={sessionId} topicId={session.topic_id} />}
+      {/* No topic assigned = a deliberate psychometry-only session (see the Dashboard's "Start
+          Psychometry Test" shortcut) — Topic Content and Polls have nothing to show and would
+          just be clutter, so only the Psychometry Test panel renders. */}
+      {session.status === "in_progress" && session.topic_id && <TopicContent topicId={session.topic_id} />}
+      {session.status === "in_progress" && session.topic_id && (
+        <PollManager sessionId={sessionId} topicId={session.topic_id} />
+      )}
       {session.status === "in_progress" && <AssessmentManager session={session} />}
     </div>
   );

@@ -17,91 +17,308 @@ export interface TopicBankEntry {
 }
 
 // One discussion poll (opinion/engagement, no right answer) and one scored quiz
-// (multiple-choice with a correct_answer) per curriculum topic. Topics 18-25 —
-// Competitive English through Career Planning, the exam-prep/aptitude stretch that
-// typically lands in the programme's closing days — get genuinely harder, exam-style
-// quiz questions rather than simple comprehension checks.
+// (multiple-choice with a correct_answer) per curriculum topic — 5 questions each, so
+// instructors have real variety across repeat cohorts/years instead of using the same 3
+// every time. Topics 18-25 — Competitive English through Career Planning, the
+// exam-prep/aptitude stretch that typically lands in the programme's closing days — get
+// genuinely harder, exam-style quiz questions rather than simple comprehension checks.
 export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
   {
-    topicTitle: "Introduction to Career Counselling & Future of Careers",
+    topicTitle: "Discovering My Interests",
     discussionPoll: {
-      title: "Discussion: Introduction to Career Counselling",
+      title: "Discussion: Discovering My Interests",
       type: "poll",
       questions: [
         {
-          text: "What do you hope to gain most from this career counselling programme?",
-          options: ["Understanding my interests", "Learning about new career options", "Improving my communication skills", "Help with decision making"],
+          text: "What's something you enjoy doing in your free time?",
+          options: ["Building or fixing things", "Reading or writing", "Playing sports/being active", "Hanging out with friends"],
         },
         {
-          text: "Which best describes how you currently feel about choosing a career?",
-          options: ["Confident and clear", "Curious but unsure", "Confused or anxious", "Haven't thought about it much"],
+          text: "Which of these sounds most like you?",
+          options: ["I like figuring out how things work", "I like creating things (art, music, stories)", "I like helping or teaching others", "I like being in charge of a group"],
         },
         {
-          text: "Which source do you trust most for career information?",
-          options: ["Teachers/counsellors", "Family members", "Internet/social media", "Friends/seniors"],
+          text: "How much have you thought about what you enjoy, versus what you're good at?",
+          options: ["A lot — I know both", "Mostly what I'm good at", "Mostly what I enjoy", "Haven't thought about either much"],
+        },
+        {
+          text: "Do you think your interests will change as you grow older?",
+          options: ["Yes, a lot", "Yes, a little", "No, they'll stay the same", "Not sure"],
+        },
+        {
+          text: "Which corner would you have picked in today's activity?",
+          options: ["Hands-On", "Creative", "Helping Others", "Leading & Organizing"],
         },
       ],
     },
     quizPoll: {
-      title: "Quiz: Introduction to Career Counselling",
+      title: "Quiz: Discovering My Interests",
       type: "quiz",
       questions: [
         {
-          text: "Career counselling primarily helps students to:",
-          options: ["Choose a career only based on marks", "Understand themselves and explore options", "Copy their parents' profession", "Avoid making any career decisions"],
-          correct_answer: "Understand themselves and explore options",
+          text: "An 'interest' is best described as:",
+          options: ["Something you're forced to do", "Something that makes you want to keep doing or learning more about it", "Something you're already the best at", "Something your parents chose for you"],
+          correct_answer: "Something that makes you want to keep doing or learning more about it",
         },
         {
-          text: "Which of the following is NOT a benefit of early career planning?",
-          options: ["Better subject/stream choices", "Reduced confusion later", "Guaranteed high salary", "More focused skill-building"],
-          correct_answer: "Guaranteed high salary",
+          text: "According to today's session, how many broad 'flavors' of interest were introduced?",
+          options: ["Three", "Four", "Six", "Ten"],
+          correct_answer: "Six",
         },
         {
-          text: "The 'future of work' is most shaped by:",
-          options: ["Fixed job roles that never change", "Technology, globalization, and changing industries", "Only government policies", "Luck"],
-          correct_answer: "Technology, globalization, and changing industries",
+          text: "Someone who enjoys building, fixing, and being outdoors fits which flavor?",
+          options: ["Creative", "Hands-on", "Organizing things", "Leading others"],
+          correct_answer: "Hands-on",
+        },
+        {
+          text: "Which is TRUE about interests?",
+          options: ["Everyone has only one interest", "Most people have a mix of a few interest flavors", "Interests never change", "You must already be good at something to be interested in it"],
+          correct_answer: "Most people have a mix of a few interest flavors",
+        },
+        {
+          text: "Why is it useful to notice your interests early?",
+          options: ["It guarantees a specific job", "It helps you pay attention to yourself on purpose", "It's required for school", "It has no real use"],
+          correct_answer: "It helps you pay attention to yourself on purpose",
         },
       ],
     },
   },
   {
-    topicTitle: "Traditional vs. Modern Career Paths",
+    topicTitle: "The World of Work",
     discussionPoll: {
-      title: "Discussion: Traditional vs. Modern Career Paths",
+      title: "Discussion: The World of Work",
       type: "poll",
       questions: [
         {
-          text: "Which sounds more appealing to you?",
-          options: ["A traditional stable job (govt/corporate)", "A modern flexible career (startup/freelance)", "Both equally", "Not sure yet"],
+          text: "Which industry sounds most interesting to you?",
+          options: ["Healthcare", "Technology", "Creative & Media", "Business"],
         },
         {
-          text: "Has your family suggested a specific traditional career for you?",
-          options: ["Yes, and I agree", "Yes, but I'm not sure", "No specific suggestion", "Haven't discussed it"],
+          text: "How many different jobs do you think exist in the world?",
+          options: ["Under 100", "A few hundred", "A few thousand", "Tens of thousands or more"],
         },
         {
-          text: "What matters most to you in a career?",
-          options: ["Job security", "Passion/interest", "High income", "Flexibility/freedom"],
+          text: "Have you ever met someone with a job you didn't know existed before?",
+          options: ["Yes, several times", "Yes, once or twice", "No, but I'd like to", "No, not that I remember"],
+        },
+        {
+          text: "Which job would you want to try for just one day?",
+          options: ["Something hands-on/outdoors", "Something creative", "Something with technology", "Something helping people"],
+        },
+        {
+          text: "Do you think a job you might do someday exists yet?",
+          options: ["Yes, definitely", "Maybe", "Probably not", "Not sure"],
         },
       ],
     },
     quizPoll: {
-      title: "Quiz: Traditional vs. Modern Career Paths",
+      title: "Quiz: The World of Work",
       type: "quiz",
       questions: [
         {
-          text: "Which is an example of a 'modern' career path?",
-          options: ["Bank clerk", "Content creator/influencer", "Government clerk", "Postal worker"],
-          correct_answer: "Content creator/influencer",
+          text: "An 'industry' is best described as:",
+          options: ["A single company", "A big category that groups similar kinds of jobs together", "A type of school subject", "A government department only"],
+          correct_answer: "A big category that groups similar kinds of jobs together",
         },
         {
-          text: "A key advantage of traditional career paths is often:",
-          options: ["High risk, high reward", "Job stability and structured growth", "No need for qualifications", "Constant career switching"],
-          correct_answer: "Job stability and structured growth",
+          text: "Which of these is an example of the Technology industry?",
+          options: ["App developer", "Farmer", "Postal worker", "Chef"],
+          correct_answer: "App developer",
         },
         {
-          text: "Modern career paths have grown mainly due to:",
-          options: ["Decrease in population", "Internet and digital technology", "Fewer traditional jobs existing", "Government mandates"],
-          correct_answer: "Internet and digital technology",
+          text: "Which statement is TRUE about jobs today?",
+          options: ["All jobs that exist today have always existed", "New jobs are being created all the time as the world changes", "Only a few dozen jobs exist in total", "Every job fits into exactly one industry with no overlap"],
+          correct_answer: "New jobs are being created all the time as the world changes",
+        },
+        {
+          text: "A drone pilot or app developer are examples of:",
+          options: ["Jobs that have existed for over 100 years", "Jobs that didn't exist a generation ago", "Government-only jobs", "Jobs that don't require any skill"],
+          correct_answer: "Jobs that didn't exist a generation ago",
+        },
+        {
+          text: "Almost everything around you — chairs, lights, buildings — was:",
+          options: ["Made by machines with no humans involved", "Designed, built, or run by someone doing a job", "Always there, nobody made it", "Irrelevant to careers"],
+          correct_answer: "Designed, built, or run by someone doing a job",
+        },
+      ],
+    },
+  },
+  {
+    topicTitle: "Everyone Has a Talent",
+    discussionPoll: {
+      title: "Discussion: Everyone Has a Talent",
+      type: "poll",
+      questions: [
+        {
+          text: "What's one thing you think you're genuinely good at?",
+          options: ["A hands-on skill", "A creative skill", "Helping or listening to others", "Staying organized or focused"],
+        },
+        {
+          text: "How comfortable are you naming your own strengths out loud?",
+          options: ["Very comfortable", "Somewhat comfortable", "A little uncomfortable", "Very uncomfortable"],
+        },
+        {
+          text: "Has someone ever pointed out a talent in you that you hadn't noticed yourself?",
+          options: ["Yes, definitely", "Maybe, a little", "Not that I recall", "No, never"],
+        },
+        {
+          text: "Which non-academic talent do you value most in a friend?",
+          options: ["Kindness", "Humor", "Reliability", "Creativity"],
+        },
+        {
+          text: "Do you think talents can be improved with practice?",
+          options: ["Yes, all of them", "Some of them", "Not really", "Not sure"],
+        },
+      ],
+    },
+    quizPoll: {
+      title: "Quiz: Everyone Has a Talent",
+      type: "quiz",
+      questions: [
+        {
+          text: "Which of these is a talent that usually does NOT show up on a report card?",
+          options: ["Being kind and patient", "Maths test scores", "Spelling test results", "Attendance record"],
+          correct_answer: "Being kind and patient",
+        },
+        {
+          text: "A great team is best described as:",
+          options: ["A group where everyone has the exact same strength", "A group where different strengths combine together", "A group with only one leader and no other roles", "A group that never disagrees"],
+          correct_answer: "A group where different strengths combine together",
+        },
+        {
+          text: "Why do people sometimes not notice their own talents?",
+          options: ["Because they don't have any", "Because talents that come naturally can feel unremarkable to the person who has them", "Because talents are always obvious to everyone", "Because only rare people have talents"],
+          correct_answer: "Because talents that come naturally can feel unremarkable to the person who has them",
+        },
+        {
+          text: "Which is an example of a leadership-related talent?",
+          options: ["Organizing a group activity", "Solving a maths problem alone", "Reading quietly", "Memorizing facts"],
+          correct_answer: "Organizing a group activity",
+        },
+        {
+          text: "Recognizing everyone's different talents in a team helps mainly by:",
+          options: ["Making one person do all the work", "Letting the team use each person's strengths effectively", "Making the team smaller", "Avoiding teamwork altogether"],
+          correct_answer: "Letting the team use each person's strengths effectively",
+        },
+      ],
+    },
+  },
+  {
+    topicTitle: "Speaking Up with Confidence",
+    discussionPoll: {
+      title: "Discussion: Speaking Up with Confidence",
+      type: "poll",
+      questions: [
+        {
+          text: "How nervous do you feel speaking in front of the class?",
+          options: ["Not nervous at all", "A little nervous", "Quite nervous", "Very nervous"],
+        },
+        {
+          text: "What worries you most about speaking up?",
+          options: ["Forgetting what to say", "Being laughed at", "My voice shaking", "Nothing really worries me"],
+        },
+        {
+          text: "How often do you get chances to speak in front of others?",
+          options: ["Often", "Sometimes", "Rarely", "Never"],
+        },
+        {
+          text: "Which of the three tools do you think would help you most?",
+          options: ["Breathing first", "Picking one friendly face", "Slowing down", "I don't need help"],
+        },
+        {
+          text: "How did the pair practice feel?",
+          options: ["Easy and comfortable", "A little awkward at first, then okay", "Quite uncomfortable", "I'd rather not say"],
+        },
+      ],
+    },
+    quizPoll: {
+      title: "Quiz: Speaking Up with Confidence",
+      type: "quiz",
+      questions: [
+        {
+          text: "Feeling nervous before speaking in public is:",
+          options: ["A sign you shouldn't speak", "Completely normal and manageable with practice", "Something only beginners feel", "Impossible to overcome"],
+          correct_answer: "Completely normal and manageable with practice",
+        },
+        {
+          text: "Taking one slow breath before speaking mainly helps by:",
+          options: ["Wasting time", "Calming your voice and nerves", "Making you forget your words", "Making the audience nervous too"],
+          correct_answer: "Calming your voice and nerves",
+        },
+        {
+          text: "Why does picking 'one friendly face' in the audience help?",
+          options: ["It's less overwhelming than trying to look at everyone", "It guarantees a perfect speech", "It's a rule you must follow exactly", "It has no real effect"],
+          correct_answer: "It's less overwhelming than trying to look at everyone",
+        },
+        {
+          text: "Nervous speaking often makes people:",
+          options: ["Speak too slowly", "Speak too fast without noticing", "Stop talking completely", "Speak too quietly always"],
+          correct_answer: "Speak too fast without noticing",
+        },
+        {
+          text: "The best way to build speaking confidence is to:",
+          options: ["Avoid all speaking opportunities", "Practice, starting with small and low-pressure situations", "Only speak once you're perfectly ready", "Memorize without understanding"],
+          correct_answer: "Practice, starting with small and low-pressure situations",
+        },
+      ],
+    },
+  },
+  {
+    topicTitle: "Working Together",
+    discussionPoll: {
+      title: "Discussion: Working Together",
+      type: "poll",
+      questions: [
+        {
+          text: "In a group project, what role do you usually take?",
+          options: ["Leader/organizer", "Idea person", "Helper/supporter", "Peacemaker"],
+        },
+        {
+          text: "What's the hardest part about working in a group for you?",
+          options: ["Getting my ideas heard", "Listening to others", "Sharing tasks fairly", "Handling disagreements"],
+        },
+        {
+          text: "How did the silent planning minute feel during the Tower Challenge?",
+          options: ["Strange but useful", "Frustrating", "Fine, no big deal", "I didn't mind it"],
+        },
+        {
+          text: "How do you feel about working in teams generally?",
+          options: ["I love it", "I'm okay with it", "I prefer working alone", "Depends on the team"],
+        },
+        {
+          text: "What matters most for a team to work well?",
+          options: ["Everyone being friends already", "Clear communication", "One strong leader", "Working fast"],
+        },
+      ],
+    },
+    quizPoll: {
+      title: "Quiz: Working Together",
+      type: "quiz",
+      questions: [
+        {
+          text: "A real team (not just a group standing together) needs:",
+          options: ["Everyone doing the exact same task", "Everyone being heard and sharing tasks fairly", "One person doing all the work", "No talking allowed ever"],
+          correct_answer: "Everyone being heard and sharing tasks fairly",
+        },
+        {
+          text: "When people disagree in a team, the best approach is to:",
+          options: ["Ignore the disagreement", "Work it out together instead of giving up or fighting", "Let the loudest person win", "Split into two separate teams"],
+          correct_answer: "Work it out together instead of giving up or fighting",
+        },
+        {
+          text: "In the Tower Challenge, the silent planning minute was meant to show:",
+          options: ["That talking is never useful", "How communication changes teamwork", "That silence always works better", "That planning doesn't matter"],
+          correct_answer: "How communication changes teamwork",
+        },
+        {
+          text: "Communicating without words (like in Silent Line-Up) mainly requires:",
+          options: ["Giving up", "Careful gestures and paying attention to others", "Shouting louder", "Working alone instead"],
+          correct_answer: "Careful gestures and paying attention to others",
+        },
+        {
+          text: "Good teamwork is important because:",
+          options: ["It's only useful in sports", "It's a skill needed in school, friendships, and future jobs", "It's not actually useful", "Only adults need it"],
+          correct_answer: "It's a skill needed in school, friendships, and future jobs",
         },
       ],
     },
@@ -124,6 +341,14 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
           text: "How do you usually learn about new career trends?",
           options: ["Social media", "News/articles", "School/teachers", "I don't follow trends"],
         },
+        {
+          text: "Which emerging trend do you think will affect India the most in the next decade?",
+          options: ["Automation/AI", "Climate/renewable energy", "Digital economy/e-commerce", "Healthcare innovation"],
+        },
+        {
+          text: "Would you be willing to move to a new city for an emerging-field career?",
+          options: ["Yes, definitely", "Maybe, if needed", "Only within my state", "No, I'd rather stay local"],
+        },
       ],
     },
     quizPoll: {
@@ -145,6 +370,16 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
           options: ["Handwriting speed", "Digital/computer literacy", "Memorizing facts", "None of the above"],
           correct_answer: "Digital/computer literacy",
         },
+        {
+          text: "'Gig economy' refers to:",
+          options: ["Permanent full-time-only jobs", "Short-term, flexible, project-based work", "Government jobs only", "Unpaid internships"],
+          correct_answer: "Short-term, flexible, project-based work",
+        },
+        {
+          text: "Which of these is an emerging trend directly created by growing internet access in smaller towns?",
+          options: ["Decline of all online business", "Rise of regional-language content creators", "Fewer digital payment users", "Less demand for delivery services"],
+          correct_answer: "Rise of regional-language content creators",
+        },
       ],
     },
   },
@@ -156,7 +391,7 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
       questions: [
         {
           text: "How do you feel about AI's impact on future jobs?",
-          options: ["Excited about new opportunities", "Worried about job loss", "Both excited and worried", "Haven't thought about it"],
+          options: ["Excited about new opportunities", "Worried about job loss", "Both excited and worried", "Haven't thought about it much"],
         },
         {
           text: "Have you personally used an AI tool (like a chatbot)?",
@@ -165,6 +400,14 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
         {
           text: "Which industry do you think AI will change the most?",
           options: ["Healthcare", "Education", "Transportation", "Entertainment"],
+        },
+        {
+          text: "Have you ever worried that AI could replace the career you want?",
+          options: ["Yes, often", "Yes, occasionally", "Rarely", "Never"],
+        },
+        {
+          text: "Would you want to learn how to build/use AI tools yourself?",
+          options: ["Yes, very interested", "Maybe, if it's easy to learn", "Not particularly", "No interest at all"],
         },
       ],
     },
@@ -187,6 +430,16 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
           options: ["Avoiding technology completely", "Building skills machines can't easily replace (creativity, empathy, critical thinking)", "Only memorizing textbooks", "Ignoring digital skills"],
           correct_answer: "Building skills machines can't easily replace (creativity, empathy, critical thinking)",
         },
+        {
+          text: "Which best describes 'automation'?",
+          options: ["Using machines/software to perform tasks with minimal human input", "Any use of electricity", "A type of career field", "A government scheme"],
+          correct_answer: "Using machines/software to perform tasks with minimal human input",
+        },
+        {
+          text: "AI is generally weakest at tasks requiring:",
+          options: ["Fast calculations", "Repetitive data processing", "Genuine empathy and nuanced human judgment", "Pattern recognition in large datasets"],
+          correct_answer: "Genuine empathy and nuanced human judgment",
+        },
       ],
     },
   },
@@ -207,6 +460,14 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
         {
           text: "Which matters more when picking an industry?",
           options: ["Personal interest", "Salary potential", "Family expectations", "Job availability"],
+        },
+        {
+          text: "Which industry do you know the LEAST about?",
+          options: ["Engineering/Technology", "Healthcare/Medicine", "Commerce/Business", "Arts/Creative fields"],
+        },
+        {
+          text: "Have you ever spoken to someone working in a field you're curious about?",
+          options: ["Yes, several people", "Yes, one person", "No, but I'd like to", "No, and not planning to"],
         },
       ],
     },
@@ -229,47 +490,75 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
           options: ["Government service", "Self-employment", "Defence", "None of the above"],
           correct_answer: "Self-employment",
         },
+        {
+          text: "Which pair correctly matches an industry with a career within it?",
+          options: ["Agriculture — Agronomist", "Retail — Radiologist", "Defence — Choreographer", "Aviation — Pathologist"],
+          correct_answer: "Agriculture — Agronomist",
+        },
+        {
+          text: "A career that spans MULTIPLE industries at once is best exemplified by:",
+          options: ["A data analyst working across healthcare, finance, and retail projects", "A job that only exists in one factory", "A role banned from changing sectors", "None of the above"],
+          correct_answer: "A data analyst working across healthcare, finance, and retail projects",
+        },
       ],
     },
   },
   {
-    topicTitle: "Skills for Future Careers",
+    topicTitle: "Choosing a Stream",
     discussionPoll: {
-      title: "Discussion: Skills for Future Careers",
+      title: "Discussion: Choosing a Stream",
       type: "poll",
       questions: [
         {
-          text: "Which future-ready skill do you feel most confident in?",
-          options: ["Digital literacy", "Communication", "Problem-solving", "Continuous learning"],
+          text: "How clear are you about which stream you want after Class 10?",
+          options: ["Very clear", "Somewhat clear", "Not really", "No idea yet"],
         },
         {
-          text: "Which skill do you most want to improve?",
-          options: ["Digital literacy", "Communication", "Problem-solving", "Teamwork"],
+          text: "What's influencing your stream choice most right now?",
+          options: ["My own interests", "My marks in certain subjects", "Family expectations", "What my friends are choosing"],
         },
         {
-          text: "How do you usually pick up new skills?",
-          options: ["Online courses/videos", "School lessons", "Practicing on my own", "Learning from friends/family"],
+          text: "Have you ever heard the myth that 'Science is for smart students'?",
+          options: ["Yes, often", "Yes, a few times", "No, never heard it", "Not sure"],
+        },
+        {
+          text: "Who would you most want to talk to before deciding your stream?",
+          options: ["Parents/family", "Teachers", "Seniors who've already chosen", "A career counsellor"],
+        },
+        {
+          text: "How much does this decision worry you right now?",
+          options: ["A lot", "Somewhat", "A little", "Not at all"],
         },
       ],
     },
     quizPoll: {
-      title: "Quiz: Skills for Future Careers",
+      title: "Quiz: Choosing a Stream",
       type: "quiz",
       questions: [
         {
-          text: "Which of these is considered a 'soft skill'?",
-          options: ["Coding in Python", "Communication", "Operating machinery", "Typing speed"],
-          correct_answer: "Communication",
+          text: "Choosing a stream mainly changes:",
+          options: ["Your personality permanently", "Your subjects, relevant exams, and eligible college courses", "Nothing at all", "Only your friend group"],
+          correct_answer: "Your subjects, relevant exams, and eligible college courses",
         },
         {
-          text: "Digital literacy mainly means:",
-          options: ["Owning the latest phone", "Ability to effectively use digital tools and information", "Watching videos online", "Playing video games"],
-          correct_answer: "Ability to effectively use digital tools and information",
+          text: "The idea that 'Science is for smart students, Commerce and Arts are for the rest' is:",
+          options: ["Completely true", "A damaging myth — streams reflect interests, not intelligence", "Only true in some schools", "An official rule"],
+          correct_answer: "A damaging myth — streams reflect interests, not intelligence",
         },
         {
-          text: "Why is 'continuous learning' important for future careers?",
-          options: ["Because exams never end", "Because industries and technology keep changing", "Because it's required by law", "It isn't important"],
-          correct_answer: "Because industries and technology keep changing",
+          text: "Switching streams after choosing one is:",
+          options: ["Completely impossible", "Harder, but not impossible", "Always easy", "Illegal"],
+          correct_answer: "Harder, but not impossible",
+        },
+        {
+          text: "Which is the best foundation for choosing a stream?",
+          options: ["Copying a friend's choice", "Combining genuine interest, self-reflection, and research", "Picking randomly", "Choosing whatever is easiest"],
+          correct_answer: "Combining genuine interest, self-reflection, and research",
+        },
+        {
+          text: "JEE and NEET are examples of:",
+          options: ["School subjects", "Competitive exams linked to specific streams", "Stream names", "Career counselling programmes"],
+          correct_answer: "Competitive exams linked to specific streams",
         },
       ],
     },
@@ -292,6 +581,14 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
           text: "Which best describes you?",
           options: ["I prefer working with people", "I prefer working with ideas", "I prefer working with things/tools", "I prefer working with data/numbers"],
         },
+        {
+          text: "How often do you set aside quiet time to think about your own goals?",
+          options: ["Regularly", "Occasionally", "Rarely", "Never"],
+        },
+        {
+          text: "Which is closer to how you make choices?",
+          options: ["Based on logic/facts", "Based on feelings/values", "A mix of both", "I usually let others decide"],
+        },
       ],
     },
     quizPoll: {
@@ -313,137 +610,21 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
           options: ["Typing speed", "Honesty", "Coding ability", "Public speaking"],
           correct_answer: "Honesty",
         },
-      ],
-    },
-  },
-  {
-    topicTitle: "Interests & Personality Assessment",
-    discussionPoll: {
-      title: "Discussion: Interests & Personality",
-      type: "poll",
-      questions: [
         {
-          text: "Which type of activity do you enjoy most?",
-          options: ["Hands-on/practical work", "Research and investigation", "Creative/artistic work", "Helping/teaching others"],
+          text: "Which of these is an example of a value (not a skill or interest)?",
+          options: ["Typing speed", "Fairness", "Drawing ability", "Football"],
+          correct_answer: "Fairness",
         },
         {
-          text: "Are you more of an introvert or extrovert?",
-          options: ["Introvert", "Extrovert", "A bit of both", "Not sure"],
-        },
-        {
-          text: "Have you ever taken a personality test before?",
-          options: ["Yes, and I found it accurate", "Yes, but I wasn't sure about it", "No, but I'm curious", "No, not interested"],
-        },
-      ],
-    },
-    quizPoll: {
-      title: "Quiz: Interests & Personality Assessment",
-      type: "quiz",
-      questions: [
-        {
-          text: "A personality assessment is designed to help you understand:",
-          options: ["Your exam marks", "Your behavioural traits and preferences", "Your family background", "Your height and weight"],
-          correct_answer: "Your behavioural traits and preferences",
-        },
-        {
-          text: "Interest inventories in career counselling are used to:",
-          options: ["Rank students against each other", "Match personal interests to career fields", "Decide final exam grades", "Replace the need for hard work"],
-          correct_answer: "Match personal interests to career fields",
-        },
-        {
-          text: "Which is TRUE about personality and career fit?",
-          options: ["Personality has no link to career satisfaction", "A good personality-career fit can improve job satisfaction", "Only one personality type can be successful", "Personality never changes with experience"],
-          correct_answer: "A good personality-career fit can improve job satisfaction",
+          text: "Understanding yourself helps career planning mainly by:",
+          options: ["Making the process harder", "Narrowing choices toward what genuinely fits you", "Guaranteeing a specific job", "Replacing the need for research"],
+          correct_answer: "Narrowing choices toward what genuinely fits you",
         },
       ],
     },
   },
   {
-    topicTitle: "Strengths, Weaknesses & Learning Styles",
-    discussionPoll: {
-      title: "Discussion: Strengths, Weaknesses & Learning Styles",
-      type: "poll",
-      questions: [
-        {
-          text: "How do you learn best?",
-          options: ["Seeing (visual)", "Hearing (auditory)", "Reading/writing", "Doing (hands-on)"],
-        },
-        {
-          text: "What's one strength you're proud of?",
-          options: ["Creativity", "Discipline/hard work", "Communication", "Problem-solving"],
-        },
-        {
-          text: "How comfortable are you talking about your weaknesses?",
-          options: ["Very comfortable", "Somewhat comfortable", "A little uncomfortable", "Very uncomfortable"],
-        },
-      ],
-    },
-    quizPoll: {
-      title: "Quiz: Strengths, Weaknesses & Learning Styles",
-      type: "quiz",
-      questions: [
-        {
-          text: "Identifying your weaknesses is useful mainly because:",
-          options: ["It helps you know what to improve", "It's meant to discourage you", "It has no real use", "It's only for teachers to judge you"],
-          correct_answer: "It helps you know what to improve",
-        },
-        {
-          text: "A 'kinesthetic' learner learns best through:",
-          options: ["Listening to lectures", "Reading textbooks", "Hands-on activities and movement", "Watching diagrams only"],
-          correct_answer: "Hands-on activities and movement",
-        },
-        {
-          text: "Which statement about strengths and weaknesses is most accurate?",
-          options: ["Everyone has the exact same strengths", "Strengths and weaknesses can change over time with effort", "Weaknesses can never be improved", "Only weaknesses matter in career planning"],
-          correct_answer: "Strengths and weaknesses can change over time with effort",
-        },
-      ],
-    },
-  },
-  {
-    topicTitle: "Career Interest Assessment (Psychometric Test)",
-    discussionPoll: {
-      title: "Discussion: Taking the Psychometric Test",
-      type: "poll",
-      questions: [
-        {
-          text: "How are you feeling about taking this psychometric test?",
-          options: ["Excited", "Nervous", "Curious", "Neutral"],
-        },
-        {
-          text: "Do you think a test can accurately capture your interests?",
-          options: ["Yes, fully", "Partly", "Not really", "Not sure"],
-        },
-        {
-          text: "What do you hope the results will tell you?",
-          options: ["Which career suits me", "Confirmation of what I already think", "My strengths and weaknesses", "Just curious to see the result"],
-        },
-      ],
-    },
-    quizPoll: {
-      title: "Quiz: About Psychometric Testing",
-      type: "quiz",
-      questions: [
-        {
-          text: "A psychometric test in career counselling measures:",
-          options: ["Physical fitness", "Interests, aptitudes, or personality traits", "Exam marks only", "Attendance record"],
-          correct_answer: "Interests, aptitudes, or personality traits",
-        },
-        {
-          text: "For accurate results, you should answer psychometric test questions:",
-          options: ["Based on what your parents want", "Honestly, based on your own preferences", "Randomly", "Based on what seems impressive"],
-          correct_answer: "Honestly, based on your own preferences",
-        },
-        {
-          text: "Psychometric results are best used as:",
-          options: ["The single final decision-maker", "One helpful input among several for decision-making", "Something to ignore completely", "A ranking against classmates"],
-          correct_answer: "One helpful input among several for decision-making",
-        },
-      ],
-    },
-  },
-  {
-    topicTitle: "Understanding Psychometric Results",
+    topicTitle: "Understanding Your Results",
     discussionPoll: {
       title: "Discussion: Understanding Your Results",
       type: "poll",
@@ -459,6 +640,14 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
         {
           text: "What would help you most in understanding your results?",
           options: ["One-on-one discussion with a counsellor", "Written explanation", "Comparing with career options list", "Group discussion with classmates"],
+        },
+        {
+          text: "Would you want your parents to see your results too?",
+          options: ["Yes, definitely", "Maybe, with explanation", "I'd rather they didn't", "Not sure"],
+        },
+        {
+          text: "How much weight should a single test carry in a big decision like stream choice?",
+          options: ["It should decide everything", "It should be one important input", "It should be ignored completely", "Not sure"],
         },
       ],
     },
@@ -481,6 +670,16 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
           options: ["They can explain what the scores actually mean in context", "They will choose your career for you", "It's a school requirement only", "It replaces the need for self-reflection"],
           correct_answer: "They can explain what the scores actually mean in context",
         },
+        {
+          text: "A high score on a single RIASEC dimension mainly suggests:",
+          options: ["A guaranteed career match", "A relative preference compared to other dimensions", "You have no other interests", "You will succeed only in that field"],
+          correct_answer: "A relative preference compared to other dimensions",
+        },
+        {
+          text: "The most useful next step after getting your results is usually to:",
+          options: ["File them away and forget them", "Research careers linked to your top dimensions", "Immediately pick a final career", "Compare scores competitively with friends"],
+          correct_answer: "Research careers linked to your top dimensions",
+        },
       ],
     },
   },
@@ -501,6 +700,14 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
         {
           text: "What's the biggest challenge in setting your goals?",
           options: ["Too many options", "Fear of choosing wrong", "Lack of information", "Pressure from others"],
+        },
+        {
+          text: "Do you tend to decide quickly or take your time on big decisions?",
+          options: ["Quickly", "I take my time", "Depends on the decision", "I often avoid deciding"],
+        },
+        {
+          text: "What would help you make better decisions right now?",
+          options: ["More information", "More confidence", "More support from others", "More time"],
         },
       ],
     },
@@ -523,6 +730,16 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
           options: ["Deciding based on one factor only", "Considering interests, abilities, and opportunities together", "Letting others decide for you", "Avoiding decisions altogether"],
           correct_answer: "Considering interests, abilities, and opportunities together",
         },
+        {
+          text: "Long-term goals are best supported by:",
+          options: ["Ignoring short-term steps", "A series of connected short-term goals", "Waiting until the goal is close", "Random unrelated actions"],
+          correct_answer: "A series of connected short-term goals",
+        },
+        {
+          text: "Which is a sign of a poorly made decision-making process (not necessarily outcome)?",
+          options: ["Considering multiple options", "Deciding based on complete guesswork with no reflection", "Asking for advice", "Weighing pros and cons"],
+          correct_answer: "Deciding based on complete guesswork with no reflection",
+        },
       ],
     },
   },
@@ -543,6 +760,14 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
         {
           text: "Have you researched career options that match your interests?",
           options: ["Yes, thoroughly", "Yes, a little", "Not yet, but I plan to", "No, not yet"],
+        },
+        {
+          text: "Have you ever chosen an activity/subject purely because you enjoyed it, not because it was 'useful'?",
+          options: ["Yes, often", "Yes, sometimes", "Rarely", "Never"],
+        },
+        {
+          text: "If your top interest and your family's top choice for you don't match, what would you do?",
+          options: ["Follow my interest", "Follow family's choice", "Try to find a middle ground", "Not sure yet"],
         },
       ],
     },
@@ -565,6 +790,16 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
           options: ["Higher job satisfaction", "Lower motivation and job dissatisfaction", "Guaranteed promotion", "No effect at all"],
           correct_answer: "Lower motivation and job dissatisfaction",
         },
+        {
+          text: "A 'career cluster' groups together:",
+          options: ["Unrelated jobs randomly", "Careers sharing similar skills/interests/work environments", "Only government jobs", "Jobs in one company"],
+          correct_answer: "Careers sharing similar skills/interests/work environments",
+        },
+        {
+          text: "When interests and skills don't perfectly align, a sensible approach is to:",
+          options: ["Ignore skills entirely", "Ignore interests entirely", "Look for careers that blend both, or build the missing skill", "Give up on planning"],
+          correct_answer: "Look for careers that blend both, or build the missing skill",
+        },
       ],
     },
   },
@@ -585,6 +820,14 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
         {
           text: "In a conversation, do you focus more on talking or listening?",
           options: ["Mostly talking", "Mostly listening", "A balance of both", "Depends on the situation"],
+        },
+        {
+          text: "In your friend group, are you usually the one who talks or listens more?",
+          options: ["I talk more", "I listen more", "Balanced", "Depends on the group"],
+        },
+        {
+          text: "How comfortable are you giving feedback to someone else?",
+          options: ["Very comfortable", "Somewhat comfortable", "A little uncomfortable", "Very uncomfortable"],
         },
       ],
     },
@@ -607,6 +850,16 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
           options: ["Body language and facial expressions", "Only written words", "Only spoken words", "None of the above"],
           correct_answer: "Body language and facial expressions",
         },
+        {
+          text: "The sender-message-receiver model shows that communication breaks down when:",
+          options: ["The message is misunderstood at any stage", "Only when the sender makes a mistake", "Communication never breaks down", "Only in written communication"],
+          correct_answer: "The message is misunderstood at any stage",
+        },
+        {
+          text: "'Feedback' in communication is most useful when it is:",
+          options: ["Vague and general", "Specific and constructive", "Purely negative", "Given only once a year"],
+          correct_answer: "Specific and constructive",
+        },
       ],
     },
   },
@@ -627,6 +880,14 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
         {
           text: "What would help boost your confidence most?",
           options: ["More practice opportunities", "Positive feedback", "Preparation techniques", "Watching others speak well"],
+        },
+        {
+          text: "What's the biggest speaking opportunity you've had so far in life?",
+          options: ["A school event/stage", "A classroom presentation", "A small group conversation", "I haven't had one yet"],
+        },
+        {
+          text: "Would you volunteer to speak first in a group activity, or wait?",
+          options: ["Volunteer first", "Wait and watch others", "Depends on the topic", "Avoid it if I can"],
         },
       ],
     },
@@ -649,6 +910,16 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
           options: ["Avoiding all speaking opportunities", "Starting with small, low-pressure speaking situations", "Only speaking when perfectly ready", "Memorizing without understanding"],
           correct_answer: "Starting with small, low-pressure speaking situations",
         },
+        {
+          text: "Nervousness before speaking is:",
+          options: ["A sign you shouldn't speak", "A normal physical response that can be managed with practice", "Something only beginners feel", "Impossible to overcome"],
+          correct_answer: "A normal physical response that can be managed with practice",
+        },
+        {
+          text: "Which technique specifically helps calm speaking nerves in the moment?",
+          options: ["Speaking as fast as possible", "Slow, deep breaths before starting", "Avoiding eye contact completely", "Memorizing word-for-word with no flexibility"],
+          correct_answer: "Slow, deep breaths before starting",
+        },
       ],
     },
   },
@@ -669,6 +940,14 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
         {
           text: "How do you feel about working in teams?",
           options: ["I love it", "I'm okay with it", "I prefer working alone", "Depends on the team"],
+        },
+        {
+          text: "In a disagreement within a group, what do you usually do?",
+          options: ["Push my point strongly", "Compromise quickly", "Try to understand the other side first", "Stay quiet"],
+        },
+        {
+          text: "Do you prefer smaller or larger group discussions?",
+          options: ["Smaller groups", "Larger groups", "No preference", "I prefer working alone"],
         },
       ],
     },
@@ -691,6 +970,16 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
           options: ["Making all decisions alone", "Helping the team collaborate and reach goals together", "Taking all the credit", "Ignoring team members' input"],
           correct_answer: "Helping the team collaborate and reach goals together",
         },
+        {
+          text: "A 'groupthink' problem happens when:",
+          options: ["The group makes decisions too slowly", "Members avoid disagreement and don't challenge weak ideas", "Everyone works independently", "The group has too many leaders"],
+          correct_answer: "Members avoid disagreement and don't challenge weak ideas",
+        },
+        {
+          text: "Constructive conflict in a team is:",
+          options: ["Always harmful and to be avoided", "Can lead to better ideas when handled respectfully", "The same as personal conflict", "A sign the team has failed"],
+          correct_answer: "Can lead to better ideas when handled respectfully",
+        },
       ],
     },
   },
@@ -711,6 +1000,14 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
         {
           text: "How would you rate your current presentation skills?",
           options: ["Excellent", "Good", "Average", "Needs improvement"],
+        },
+        {
+          text: "Have you ever had to represent your class/school somewhere?",
+          options: ["Yes, more than once", "Yes, once", "No, but I'd like to", "No, and not interested"],
+        },
+        {
+          text: "How do you usually dress/prepare for something 'important'?",
+          options: ["I plan it carefully in advance", "I decide last minute but it works out", "I don't think about it much", "I get anxious about it"],
         },
       ],
     },
@@ -733,6 +1030,16 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
           options: ["Meeting deadlines and communicating clearly", "Avoiding all communication", "Ignoring team responsibilities", "Being unpredictable"],
           correct_answer: "Meeting deadlines and communicating clearly",
         },
+        {
+          text: "Punctuality in a professional setting mainly signals:",
+          options: ["Nothing important", "Respect for others' time and reliability", "That you're anxious", "That you dislike the job"],
+          correct_answer: "Respect for others' time and reliability",
+        },
+        {
+          text: "A presentation's visuals/slides should mainly:",
+          options: ["Contain every word you'll say", "Support and clarify your spoken points", "Be as colorful as possible regardless of content", "Be skipped entirely"],
+          correct_answer: "Support and clarify your spoken points",
+        },
       ],
     },
   },
@@ -753,6 +1060,14 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
         {
           text: "Which is harder for you?",
           options: ["Synonyms", "Antonyms", "Idioms", "Using words in context"],
+        },
+        {
+          text: "How many new English words do you think you learn in an average week?",
+          options: ["Many (10+)", "A few (3-9)", "1-2", "Almost none"],
+        },
+        {
+          text: "Do you enjoy reading in English outside of school requirements?",
+          options: ["Yes, regularly", "Sometimes", "Rarely", "Not at all"],
         },
       ],
     },
@@ -775,6 +1090,16 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
           options: ["To avoid saying something directly", "To work in a garden", "To win a competition", "To argue loudly"],
           correct_answer: "To avoid saying something directly",
         },
+        {
+          text: "Choose the synonym of 'Meticulous':",
+          options: ["Careless", "Careful and precise", "Fast", "Loud"],
+          correct_answer: "Careful and precise",
+        },
+        {
+          text: "Choose the antonym of 'Reluctant':",
+          options: ["Hesitant", "Willing", "Unsure", "Slow"],
+          correct_answer: "Willing",
+        },
       ],
     },
   },
@@ -795,6 +1120,14 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
         {
           text: "What's your biggest challenge in reading comprehension?",
           options: ["Understanding vocabulary", "Understanding the main idea", "Answering inference questions", "Time management"],
+        },
+        {
+          text: "Do you find spoken or written English grammar harder?",
+          options: ["Spoken", "Written", "Both equally", "Neither is hard for me"],
+        },
+        {
+          text: "How do you check your own grammar mistakes?",
+          options: ["Re-read carefully", "Ask someone else", "Use an app/tool", "I don't usually check"],
         },
       ],
     },
@@ -817,6 +1150,16 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
           options: ["Its a beautiful day, isnt it?", "It's a beautiful day, isn't it?", "Its a beautiful day, isn't it.", "It's a beautiful day isnt it"],
           correct_answer: "It's a beautiful day, isn't it?",
         },
+        {
+          text: "Choose the grammatically correct sentence:",
+          options: ["He go to school daily.", "He goes to school daily.", "He going to school daily.", "He gone to school daily."],
+          correct_answer: "He goes to school daily.",
+        },
+        {
+          text: "In reading comprehension, an 'inference' question asks you to:",
+          options: ["Find information stated word-for-word", "Conclude something implied but not directly stated", "Guess randomly", "Ignore the passage"],
+          correct_answer: "Conclude something implied but not directly stated",
+        },
       ],
     },
   },
@@ -837,6 +1180,14 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
         {
           text: "How do you usually practice maths?",
           options: ["Textbook problems", "Online quizzes/apps", "Practice tests", "I rarely practice"],
+        },
+        {
+          text: "Which do you find easier: percentages or ratios?",
+          options: ["Percentages", "Ratios", "Both equally easy", "Both equally hard"],
+        },
+        {
+          text: "How do you usually double-check a maths answer?",
+          options: ["Redo the calculation", "Estimate to see if it's reasonable", "Ask someone else", "I usually don't check"],
         },
       ],
     },
@@ -859,47 +1210,15 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
           options: ["20%", "25%", "30%", "50%"],
           correct_answer: "25%",
         },
-      ],
-    },
-  },
-  {
-    topicTitle: "Speed Mathematics & Calculation Tricks",
-    discussionPoll: {
-      title: "Discussion: Speed Mathematics",
-      type: "poll",
-      questions: [
         {
-          text: "How fast can you currently do calculations without a calculator?",
-          options: ["Very fast", "Average speed", "A bit slow", "Very slow"],
+          text: "What is 40% of 150?",
+          options: ["50", "60", "65", "70"],
+          correct_answer: "60",
         },
         {
-          text: "Which calculation trick would help you most?",
-          options: ["Fast multiplication", "Quick squares/cubes", "Percentage shortcuts", "Division shortcuts"],
-        },
-        {
-          text: "How much time pressure do you feel during timed maths tests?",
-          options: ["A lot", "Some", "A little", "None"],
-        },
-      ],
-    },
-    quizPoll: {
-      title: "Exam-Style Quiz: Speed Mathematics",
-      type: "quiz",
-      questions: [
-        {
-          text: "Using shortcuts, what is 15 × 15?",
-          options: ["215", "225", "235", "245"],
-          correct_answer: "225",
-        },
-        {
-          text: "What is the square of 21?",
-          options: ["441", "431", "451", "421"],
-          correct_answer: "441",
-        },
-        {
-          text: "What is 99 × 99 using the shortcut for numbers near 100?",
-          options: ["9801", "9701", "9601", "9901"],
-          correct_answer: "9801",
+          text: "Two numbers are in the ratio 4:5. If the smaller number is 20, what is the larger number?",
+          options: ["24", "25", "28", "30"],
+          correct_answer: "25",
         },
       ],
     },
@@ -922,6 +1241,14 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
           text: "How do you approach a tricky reasoning question?",
           options: ["Work through it step by step", "Look for patterns first", "Eliminate wrong options", "Guess if unsure"],
         },
+        {
+          text: "Do you enjoy solving riddles/puzzles in your free time?",
+          options: ["Yes, often", "Sometimes", "Rarely", "Never"],
+        },
+        {
+          text: "When stuck on a reasoning problem, what do you do first?",
+          options: ["Re-read the question carefully", "Try to eliminate wrong options", "Guess and move on", "Skip it entirely"],
+        },
       ],
     },
     quizPoll: {
@@ -943,6 +1270,16 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
           options: ["Sister", "Cousin", "Mother", "Aunt"],
           correct_answer: "Sister",
         },
+        {
+          text: "Find the odd one out: Apple, Banana, Carrot, Mango",
+          options: ["Apple", "Banana", "Carrot", "Mango"],
+          correct_answer: "Carrot",
+        },
+        {
+          text: "If today is Wednesday, what day will it be after 17 days?",
+          options: ["Saturday", "Sunday", "Friday", "Monday"],
+          correct_answer: "Saturday",
+        },
       ],
     },
   },
@@ -962,6 +1299,14 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
         },
         {
           text: "Which data format is hardest for you to interpret?",
+          options: ["Bar graphs", "Pie charts", "Tables", "Line graphs"],
+        },
+        {
+          text: "How often do you encounter charts/graphs outside school (news, apps, etc.)?",
+          options: ["Very often", "Sometimes", "Rarely", "Never"],
+        },
+        {
+          text: "Which data interpretation format do you find easiest?",
           options: ["Bar graphs", "Pie charts", "Tables", "Line graphs"],
         },
       ],
@@ -985,6 +1330,16 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
           options: ["123.3", "120", "135", "140"],
           correct_answer: "123.3",
         },
+        {
+          text: "A bar graph shows 4 cities' populations. Which is the best first step to answer 'which city has the highest population'?",
+          options: ["Guess based on city size reputation", "Compare bar heights directly", "Ignore the graph and estimate", "Add all bars together"],
+          correct_answer: "Compare bar heights directly",
+        },
+        {
+          text: "If a car travels 240 km using 20 litres of fuel, what is its mileage?",
+          options: ["10 km/l", "12 km/l", "14 km/l", "16 km/l"],
+          correct_answer: "12 km/l",
+        },
       ],
     },
   },
@@ -1005,6 +1360,14 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
         {
           text: "What worries you most about starting a business?",
           options: ["Financial risk", "Fear of failure", "Lack of knowledge", "Uncertainty/instability"],
+        },
+        {
+          text: "Do you personally know anyone who freelances or runs their own business?",
+          options: ["Yes, a family member", "Yes, a friend/acquaintance", "No, but I've heard of it", "No, not really"],
+        },
+        {
+          text: "What kind of business/service would you consider starting someday?",
+          options: ["Something tech-related", "Something creative/artistic", "Something service-based (tutoring, repair, etc.)", "Not sure/not interested"],
         },
       ],
     },
@@ -1027,6 +1390,16 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
           options: ["Any large, established company", "A newly founded company solving a problem, often with growth potential", "A government office", "A school club"],
           correct_answer: "A newly founded company solving a problem, often with growth potential",
         },
+        {
+          text: "A 'business plan' primarily helps an entrepreneur:",
+          options: ["Avoid ever having to adapt", "Think through the idea, market, and finances before starting", "Guarantee success", "Impress people with no real substance"],
+          correct_answer: "Think through the idea, market, and finances before starting",
+        },
+        {
+          text: "Which is a common early-stage challenge for freelancers?",
+          options: ["Too much job security", "Irregular income and finding clients", "No need to market themselves", "Guaranteed paid leave"],
+          correct_answer: "Irregular income and finding clients",
+        },
       ],
     },
   },
@@ -1048,6 +1421,14 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
           text: "How has this programme changed your thinking about your career?",
           options: ["A lot", "Somewhat", "A little", "Not much"],
         },
+        {
+          text: "How often do you think you'll need to revisit/update your career plan?",
+          options: ["Never, once decided it's final", "Every few years", "Constantly", "Not sure"],
+        },
+        {
+          text: "What's one thing you're going to do differently starting this week because of this programme?",
+          options: ["Research a career option", "Talk to someone about my plans", "Focus on a specific skill", "Nothing different yet"],
+        },
       ],
     },
     quizPoll: {
@@ -1068,6 +1449,16 @@ export const TOPIC_QUESTION_BANK: TopicBankEntry[] = [
           text: "Why should a career roadmap be reviewed and updated over time?",
           options: ["Because plans should never be revisited", "Because interests, skills, and opportunities can change", "Because it's a strict legal requirement", "It shouldn't be updated"],
           correct_answer: "Because interests, skills, and opportunities can change",
+        },
+        {
+          text: "A realistic career roadmap should account for:",
+          options: ["Only your dream outcome, ignoring obstacles", "Both your goals and realistic steps/obstacles along the way", "Only what your family wants", "Nothing beyond the next year"],
+          correct_answer: "Both your goals and realistic steps/obstacles along the way",
+        },
+        {
+          text: "The best time to start building a career roadmap is:",
+          options: ["Only after finishing college", "Now, even if it will change over time", "Never, plans are pointless", "Only once you're completely certain"],
+          correct_answer: "Now, even if it will change over time",
         },
       ],
     },

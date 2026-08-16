@@ -16,20 +16,14 @@ export function TopicContent({ topicId }: { topicId: number | null }) {
   if (!topic) return null;
 
   return (
-    <div style={{ marginTop: "1.5rem" }}>
-      <button onClick={() => setPresenting((p) => !p)}>
-        {presenting ? "Exit projector view" : "Present (projector view)"}
-      </button>
-      <div
-        style={{
-          marginTop: "0.8rem",
-          padding: presenting ? "3rem" : "1rem",
-          border: "1px solid #ddd",
-          fontSize: presenting ? "2rem" : "1rem",
-          lineHeight: 1.5,
-          background: presenting ? "#fff" : "transparent",
-        }}
-      >
+    <div className="section">
+      <div className="section-header">
+        <h2 style={{ margin: 0 }}>Facilitator Script</h2>
+        <button className="btn-primary btn-sm" onClick={() => setPresenting((p) => !p)}>
+          {presenting ? "✕ Exit projector view" : "🖥️ Present (projector view)"}
+        </button>
+      </div>
+      <div className={`projector${presenting ? " is-presenting" : ""}`}>
         <ReactMarkdown>{topic.content_markdown ?? ""}</ReactMarkdown>
       </div>
     </div>

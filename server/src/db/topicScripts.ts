@@ -11,173 +11,262 @@
 // do not invent new poll/quiz questions here, only reference the existing ones.
 
 export const TOPIC_SCRIPTS: Record<string, string> = {
-  "Introduction to Career Counselling & Future of Careers": `## Objectives
+  "Discovering My Interests": `## Objectives
 
-- Students understand what this 14-day programme is, why it's happening, and how the sessions will run.
-- Students feel at ease with you as facilitators and with the smartboard/show-of-hands format.
-- Students take a first honest look at how they currently feel about choosing a career.
+- Students start noticing what genuinely interests them — not what they're "supposed to" like, or what they're already good at.
+- Students meet, for the first time, the idea that people are interested in different kinds of things — practical, thinking, creative, helping, leading, organizing — and that noticing this now is useful, not scary.
+- Students feel comfortable and curious about the days ahead, not anxious about "picking a career" — nobody is being asked to decide anything today.
 
 ## What You Need
 
 Just the laptop connected to the smartboard. Nothing else to prepare.
 
-## Opening (~8 min)
+## Opening (~10 min)
 
-Walk in, get the room settled, and start with an introduction of yourselves — be honest about who you are.
+Introduce yourselves warmly and explain who you are and why you're here — be honest that you're not trained career counsellors, you're people who care about helping them think about their future in a fun, low-pressure way.
 
-**Say:** "Good morning everyone! Over the next two weeks, we're going to spend 90 minutes together each day talking about something that's going to matter a lot to you very soon — your career. Before we start, a quick introduction: we're software engineers, not career counsellors by training. What we are is people who've thought hard about how careers actually work today, and we've put together this programme to share that with you. So this is going to feel less like a class and more like a series of conversations."
+**Say:** "Over the next few days, we're going to spend time together doing something a little different from your normal classes. We're not here to teach you a subject or give you homework. We're here to help you get better at noticing things about yourself — what you like, what you're good at, and what kind of things make you feel excited or proud. That's it. No wrong answers, ever."
 
-**Say:** "Here's how it will work. There's no textbook, no separate notebook you need to carry, and nothing to submit. Everything happens right here on this screen. Sometimes I'll ask a question and want you to just raise your hand. Sometimes we'll do a quick activity in pairs or small groups. And most days, there's a short quiz at the end — not for marks, just for fun, to see what stuck."
-
-**Say:** "One rule for these 90 minutes: there's no wrong answer when I ask for your opinion. This is a judgment-free zone. The only bad response is silence — so I'd rather hear a wrong guess than nothing at all."
-
-Ask the class: "Show of hands — who has ever had a real conversation with someone about what career to choose?" Take note of how many hands go up. This tells you the room's starting point.
+Ask the class: "Show of hands — who has ever been asked 'what do you want to be when you grow up?'" (Most hands will go up.) "Who felt totally sure of their answer?" (Fewer hands.) "That's completely normal — today isn't about answering that question. It's about paying attention to what you actually enjoy."
 
 ## Main Content (~35 min)
 
-**Chunk 1 — What actually is "career counselling"? (10 min)**
+**Chunk 1 — What's the difference between a hobby and an interest? (10 min)**
 
-**Say:** "So what is career counselling, really? It is NOT someone telling you 'become a doctor' or 'become an engineer.' It's the opposite. It's a structured process to help you understand three things: who you are — your interests and strengths; what's out there — the range of careers and paths that exist today, many of which didn't exist ten years ago; and how to connect the two — so the career you eventually choose actually fits you, instead of you trying to fit yourself into a career because someone else picked it."
+**Say:** "Let's start simple. What's something you like doing in your free time?" Take 4-5 quick answers from volunteers (drawing, cricket, video games, reading, helping at home, etc.). Write a few on the board.
 
-**Say:** "Over these 14 days, we'll cover all three of those pieces. The first few days are about the world of work — what's changing, what's out there. Then we spend time on you — your interests, personality, strengths. Then we build communication and problem-solving skills that matter in almost any career. And we finish by putting it all together into a roadmap that's yours."
+**Say:** "All of those are things you enjoy — that's what we mean by an 'interest.' An interest isn't something you have to be the BEST at. It's just something that makes you want to keep doing it, or learn more about it, or try it again."
 
-**Chunk 2 — Why now, in grade IX/XI/XII? (10 min)**
+**Chunk 2 — Six flavors of interest (20 min)**
 
-**Say:** "You might be thinking — I still have years before I need to decide anything. Here's the thing: you're already deciding, right now, in small ways. Your stream choice after Class 10, the subjects you put extra effort into, even how you spend your free time — these are all quietly narrowing or widening your options. This programme isn't asking you to pick a final career today. It's asking you to start paying attention on purpose, instead of by accident."
+**Say:** "Here's something interesting: people who study careers found that most people's interests fall into six big 'flavors.' You probably have a mix of a few, not just one. Let's go through them."
 
-Pause and check for questions: "Any questions so far? This is the moment to ask — we've got two weeks together, so nothing's off the table."
+Introduce each with a simple, concrete example (write these on the board as you go):
+1. **Hands-on** — building, fixing, sports, being outdoors, working with your hands.
+2. **Thinking/investigating** — asking "why," solving puzzles, science experiments, figuring out how things work.
+3. **Creative** — drawing, music, writing stories, dancing, making things up.
+4. **Helping people** — teaching, caring for others, listening to friends, volunteering.
+5. **Leading/organizing others** — running a group game, convincing friends to try your idea, being in charge of a project.
+6. **Organizing things** — keeping lists, sorting, following clear steps, being neat and structured.
 
-**Chunk 3 — The world of careers is changing fast (15 min)**
+**Say:** "None of these is 'better' than another. The world needs all six kinds of people, and most jobs actually need a mix of them. Over the next few days, we're going to help you notice which ones feel most like YOU."
 
-**Say:** "Let me ask you something. Think about your parents' generation. When they were your age, could they have told you what a 'UX designer' does? Or a 'drone operator'? Or a 'social media manager'? Most of these jobs simply didn't exist. And that pace of change is only getting faster — driven by the internet, by AI, by how connected the whole world now is."
+**Chunk 3 — Quick self-check (5 min)**
 
-**Say:** "That's actually good news for you, even though it might feel unsettling. It means there will be MORE kinds of careers available to you than there ever were for your parents — not fewer. But it also means the old approach of 'pick one safe job and do it for 40 years' is less common now. People today often build a career that evolves — they learn new skills every few years, sometimes they change direction entirely. So the most useful skill isn't picking the 'perfect' career on day one. It's learning how to keep learning and keep choosing well, again and again."
-
-Give a couple of concrete, relatable examples if the class seems unconvinced: a family member or someone locally known who does a job that wouldn't have existed a generation ago (a YouTuber, an app developer, a drone survey pilot, a data analyst). Keep it local and real rather than abstract.
+**Say:** "Think for a second, quietly — which one or two of those six sounded most like you? You don't have to share it out loud unless you want to." Pause for 30 seconds of quiet thinking. Ask for 2-3 volunteers to share if the class seems comfortable.
 
 ## Discussion Poll Moment (~around the 45-minute mark)
 
-**Say:** "Let's actually hear from you now. I'm putting up a few questions on the screen — for each one, I'll read the options out loud, and I want you to raise your hand for the one that's true for you. There's no right answer, so don't wait to see what your friend picks."
+**Say:** "Let's find out what this whole room enjoys! I'll put up a few questions — raise your hand for the option that's true for you."
 
-Launch the discussion poll **"Discussion: Introduction to Career Counselling"** on the smartboard and run all three questions as a show of hands:
+Launch the discussion poll **"Discussion: Discovering My Interests"** and run all questions as a show of hands, counting and reacting warmly to each ("Wow, lots of hands for outdoor stuff — that makes sense, we've got an active bunch!").
 
-1. "What do you hope to gain most from this career counselling programme?" — *Understanding my interests / Learning about new career options / Improving my communication skills / Help with decision making*
-2. "Which best describes how you currently feel about choosing a career?" — *Confident and clear / Curious but unsure / Confused or anxious / Haven't thought about it much*
-3. "Which source do you trust most for career information?" — *Teachers/counsellors / Family members / Internet/social media / Friends/seniors*
+## Interactive Activity (~20 min)
 
-For each question, count hands out loud as you go and say the tally back to the class ("Okay, about half the room says 'curious but unsure' — that's completely normal, and honestly that's exactly why we're here"). For question 2 especially, react warmly if a lot of hands go up for "confused or anxious" — normalize it, don't rush past it: **Say:** "If you raised your hand for confused or anxious, you are in very good company — that's most people your age, everywhere in the world, not just in this room."
+**"Interest Corners."**
 
-## Interactive Activity (~18 min)
-
-**"Two Truths About My Future" pair-share.**
-
-1. Ask students to pair up with the person next to them (or groups of three if numbers are odd).
-2. **Say:** "In your pair, I want each of you to share two things: one career or field you've genuinely thought about for yourself, and one thing you're worried about when it comes to choosing a career. You have 5 minutes — take turns, both people share both things."
-3. Walk around the room while pairs talk. If a pair finishes early, prompt them with: "Now ask your partner — why that career? What draws you to it?"
-4. After 5 minutes, bring the room back together. **Say:** "I don't need every pair to report back, but who's willing to share what their partner said?" Take 4-5 volunteers. This is about hearing real voices in the room, not covering everyone.
-5. Close the activity by pointing out any patterns you noticed out loud (e.g., "I heard a lot of you mention engineering and medicine — we're going to spend the next two weeks showing you just how much wider the map actually is").
-
-## Quiz Moment
-
-Launch the quiz **"Quiz: Introduction to Career Counselling"** on the smartboard. Read each question and let the class call out or show hands for their answer choice before revealing the correct one.
-
-**Say when revealing each answer:** "The correct answer is..." — then briefly explain why in one sentence:
-
-1. Career counselling primarily helps students to **understand themselves and explore options** — not just chase marks or copy a parent's profession.
-2. **"Guaranteed high salary" is NOT a benefit of early career planning** — planning helps with better choices and less confusion, but nothing in life is guaranteed, and that's an important honest point to make out loud.
-3. The future of work is shaped mainly by **technology, globalization, and changing industries** — reinforce the point you made earlier in the session.
-
-## Wrap-Up (~7 min)
-
-**Say:** "Let's close today with three things I want you to remember. One: career counselling is about understanding yourself and your options, not being told what to become. Two: the world of careers is changing faster than ever, which means more possibilities, not fewer. Three: it's completely normal to feel unsure right now — that's exactly why we've got 14 days together."
-
-**Say:** "Tomorrow, we're going to look at something a lot of you are probably wrestling with at home — the difference between the 'traditional' careers your family may expect, and the newer, more modern paths you're hearing about. See you then."
+1. Label four corners/areas of the room: "Hands-On," "Creative," "Helping Others," "Leading & Organizing" (a simplified four-way split of the six flavors, easier to manage physically than six).
+2. Call out an activity (e.g. "building a treehouse," "writing a story," "helping a friend with homework," "running a class election") and have students walk to the corner that fits best, then freeze.
+3. At each corner, ask 1-2 students to say why they picked it.
+4. Do 4-5 rounds with different example activities, mixing it up each time.
 
 ## If Time Runs Short/Long
 
-If short: compress Chunk 3 to just 2-3 quick examples and skip straight to the poll — the poll itself does a lot of the "getting to know the room" work.
+If short: skip Chunk 3 (Quick self-check) and go straight from the six flavors into the discussion poll.
 
-If long: let the pair-share reporting run longer and take more volunteers — hearing more student voices on day one is valuable and helps you learn the room's personalities early.`,
+If long: after the Interest Corners activity, ask the whole class to shout out (all at once, playfully) which corner they'd want to spend a whole day at, and count the loudest cheer per corner.`,
 
-  "Traditional vs. Modern Career Paths": `## Objectives
+  "The World of Work": `## Objectives
 
-- Students can clearly describe what distinguishes a "traditional" career path from a "modern" one.
-- Students recognize that both paths have genuine trade-offs — neither is simply "better."
-- Students start noticing where family expectations and personal interest might align or clash for them specifically.
+- Students build a wider, more accurate picture of the kinds of jobs that exist — beyond the handful of jobs most kids can name (doctor, teacher, engineer, police).
+- Students understand that almost everything around them was designed, built, or is run by someone doing a job.
+- Students start connecting the idea of "industries" to the interests they explored in the last session.
 
 ## What You Need
 
-Laptop connected to the smartboard. Nothing else.
+Just the laptop connected to the smartboard.
 
-## Opening (~8 min)
+## Opening (~10 min)
 
-**Say:** "Yesterday we talked about how fast the world of careers is changing. Today we're going to get into something a lot of you probably think about at home, maybe even argue about — the difference between what I'll call 'traditional' careers and 'modern' careers."
+**Say:** "Quick game to start: I'm going to say a job, and I want you to picture — silently in your head first — what that person actually does all day." Say a few obvious jobs (doctor, farmer, chef) then a few less obvious ones (voice actor, wildlife photographer, app developer, drone pilot) and ask for quick guesses on what each one actually does.
 
-**Say:** "Quick show of hands to start: who has heard a parent, uncle, aunt, or grandparent say something like 'become an engineer' or 'become a doctor' or 'get a government job'?" (Most hands will go up — acknowledge it with humor.) "Yes, I thought so. That's a very familiar sentence in most Indian households, including mine growing up. Let's unpack why that advice exists, and what's changed since then."
+**Say:** "Today we're going to zoom out and look at just how many different kinds of jobs exist — way more than most people ever think about."
 
 ## Main Content (~35 min)
 
-**Chunk 1 — What is a "traditional" career path? (10 min)**
+**Chunk 1 — Everything around you is somebody's job (10 min)**
 
-**Say:** "A traditional career path usually means: fixed education route, often a well-known entrance exam, a clear job title at the end — engineer, doctor, government officer, bank employee, teacher — and a fairly predictable structure of promotions and pay over the years. The big appeal is stability. You generally know what you're signing up for."
+**Say:** "Look around this room. The chair you're sitting on — someone designed it, someone manufactured it, someone sold it to the school. The lights — someone wired the building. Even this smartboard — someone coded the software inside it." Ask: "Can anyone spot something in this room and guess a job connected to it?" Take 3-4 answers.
 
-**Say:** "These paths became popular for good reasons — they offered financial security in a country where, for a long time, opportunities were limited and risk was expensive. If your parents or grandparents pushed you toward one of these, it usually came from love and from their own experience of what 'safe' looked like."
+**Chunk 2 — A tour of industries (15 min)**
 
-**Chunk 2 — What is a "modern" career path? (10 min)**
+**Say:** "Jobs usually get grouped into big categories called 'industries.' Let's do a quick tour." Go through, with 1-2 example jobs each: Healthcare (doctor, nurse, lab technician), Technology (app developer, game designer, IT support), Creative & Media (animator, journalist, musician), Business (shopkeeper, accountant, manager), Agriculture & Environment (farmer, wildlife researcher), Government & Public Service (police officer, postal worker, civil servant), Skilled Trades (electrician, mechanic, carpenter).
 
-**Say:** "A modern career path is less fixed. Think content creator, UX designer, app developer, data analyst, freelance photographer, startup founder, digital marketer, drone pilot, esports professional. These often don't have one standard entrance exam or a single fixed ladder. Some don't even require a traditional degree at all — a strong portfolio of work can matter more than a certificate."
+**Chunk 3 — Jobs that didn't exist before (10 min)**
 
-**Say:** "The appeal here is flexibility and the chance to build something that closely matches your specific interests. The trade-off is that it's often less predictable — income can vary, and you're frequently responsible for finding your own opportunities rather than being assigned a fixed role."
+**Say:** "Here's something wild — some jobs today didn't exist when your parents were your age. YouTuber. App developer. Drone pilot. Social media manager. That means brand-new jobs are being invented all the time — including ones that don't exist yet, that YOU might end up doing."
 
-**Chunk 3 — Neither is automatically "better" (15 min)**
+## Discussion Poll Moment (~around the 45-minute mark)
 
-**Say:** "Here's the honest truth: there is no universally correct answer between these two. A stable government job can be deeply fulfilling for one person and feel stifling for another. A startup career can be exciting for one person and exhausting for another. What matters is understanding YOUR own priorities — how much uncertainty can you personally handle, what does your family situation allow for, and what genuinely interests you."
+Launch the discussion poll **"Discussion: The World of Work"** and run all questions as a show of hands.
 
-**Say:** "Also — and this is important — these two categories are blending together more than ever. Doctors now build YouTube channels. Engineers become entrepreneurs. Government officers use social media and data tools daily. So this isn't really 'pick one lane forever.' It's more useful to think of it as a spectrum, and you can move along it over your career."
+## Interactive Activity (~20 min)
 
-Pause: "Questions before we hear your opinions on this?"
+**"Guess My Job" charades.**
 
-## Discussion Poll Moment (~around the 43-minute mark)
-
-**Say:** "Let's find out where this room actually stands. Raise your hand for whichever option is true for you — remember, no judgment, and it's fine if your honest answer today is different from what your family expects."
-
-Launch **"Discussion: Traditional vs. Modern Career Paths"** and run all three:
-
-1. "Which sounds more appealing to you?" — *A traditional stable job (govt/corporate) / A modern flexible career (startup/freelance) / Both equally / Not sure yet*
-2. "Has your family suggested a specific traditional career for you?" — *Yes, and I agree / Yes, but I'm not sure / No specific suggestion / Haven't discussed it*
-3. "What matters most to you in a career?" — *Job security / Passion/interest / High income / Flexibility/freedom*
-
-For question 2, react gently and without judgment if many hands go up for "yes, but I'm not sure" — this is an extremely common and sensitive spot for this age group. **Say:** "That's a really honest thing to admit, and a lot of people in this room clearly feel the same way. We're not here to tell you to agree or disagree with your family — just to help you think clearly, so that whatever conversation you eventually have with them is an informed one."
-
-## Interactive Activity (~18 min)
-
-**"Career Path Sorting" — quick group brainstorm.**
-
-1. Split the class into 4-5 small groups.
-2. **Say:** "In your group, I want you to come up with as many career examples as you can in 4 minutes — half should be careers you'd call 'traditional' and half 'modern.' Don't overthink it, just call them out to your group and someone write or remember the list."
-3. After 4 minutes, go group by group and ask them to shout out 2-3 examples from their list. Write a running tally on the smartboard (or just verbally note interesting ones) of "traditional" vs "modern" careers named.
-4. **Say:** "Now, here's the twist — for one career from your list, can your group name ONE thing that's traditional about it and ONE thing that's becoming modern about it?" (e.g., "doctor" — traditional: long fixed medical degree path; modern: many doctors now also build health content online, use telemedicine apps). Give one example yourself first if the room is quiet.
-5. Take 2-3 group answers, then wrap the activity: "This is exactly the blending we talked about — almost every field today has both traditional and modern elements inside it."
-
-## Quiz Moment
-
-Launch **"Quiz: Traditional vs. Modern Career Paths"**. Take a show of hands per option before revealing each answer.
-
-1. An example of a "modern" career path: **Content creator/influencer**.
-2. A key advantage of traditional career paths is often: **Job stability and structured growth**.
-3. Modern career paths have grown mainly due to: **Internet and digital technology**.
-
-## Wrap-Up (~7 min)
-
-**Say:** "Here's what I want you to take away from today. Traditional and modern career paths both have real strengths — stability on one side, flexibility on the other. Neither is automatically right for everyone. And more and more, careers are blending both. Your job over these two weeks isn't to pick a side today — it's to get clear enough on your own priorities that whichever path you eventually lean toward, it's a choice you understand, not just one you inherited."
-
-**Say:** "Tomorrow we'll zoom out even further and look at some of the specific emerging career trends shaping the next ten years — some of these might surprise you. See you then."
+1. Write 10-12 job names on separate slips (mix of common and surprising ones).
+2. Call up a volunteer, show them a slip privately, and have them act it out (no talking, no props beyond gestures) while the class guesses.
+3. After each correct guess, ask: "What industry would this job fall under?"
+4. Do as many rounds as time allows — this works well with a lot of energy and laughter.
 
 ## If Time Runs Short/Long
 
-If short: cut the group brainstorm down to 2 groups reporting instead of all 4-5.
+If short: trim the industry tour (Chunk 2) to five industries instead of seven.
 
-If long: after the activity, ask 2-3 students to share what a family conversation about career choice has actually looked like for them — keep it optional and never call anyone out by name if they seem hesitant.`,
+If long: let students in pairs come up with one job NOT already mentioned and share it with the class.`,
+
+  "Everyone Has a Talent": `## Objectives
+
+- Students recognize that "talent" comes in many forms, most of which aren't graded in school.
+- Students practice naming a genuine strength in themselves without feeling like they're bragging.
+- Students learn that working well in a team means recognizing and using EVERYONE's different strengths.
+
+## What You Need
+
+Just the laptop connected to the smartboard.
+
+## Opening (~8 min)
+
+**Say:** "Quick question — when I say the word 'talented,' what's the first image that pops into your head?" Take a few answers (usually: sports star, singer, top-of-class student). **Say:** "Those are real talents, but they're not the ONLY talents. Being a good listener is a talent. Staying calm when things go wrong is a talent. Noticing when a friend is upset is a talent. Today we're going to widen what 'talented' means."
+
+## Main Content (~35 min)
+
+**Chunk 1 — Talents that don't show up on a report card (12 min)**
+
+List and briefly discuss: kindness/empathy, patience, curiosity, creativity, leadership, honesty, humor, reliability, physical coordination, staying calm under pressure. **Say:** "None of these get a grade on your report card, but every single one of them matters — in friendships, in teams, and later, in almost every job."
+
+**Chunk 2 — Everyone in this room has at least one (15 min)**
+
+**Say:** "I promise you — everyone in this room, without exception, is genuinely good at something. Sometimes we don't notice our own talents because they come so naturally to us that they don't feel special." Give a personal example — a talent of your own that took you a while to recognize.
+
+**Chunk 3 — Why this matters for teams (8 min)**
+
+**Say:** "Here's the important part: a great team isn't a group of people who are all good at the exact same thing. It's a group where everyone's DIFFERENT strengths combine. One person's great at ideas, another's great at organizing, another's great at keeping everyone calm and motivated. That's how real teams — and real workplaces — succeed."
+
+## Discussion Poll Moment (~around the 43-minute mark)
+
+Launch the discussion poll **"Discussion: Everyone Has a Talent"** and run all questions as a show of hands.
+
+## Interactive Activity (~22 min)
+
+**"Talent Cards."**
+
+1. Give each student a small card/paper. **Say:** "Write down one thing you think you're genuinely good at — it can be anything, big or small."
+2. Collect the cards, shuffle them, and redistribute randomly so no one has their own.
+3. One at a time, read a card aloud (anonymously) and have the class guess whose it might be, or just appreciate it out loud ("That's a great one!").
+4. Alternatively, in pairs: have students exchange cards directly with a partner and tell them one more strength they've noticed in them.
+
+## If Time Runs Short/Long
+
+If short: skip Chunk 3 and fold the "teams" point into your wrap-up sentence before the poll.
+
+If long: after Talent Cards, ask the class to shout out (as a whole group) what talent they think THIS CLASS collectively has as a group.`,
+
+  "Speaking Up with Confidence": `## Objectives
+
+- Students get low-pressure practice speaking in front of others.
+- Students learn that nervousness before speaking is normal and manageable, not something wrong with them.
+- Students practice basic eye contact, volume, and pacing without being formally "graded" on it.
+
+## What You Need
+
+Just the laptop connected to the smartboard.
+
+## Opening (~8 min)
+
+**Say:** "Quick show of hands — who gets nervous speaking in front of the class?" (Most hands will go up, including probably yours as instructors — mention that honestly.) **Say:** "Good — that means you're normal! Every single person who's ever spoken in public, from movie stars to your favorite YouTuber, felt nervous the first time. Today's about practicing, not performing perfectly."
+
+## Main Content (~30 min)
+
+**Chunk 1 — Why does speaking up feel scary? (8 min)**
+
+**Say:** "What's the scariest part about speaking in front of people?" Take a few answers (forgetting words, being laughed at, voice shaking). **Say:** "Every one of those fears is normal, and every one gets smaller with practice — which is exactly what today is for."
+
+**Chunk 2 — Three simple tools (12 min)**
+
+Teach three concrete, memorable tools:
+1. **Breathe first** — one slow breath before you start talking calms your voice down.
+2. **Pick one friendly face** — find one person in the room and talk mostly to them; it's less scary than trying to look at everyone.
+3. **Slow down** — nervous talking speeds up without you noticing; slowing down on purpose actually makes you sound MORE confident.
+
+**Chunk 3 — Practice in pairs (10 min)**
+
+**Say:** "Let's practice in the lowest-pressure way possible — just with the person next to you." Have students pair up and take turns talking for 30 seconds each about something easy (their favorite weekend activity), practicing the three tools. Walk around and encourage.
+
+## Discussion Poll Moment (~around the 38-minute mark)
+
+Launch the discussion poll **"Discussion: Speaking Up with Confidence"** and run all questions as a show of hands.
+
+## Interactive Activity (~25 min)
+
+**"One-Sentence Stand-Up."**
+
+1. Go around the room (or call volunteers if the class is large) and have each student stand and say ONE sentence about something they're looking forward to this week.
+2. Keep it fast-paced and celebratory — clap after every single person, no matter how short or shaky.
+3. For students who are extremely reluctant, let them pass the first time and come back to them at the end — never force it.
+
+## If Time Runs Short/Long
+
+If short: do One-Sentence Stand-Up in small groups of 6-8 simultaneously instead of the whole class one at a time.
+
+If long: after the stand-up round, ask 2-3 confident volunteers to try a two-sentence version.`,
+
+  "Working Together": `## Objectives
+
+- Students practice basic teamwork skills — listening, sharing tasks, handling disagreement — through a hands-on challenge.
+- Students notice that good teams need more than just "being friends" — they need clear communication and shared effort.
+- Students finish the session having built something together, giving a concrete sense of accomplishment.
+
+## What You Need
+
+Just the laptop connected to the smartboard, plus paper or any reusable classroom objects for the team-building activity (see Main Content).
+
+## Opening (~8 min)
+
+**Say:** "Think of the best group project or team activity you've ever been part of — sports, a school project, anything. What made it good?" Take a few answers (usually: everyone helped, people listened to each other, it was fun). **Say:** "Today we're going to practice exactly those things — on purpose."
+
+## Main Content (~35 min)
+
+**Chunk 1 — What makes a team actually work (10 min)**
+
+**Say:** "A team isn't just a group of people standing near each other. A REAL team has a few key things: everyone gets heard, tasks get shared fairly, and when people disagree, they work it out instead of giving up or fighting." Ask: "What usually goes wrong in group work?" Take a few honest answers (one person does everything, people argue, no one listens).
+
+**Chunk 2 — The Tower Challenge (20 min)**
+
+Split into teams of 4-5. Give each team a small stack of paper (or reusable classroom objects). **Say:** "You have 8 minutes to build the tallest free-standing tower you can, using only what's in front of you. First minute: no talking allowed — just plan silently in your head. After that, you can talk." Time it strictly, then measure/compare results together.
+
+**Chunk 3 — Debrief (5 min)**
+
+**Say:** "That silent planning minute was strange, right? Let's talk about it — what happened when you finally COULD talk? Did the plan change? Did someone take the lead?" Take 2-3 answers.
+
+## Discussion Poll Moment (~around the 43-minute mark)
+
+Launch the discussion poll **"Discussion: Working Together"** and run all questions as a show of hands.
+
+## Interactive Activity (~22 min)
+
+**"Silent Line-Up" (teamwork edition).**
+
+1. **Say:** "Without talking or writing anything down, the whole class needs to line up in order of birthday month — January on this end, December on that end. You can only use gestures."
+2. Give the class 5-6 minutes to sort themselves out non-verbally.
+3. Check the result by going down the line and calling out birthday months.
+4. Debrief: "How did you communicate without words? What made it hard? What made it work?"
+
+## If Time Runs Short/Long
+
+If short: cut the Tower Challenge's build time to 5 minutes instead of 8.
+
+If long: run a second, harder Silent Line-Up (e.g. alphabetically by first name) as a bonus round.`,
 
   "Emerging Career Trends": `## Objectives
 
@@ -417,83 +506,6 @@ If short: cover only 3 industries in Chunk 2 instead of 5, prioritizing Technolo
 
 If long: let each group in the activity present a "most surprising role" they discovered and briefly explain why it surprised them.`,
 
-  "Skills for Future Careers": `## Objectives
-
-- Students can name the core skills (both digital and soft skills) that matter across almost every future career.
-- Students honestly self-assess where they're already strong and where they want to grow.
-- Students understand that skills, unlike fixed job titles, can be built deliberately starting now.
-
-## What You Need
-
-Laptop connected to the smartboard. Nothing else.
-
-## Opening (~8 min)
-
-**Say:** "Over the last few days we've talked about changing industries, AI, and emerging trends. Today's question is simpler and more personal: no matter which career you eventually pick, what skills will actually matter? Because here's a secret — the specific job titles will keep changing, but a handful of underlying skills stay valuable across almost all of them."
-
-Ask: "Show of hands — who can already think of one skill they believe will help them no matter what career they choose?" Take 2-3 quick verbal answers before moving on.
-
-## Main Content (~35 min)
-
-**Chunk 1 — Two categories of future-ready skills (10 min)**
-
-**Say:** "Skills for the future generally fall into two buckets. First, digital literacy — being comfortable using computers, the internet, and common digital tools effectively, not just for entertainment but to find information, create things, and solve problems. Second, soft skills — things like communication, problem-solving, teamwork, and adaptability. Interestingly, as AI and automation handle more routine technical work, soft skills are becoming MORE valuable, not less, because they're harder to automate."
-
-**Chunk 2 — Going deeper on four key skills (15 min)**
-
-**Say (Communication):** "Communication means being able to clearly express your ideas, and just as importantly, really listen to others. This shows up in job interviews, teamwork, client meetings — everywhere."
-
-**Say (Problem-solving):** "Problem-solving is the ability to break a messy, unclear situation into smaller pieces and work through it logically, rather than freezing up or guessing randomly."
-
-**Say (Adaptability / continuous learning):** "Continuous learning means staying comfortable picking up new tools and ideas throughout your career, because industries keep changing — we talked about this on day one. The people who struggle most in their careers aren't usually the least talented; they're often the ones who stopped learning too early."
-
-**Say (Digital literacy):** "Digital literacy isn't about owning the newest phone — it's about being able to use digital tools effectively to find information, communicate, and get real work done."
-
-**Chunk 3 — Skills can be built, unlike raw talent (10 min)**
-
-**Say:** "Here's the most important idea in today's session: unlike, say, height, skills are things you can deliberately build through practice. If you feel weak in public speaking today, that is not a permanent trait — it is a starting point. We're actually going to spend several full sessions later in this programme specifically building communication, public speaking, teamwork, and presentation skills, precisely because these are learnable."
-
-Pause for questions.
-
-## Discussion Poll Moment (~around the 43-minute mark)
-
-Launch **"Discussion: Skills for Future Careers"**:
-
-1. "Which future-ready skill do you feel most confident in?" — *Digital literacy / Communication / Problem-solving / Continuous learning*
-2. "Which skill do you most want to improve?" — *Digital literacy / Communication / Problem-solving / Teamwork*
-3. "How do you usually pick up new skills?" — *Online courses/videos / School lessons / Practicing on my own / Learning from friends/family*
-
-**Say** after question 2: "Whatever you raised your hand for just now — hold onto that. We're going to be building exactly these skills together over the coming sessions."
-
-## Interactive Activity (~18 min)
-
-**"Skill Self-Rating" quick write plus pair-share.**
-
-1. **Say:** "On a piece of paper, or just mentally if you don't have one, rate yourself 1 to 5 on each of these four skills: communication, problem-solving, teamwork, and digital literacy. Be honest — this is just for you." Give 3 minutes.
-2. **Say:** "Now turn to your partner and share just ONE skill where you rated yourself lowest, and ONE small idea for how you could start improving it this month." Give 5 minutes for pairs to discuss.
-3. Circulate and listen in — if a pair is stuck for ideas, offer a prompt (e.g., for communication: "join a school debate or simply try speaking up once more per class discussion").
-4. Bring the class back and ask for 4-5 volunteers to share the skill they want to improve and their one small idea. Affirm each answer specifically.
-
-## Quiz Moment
-
-Launch **"Quiz: Skills for Future Careers"**:
-
-1. Considered a "soft skill": **Communication**.
-2. Digital literacy mainly means: **Ability to effectively use digital tools and information**.
-3. Why "continuous learning" matters for future careers: **Because industries and technology keep changing**.
-
-## Wrap-Up (~7 min)
-
-**Say:** "Remember these three things. Future careers reward both digital literacy and soft skills like communication, problem-solving, and adaptability. Soft skills are becoming more valuable, not less, as automation increases. And unlike a fixed job title, skills are something you can start building today, deliberately — which is exactly what a big chunk of the rest of this programme is going to help you do."
-
-**Say:** "That brings us to the end of the first week's focus on the world of work out there. Starting tomorrow, we turn the lens inward — the next few sessions are all about knowing yourself. See you then."
-
-## If Time Runs Short/Long
-
-If short: skip the individual quiet-writing step and go straight to the pair-share with a verbal self-rating instead.
-
-If long: after pairs share, open the floor briefly for anyone who wants to name a skill they feel is ALREADY a genuine strength — ending the session on a confidence note works well before moving into the more personal "Knowing Yourself" stretch tomorrow.`,
-
   "Knowing Yourself": `## Objectives
 
 - Students understand why self-awareness is described as the essential first step of career planning.
@@ -568,234 +580,7 @@ If short: reduce the "Three Words" activity to just 2 minutes of quiet thinking 
 
 If long: after volunteers share their three words, ask the room as a whole: "Did anyone hear a word from someone else that they wish they'd picked too?" — a light, connecting way to extend the discussion.`,
 
-  "Interests & Personality Assessment": `## Objectives
-
-- Students understand the difference between an "interest" and a "personality trait," and how both relate to career fit.
-- Students get a plain-language introduction to the idea behind interest/personality inventories (setting up the psychometric test later in the programme).
-- Students reflect on their own likely interest and personality leanings through discussion, not a formal test yet.
-
-## What You Need
-
-Laptop connected to the smartboard. Nothing else.
-
-## Opening (~8 min)
-
-**Say:** "Yesterday we talked about knowing yourself in a general sense. Today we get more specific — interests and personality. Quick question to start: what's the difference between liking something and being suited to it personality-wise? For example, you might enjoy watching medical dramas, but does that automatically mean you have the personality for hands-on medical work under pressure? Not necessarily — and that gap is exactly what we're exploring today."
-
-## Main Content (~35 min)
-
-**Chunk 1 — Interests vs. personality (10 min)**
-
-**Say:** "An interest is about WHAT kind of activities or topics pull your attention — fixing things, researching, creating art, helping people, leading projects, or organizing details. A personality trait is more about HOW you naturally operate — are you more introverted or extroverted, more structured or more spontaneous, more logical or more emotionally driven in decisions? Career fit usually depends on both lining up reasonably well, not just one."
-
-**Chunk 2 — A simple way to think about interest types (15 min)**
-
-**Say:** "One well-known way career counsellors group interests is into six broad types — you'll actually take a proper assessment on this exact framework in a few days, so today is just a plain-language preview. People tend to lean toward: hands-on practical work, like building or fixing things; investigative work, like research and solving puzzles; artistic and creative work; social work, like teaching or helping; enterprising work, like leading and persuading; and conventional work, like organizing and detail-oriented tasks. Most people are a mix of two or three of these, not just one."
-
-**Say:** "None of these six types is 'better' than another — the world genuinely needs all of them, and honestly, most workplaces need a mix of people across several of these types to function well."
-
-**Chunk 3 — Introvert, extrovert, and career fit (10 min)**
-
-**Say:** "One personality dimension that comes up a lot is introvert versus extrovert. An extrovert tends to gain energy from being around people and talking things through out loud. An introvert tends to gain energy from quieter, more independent focus time, even if they're perfectly capable of being social. Neither is better for career success — there are excellent introverted leaders and excellent extroverted researchers — but it's genuinely useful to know your own tendency, because a work environment that fights against your natural energy pattern all day, every day, gets exhausting fast."
-
-Pause for questions.
-
-## Discussion Poll Moment (~around the 43-minute mark)
-
-Launch **"Discussion: Interests & Personality"**:
-
-1. "Which type of activity do you enjoy most?" — *Hands-on/practical work / Research and investigation / Creative/artistic work / Helping/teaching others*
-2. "Are you more of an introvert or extrovert?" — *Introvert / Extrovert / A bit of both / Not sure*
-3. "Have you ever taken a personality test before?" — *Yes, and I found it accurate / Yes, but I wasn't sure about it / No, but I'm curious / No, not interested*
-
-**Say** after question 3: "For those who said you're curious — good news, you'll get to take a real one very soon in this programme."
-
-## Interactive Activity (~18 min)
-
-**"Guess the Type" group activity.**
-
-1. Keep the class as one group or split into 2 halves for a light competitive element.
-2. **Say:** "I'm going to describe a type of person. You tell me, as fast as you can with a show of hands, which of the six interest types from today — hands-on, investigative, artistic, social, enterprising, or conventional — best fits the description." List these on the board or just say them again slowly before starting.
-3. Read out scenarios one at a time, pausing for the class to call out or raise hands, then confirm the intended answer:
-   - "This person loves organizing their study desk, keeping neat notes, and following a clear daily schedule." (Conventional)
-   - "This person is always trying to convince friends to join their new idea or plan." (Enterprising)
-   - "This person loves taking apart old gadgets to see how they work." (Realistic/hands-on)
-   - "This person could spend hours drawing, writing stories, or making music." (Artistic)
-   - "This person is the one everyone goes to for advice or comfort." (Social)
-   - "This person is fascinated by how diseases spread and loves asking 'why' questions in science class." (Investigative)
-4. After going through the scenarios, **say:** "Now think privately — which one or two of these sounded most like you? Hold onto that thought, because it'll come up again when we do the actual psychometric test."
-
-## Quiz Moment
-
-Launch **"Quiz: Interests & Personality Assessment"**:
-
-1. A personality assessment helps you understand: **Your behavioural traits and preferences**.
-2. Interest inventories in career counselling are used to: **Match personal interests to career fields**.
-3. TRUE about personality and career fit: **A good personality-career fit can improve job satisfaction**.
-
-## Wrap-Up (~7 min)
-
-**Say:** "Key points from today. Interests are about what activities pull you in, personality is about how you naturally operate, and career fit usually depends on both. There are six broad interest types, and most people are a mix of two or three — none better than another. And knowing your own introvert/extrovert tendency, and interest leanings, helps you choose environments where you'll naturally thrive rather than constantly fight your own nature."
-
-**Say:** "Tomorrow we'll look at strengths, weaknesses, and how each of us learns best — and then very soon after that, you'll get to take the real psychometric assessment we've been building up to. See you then."
-
-## If Time Runs Short/Long
-
-If short: reduce the "Guess the Type" activity to 3-4 scenarios instead of all 6.
-
-If long: ask a few volunteers to describe a family member or friend using one of the six types, as extra practice applying the framework to people they know well.`,
-
-  "Strengths, Weaknesses & Learning Styles": `## Objectives
-
-- Students can name at least one genuine personal strength and one honest area for growth without shame.
-- Students understand the four VARK learning styles in plain language.
-- Students preview how this connects to the learning-style assessment coming up soon.
-
-## What You Need
-
-Laptop connected to the smartboard. Nothing else.
-
-## Opening (~8 min)
-
-**Say:** "Today has two parts that are actually closely connected — strengths and weaknesses, and how you personally learn best. Let's start with something a little uncomfortable. Show of hands — who finds it easier to talk about their weaknesses than their strengths?" (Often a surprising number of hands go up.) "Interesting — a lot of us are trained to be modest about our strengths, but that same modesty can actually get in the way of good career decisions. Today we're going to practice naming both honestly."
-
-## Main Content (~35 min)
-
-**Chunk 1 — Strengths and weaknesses aren't fixed labels (10 min)**
-
-**Say:** "Here's an important mindset shift: a weakness today is not a permanent life sentence. Weaknesses can genuinely improve with effort and the right kind of practice — we'll actually see this ourselves later in the programme with skills like public speaking, which almost nobody starts out confident in. Strengths, similarly, aren't just things you were born with — many strengths are built through repeated practice over years, even if it feels like they came naturally."
-
-**Say:** "Knowing your weaknesses isn't about self-criticism — it's information. It tells you what to deliberately work on, and just as importantly, what kind of extra support or environment might help you do your best work."
-
-**Chunk 2 — Introducing learning styles (VARK) (15 min)**
-
-**Say:** "Now let's talk about how you actually learn best — because this affects everything from how you study to what kind of training you'll thrive in during a future career. There's a well-known framework called VARK, which stands for four learning styles."
-
-**Say:** "Visual learners understand best through diagrams, charts, and pictures. Auditory learners learn best by listening — discussions, lectures, explanations out loud. Reading/Writing learners prefer written text — textbooks, written notes. And Kinesthetic learners learn best by physically doing something — hands-on practice, movement, real experimentation."
-
-**Say:** "Most people are a blend, often with one or two dominant styles. None of these is 'smarter' than another — they're just different channels that work better for different brains. And here's something directly useful: once you know your own style, you can deliberately choose HOW you study, not just what you study."
-
-**Chunk 3 — Connecting this to real career planning (10 min)**
-
-**Say:** "Why does this matter for a career, and not just for school exams? Because your learning style affects how comfortable you'll be in different training and work environments — a highly kinesthetic learner might struggle in a career that's 100% lecture-based training, and thrive instead in an apprenticeship-style field. Knowing this about yourself lets you seek out or adapt to the right kind of learning environment wherever you end up."
-
-Pause for questions.
-
-## Discussion Poll Moment (~around the 43-minute mark)
-
-Launch **"Discussion: Strengths, Weaknesses & Learning Styles"**:
-
-1. "How do you learn best?" — *Seeing (visual) / Hearing (auditory) / Reading/writing / Doing (hands-on)*
-2. "What's one strength you're proud of?" — *Creativity / Discipline/hard work / Communication / Problem-solving*
-3. "How comfortable are you talking about your weaknesses?" — *Very comfortable / Somewhat comfortable / A little uncomfortable / Very uncomfortable*
-
-**Say** after question 1: "Hold onto your answer here — you'll get to properly confirm this with an actual short assessment very soon in the programme."
-
-## Interactive Activity (~18 min)
-
-**"Strength Spotting" pair activity.**
-
-1. Pair students up — ideally with someone they know reasonably well, if possible.
-2. **Say:** "Here's the twist for today — instead of talking about your OWN strengths, I want you to tell your partner one genuine strength YOU see in THEM. Be specific — not just 'you're nice,' but something like 'you're really good at calming people down when they're stressed' or 'you explain things clearly.' Take turns." Give 6 minutes.
-3. Circulate and listen — this activity tends to create genuine warmth in the room; let it breathe.
-4. **Say:** "Now, individually, think of one small weakness you're willing to work on, and just one tiny first step to start improving it — doesn't need to be shared aloud unless you want to." Give 2 minutes of quiet thought.
-5. Ask for a few volunteers to share the strength they received from their partner — being told a strength by someone else often lands more powerfully than naming your own. Take 5-6 volunteers.
-
-## Quiz Moment
-
-Launch **"Quiz: Strengths, Weaknesses & Learning Styles"**:
-
-1. Identifying your weaknesses is useful mainly because: **It helps you know what to improve**.
-2. A "kinesthetic" learner learns best through: **Hands-on activities and movement**.
-3. Most accurate statement about strengths and weaknesses: **Strengths and weaknesses can change over time with effort**.
-
-## Wrap-Up (~7 min)
-
-**Say:** "Remember these points. Strengths and weaknesses aren't fixed — both can change with effort and practice. There are four broad learning styles — visual, auditory, reading/writing, and kinesthetic — and knowing yours helps you study and train more effectively. And it's worth practicing naming your own strengths out loud, not just your weaknesses, because both are useful information."
-
-**Say:** "In our next session, you're finally going to take the real psychometric test we've been building toward — a proper interest assessment done one-on-one on this laptop. I'll explain exactly how that will work. See you then."
-
-## If Time Runs Short/Long
-
-If short: shorten the pair "Strength Spotting" activity to 4 minutes and skip the individual weakness-reflection step.
-
-If long: ask 2-3 more volunteers to share their partner's strength, and briefly poll the room on which VARK style got the most hands, noting the pattern out loud.`,
-
-  "Career Interest Assessment (Psychometric Test)": `## Objectives
-
-- Students understand what a psychometric test is, what it measures, and — just as important — what it does NOT do.
-- Students understand exactly how today's testing process will work logistically, so nobody is confused or anxious about the process itself.
-- Every student completes the RIASEC-style interest inventory individually on the instructor's laptop.
-
-## What You Need
-
-The laptop (used both for the smartboard explanation AND as the one-on-one testing "kiosk" later). No other materials. You will need enough of the session for one-on-one turns, so read the logistics section below carefully before the day.
-
-## Important: How This Session Is Structured Differently
-
-Unlike other sessions, today's "main content" is NOT a smartboard lecture followed by a poll and quiz on that lecture content. The actual 12-question interest inventory is taken by each student individually, one at a time, directly on your laptop (a separate kiosk-style flow in the app) — it is not shown to the whole class on the smartboard, and its questions are not part of this script. Your job in this session is to explain the process clearly to the whole group, manage the queue of students taking their turn, and keep the rest of the class productively occupied while they wait.
-
-## Opening (~10 min)
-
-**Say:** "Today's the day we've been building toward — you're each going to take a real psychometric test, the same kind of tool professional career counsellors use. I want to walk you through exactly what this is, how it works today, and just as importantly, what it is NOT, before we start."
-
-**Say:** "This is called a RIASEC-style interest inventory — RIASEC is just short for the six interest types we talked about a few sessions ago: Realistic, Investigative, Artistic, Social, Enterprising, and Conventional. It's 12 short statements. For each one, you'll rate how much it sounds like you, from 1 to 5. There are no right or wrong answers — this only works if you answer honestly, based on what's actually true for you, not what sounds impressive or what you think we want to hear."
-
-**Say:** "Here's what's important: this is not a pass/fail test, it doesn't affect any grade, and nobody else in this room will see your individual answers or your results. You'll each come up one at a time and take it privately on this laptop, and then go back to your seat. It takes about 2-3 minutes per person."
-
-## Main Content — Explaining the Process to the Class (~15 min)
-
-**Say:** "A few honest things about psychometric tests in general, because I want you to trust this process. First — these tools are not magic. A 12-question test cannot perfectly capture everything about who you are. What it CAN do is give us a useful starting signal about your interest leanings, which we'll use as ONE input among several — alongside everything you've told us in our discussions so far — not as a final verdict."
-
-**Say:** "Second — please answer based on your gut reaction, not overthinking each question for a long time. The first honest instinct is usually the most accurate one."
-
-**Say:** "Third — we will not go through your individual results today. We're going to sit with the results, and in our very next session, we'll talk as a class about how to read and interpret psychometric results in general, and those of you who want a one-on-one conversation about your specific results can ask us afterward or during breaks."
-
-Address nerves directly: **Say:** "I know 'test' can be a scary word after years of exams. I promise you — there's no studying required, no way to fail, and no marks. Just answer honestly."
-
-## Discussion Poll Moment (~around the 25-minute mark, before testing begins)
-
-**Say:** "Before we start, let's do a quick show of hands to check in on how everyone's feeling about this."
-
-Launch **"Discussion: Taking the Psychometric Test"**:
-
-1. "How are you feeling about taking this psychometric test?" — *Excited / Nervous / Curious / Neutral*
-2. "Do you think a test can accurately capture your interests?" — *Yes, fully / Partly / Not really / Not sure*
-3. "What do you hope the results will tell you?" — *Which career suits me / Confirmation of what I already think / My strengths and weaknesses / Just curious to see the result*
-
-React warmly to question 2 in particular: **Say:** "Whatever you picked here is a healthy attitude to bring in — even 'not really' is fine, because as I said, this is one useful input, not a fortune teller."
-
-## Individual Testing "Activity" (~40-45 min — the bulk of the session)
-
-This replaces the usual pair/group activity. Plan the logistics carefully:
-
-1. **Say to the class:** "Here's how we'll run this. I'll call you up one at a time in roughly the order you're sitting. When it's your turn, come to the laptop, I'll get the test started for you, and you'll answer the 12 questions privately — it only takes a couple of minutes. While you wait for your turn, I want you to [quietly re-read your notes from earlier sessions / quietly think about what interest type you expect to score highest in, from our 'Guess the Type' session a few days ago / talk quietly with your neighbour about which career fields interest you and why]." Pick whichever occupying task suits your class's temperament, or offer it as a menu of options.
-2. Call students up in small batches so there's always a short queue ready and no dead time — for a class of around 30-40 students at roughly 2-3 minutes each, this comfortably fills 40-45 minutes; adjust your class-occupying instructions if your class is smaller and testing finishes faster than expected.
-3. For each student, make sure they're seated where classmates cannot see the laptop screen. Give a quiet one-line reminder as you hand it over: "Remember, honest gut answers, no wrong answers."
-4. Keep an eye on the room while students test — a low hum of quiet chatter is fine and expected; just make sure nobody is disruptive to the student currently testing.
-5. If time is genuinely tight and not everyone finishes, it is completely fine to continue testing remaining students at the very start of the next session before moving to "Understanding Psychometric Results" — plan for this possibility rather than rushing anyone through the test.
-
-## Quiz Moment (~10 min, once testing has wrapped up or while the last few students finish)
-
-Launch **"Quiz: About Psychometric Testing"** for the students who are done and back in their seats:
-
-1. A psychometric test in career counselling measures: **Interests, aptitudes, or personality traits**.
-2. For accurate results, answer psychometric test questions: **Honestly, based on your own preferences**.
-3. Psychometric results are best used as: **One helpful input among several for decision-making**.
-
-## Wrap-Up (~5-8 min)
-
-**Say:** "Great work today, everyone. Here's what I want you to remember: you've just completed a real interest assessment, the same kind professionals use. Your answers are private, and this is one useful input into your career thinking — not a final verdict on who you are or what you must become."
-
-**Say:** "In our next session, we're going to talk about how to actually read and make sense of results like these — what the different scores mean, and how to use them constructively rather than either ignoring them or treating them as absolute truth. See you then."
-
-## If Time Runs Short/Long
-
-If short: prioritize getting every single student through the actual test — cut the quiz short or move it entirely to the start of the next session rather than rushing any student's testing turn.
-
-If long: use extra time for more one-on-one quiet check-ins with students while they wait in the queue — this is a good moment to build rapport individually, which is hard to do in a full-class lecture format.`,
-
-  "Understanding Psychometric Results": `## Objectives
+  "Understanding Your Results": `## Objectives
 
 - Students understand, in general terms, how to interpret a RIASEC-style score profile (without seeing anyone else's specific results shown publicly).
 - Students learn a healthy mindset for reacting to a surprising or unexpected result.
@@ -1030,6 +815,59 @@ Launch **"Quiz: Matching Interests with Career Choices"**:
 If short: skip the pair-share step in the activity and go straight to volunteers sharing with the whole class.
 
 If long: build a running list on the smartboard of every career example mentioned across all the volunteer shares — by the end you'll have a rich, student-generated map of the room's interests.`,
+
+  "Choosing a Stream": `## Objectives
+
+- Students understand what "choosing a stream" (Science / Commerce / Arts-Humanities) actually means practically — what changes, what doesn't, and how reversible or irreversible it really is.
+- Students understand the stream decision should be informed by interests and strengths from earlier sessions, not just by marks, family pressure, or peer choices alone.
+- Students leave with concrete questions they can go ask their family, teachers, or seniors before deciding.
+
+## What You Need
+
+Just the laptop connected to the smartboard.
+
+## Opening (~10 min)
+
+**Say:** "Raise your hand if you already know which stream you're planning to take after Class 10." Note how many hands go up. **Say:** "Whether you're totally sure, totally unsure, or somewhere in between — that's exactly the right place to be right now. This session isn't going to tell you what to choose. It's going to help you ask the right questions before you do."
+
+## Main Content (~40 min)
+
+**Chunk 1 — What actually changes when you pick a stream? (12 min)**
+
+**Say:** "Let's get very concrete. Picking a stream mainly changes three things: which SUBJECTS you study for the next two years, which COMPETITIVE EXAMS become relevant to you (like JEE for engineering, NEET for medicine, or commerce/humanities entrance exams), and which COLLEGE COURSES you become eligible for later. It does NOT permanently lock your entire life — people do change direction later, but it's smoother if your stream roughly matches where you're headed."
+
+**Chunk 2 — Busting the myths (13 min)**
+
+Address common myths directly:
+- **"Science is for smart students, Commerce and Arts are for the rest."** — **Say:** "This is one of the most damaging myths in Indian schools. Streams are about DIFFERENT interests and career paths, not about ranking intelligence. Some of the most successful lawyers, journalists, designers, and entrepreneurs came from Commerce or Arts, not Science."
+- **"Once you choose, you can never switch."** — **Say:** "Switching later is harder, not impossible — but choosing thoughtfully now saves you that extra difficulty."
+- **"I should choose what my friends are choosing."** — **Say:** "Your friends' interests are not your interests. This is one of the most personal decisions you'll make in school — worth thinking through on your own terms."
+
+**Chunk 3 — What should actually guide the decision (15 min)**
+
+**Say:** "Here's a simple way to think about it. Ask yourself three questions: What subjects do I genuinely enjoy, not just do well in? What kind of work have I imagined myself doing, even vaguely? And what does my psychometric result and self-reflection so far suggest about my interests?" Connect explicitly back to earlier sessions: "Remember the 'Knowing Yourself' session, and your results if you've taken the psychometry test? Those are exactly the inputs that should feed into this decision — not just marks in one subject."
+
+## Discussion Poll Moment (~around the 50-minute mark)
+
+**Say:** "Let's see where this room stands right now."
+
+Launch the discussion poll **"Discussion: Choosing a Stream"** and run all questions as a show of hands.
+
+## Interactive Activity (~25 min)
+
+**"Stream Q&A Panel."**
+
+1. Split the class into three groups, one per stream (Science, Commerce, Arts/Humanities).
+2. **Say:** "Each group is going to become 'experts' for a few minutes — write down everything you already know or have heard about your assigned stream: subjects, possible careers, common myths."
+3. Give 6-7 minutes to brainstorm, then have each group present their notes to the class.
+4. As instructor, gently correct any myths that come up (especially the "Science = smart" one) and add any missing accurate information.
+5. Close with: **Say:** "Notice how much you already knew, once you actually talked it through. That's the goal for the real decision too — talk it through, out loud, with people who know more than a rumor mill does."
+
+## If Time Runs Short/Long
+
+If short: skip the group presentations in the Interactive Activity and just have each group share one myth and one fact aloud.
+
+If long: invite students to share one specific question they now want to ask a teacher, senior, or family member before deciding — write a few up on the board as a model for the rest.`,
 
   "Communication Skills - The Basics": `## Objectives
 
@@ -1596,91 +1434,6 @@ Launch **"Exam-Style Quiz: Quantitative Aptitude"**:
 If short: cover only percentages and profit/loss in Chunk 3, moving ratios and averages into the practice round directly with the formula given upfront.
 
 If long: add 2 extra word problems to the Problem Set Relay, mixing topics so pairs have to first identify which formula applies before solving.`,
-
-  "Speed Mathematics & Calculation Tricks": `## A Note on This Session
-
-Continuing the skill-drilling stretch. Today is specifically about calculation SPEED — shortcuts and tricks, not new concepts. Keep energy high and make it feel a little like a game; speed maths sessions tend to be genuinely fun once students see the tricks work.
-
-## Objectives
-
-- Students learn at least three practical shortcut techniques for faster mental calculation.
-- Students practice these shortcuts under light time pressure.
-- Students see direct evidence that these tricks meaningfully speed up their own calculation.
-
-## What You Need
-
-Laptop connected to the smartboard. Paper is useful if available.
-
-## Opening (~8 min)
-
-**Say:** "Today's session is one a lot of students genuinely enjoy — speed mathematics. We're not learning new maths concepts today, just faster ways to do calculations you already know how to do, which matters enormously in timed competitive exams where every second counts."
-
-**Say:** "Quick demo — I'm going to calculate 99 times 99 in my head faster than most of you could on paper, using a trick I'll teach you in a few minutes." Do it live: "99 times 99 is 9801." **Say:** "By the end of today, you'll be able to do that too."
-
-## Main Content (~35 min)
-
-**Chunk 1 — Squaring numbers ending in 5 (8 min)**
-
-**Say:** "Here's a trick for squaring any number ending in 5. Take the digits before the 5, multiply that number by itself plus one, then just add 25 at the end. For example, 25 squared: the digit before 5 is 2. 2 times 3 (which is 2 plus 1) equals 6. Add 25 at the end: 625. That's 25 squared."
-
-Work through together: "What's 35 squared?" (3 times 4 = 12, so 1225) "What's 45 squared?" (4 times 5 = 20, so 2025)
-
-**Chunk 2 — Multiplying numbers near 100 (12 min)**
-
-**Say:** "For numbers close to 100, like 99 times 99, or 98 times 97 — here's the trick. Find how far each number is below 100. 99 is 1 below 100. So for 99 times 99: subtract one number's 'below 100' amount from the other number — 99 minus 1 equals 98, that's your first part. Then multiply the two 'below 100' amounts together — 1 times 1 equals 1, that's your second part. Put them together: 98 and 01, giving 9801."
-
-Work through together: "What's 98 times 96?" (98 is 2 below 100, 96 is 4 below 100. First part: 98 − 4 = 94. Second part: 2 × 4 = 8. Answer: 9408.)
-
-**Chunk 3 — Fast multiplication by 11, and percentage shortcuts (15 min)**
-
-**Say:** "Multiplying any two-digit number by 11: add the two digits together and place that sum in the middle. For 45 times 11: 4 plus 5 equals 9, so place the 9 between the 4 and 5, giving 495." Work through: "What's 63 times 11?" (6+3=9, so 693)
-
-**Say:** "For percentage shortcuts — to quickly find 10% of any number, just move the decimal point one place left. To find 5%, find 10% and halve it. To find 20%, find 10% and double it. This lets you build almost any 'nice' percentage quickly from a 10% base."
-
-Work through: "What's 15% of 300?" (10% = 30, 5% = 15, so 15% = 45)
-
-**Say:** "None of these tricks work by magic — they're all just smart rearrangements of maths you already know. The real skill is recognizing WHEN a shortcut applies, which only comes from practice."
-
-Pause for questions.
-
-## Discussion Poll Moment (~around the 43-minute mark)
-
-Launch **"Discussion: Speed Mathematics"**:
-
-1. "How fast can you currently do calculations without a calculator?" — *Very fast / Average speed / A bit slow / Very slow*
-2. "Which calculation trick would help you most?" — *Fast multiplication / Quick squares/cubes / Percentage shortcuts / Division shortcuts*
-3. "How much time pressure do you feel during timed maths tests?" — *A lot / Some / A little / None*
-
-**Say** after question 3: "For those who feel a lot of time pressure, today's tricks are specifically meant to buy you back precious seconds on exactly the calculations that eat up time."
-
-## Interactive Activity (~18 min)
-
-**"Speed Round" — timed pair drilling.**
-
-1. Pair students up. **Say:** "I'll put up a calculation. You and your partner race to solve it using today's tricks, then raise your hands when you have an answer. I'll call on the fastest hands first, and we'll check the answer together."
-2. Run through a rapid sequence, giving about 30-45 seconds per problem: 65² (4225, using the ending-in-5 trick), 97 × 96 (9312, using the near-100 trick), 72 × 11 (792, using the times-11 trick), 15% of 480 (72, using the percentage shortcut).
-3. After each answer, briefly ask a fast pair to explain which trick they used — reinforces the technique out loud for the rest of the room.
-4. Close with an honest gut-check: **Say:** "Show of hands — did today's tricks genuinely feel faster than your normal method for at least one of these?" Most hands should go up — acknowledge that with encouragement.
-
-## Quiz Moment
-
-Launch **"Exam-Style Quiz: Speed Mathematics"**:
-
-1. 15 × 15 using shortcuts: **225**.
-2. Square of 21: **441**.
-3. 99 × 99 using the near-100 shortcut: **9801**.
-
-## Wrap-Up (~7 min)
-
-**Say:** "Today's takeaways: squaring numbers ending in 5, multiplying numbers near 100, multiplying by 11, and building percentages from a 10% base are all genuine time-savers in a timed exam. None of these are magic — they're just smart shortcuts on maths you already know, and like any skill, they get faster the more you practice them."
-
-**Say:** "Tomorrow, we shift from numbers to patterns and logic — logical reasoning and analytical thinking, another heavily tested area in competitive exams. See you then."
-
-## If Time Runs Short/Long
-
-If short: cover only the ending-in-5 squaring trick and the near-100 multiplication trick, dropping the times-11 and percentage shortcuts to a quick mention.
-
-If long: challenge the class with one harder near-100 example (e.g., 103 × 104, extending the trick to numbers just ABOVE 100) as a bonus stretch problem.`,
 
   "Logical Reasoning & Analytical Thinking": `## A Note on This Session
 

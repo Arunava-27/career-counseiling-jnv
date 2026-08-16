@@ -4,6 +4,7 @@ import { SessionRunner } from "./instructor/SessionRunner";
 import { ExportPage } from "./instructor/ExportPage";
 import { AssessmentKiosk } from "./instructor/AssessmentKiosk";
 import { PrincipalReport } from "./instructor/PrincipalReport";
+import { SessionReport } from "./instructor/SessionReport";
 import { LoginPage } from "./instructor/LoginPage";
 import { RequireAuth } from "./instructor/RequireAuth";
 import { JoinPage } from "./student/JoinPage";
@@ -50,6 +51,14 @@ function App() {
         element={
           <RequireAuth>
             <PrincipalReport />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/console/session-report"
+        element={
+          <RequireAuth>
+            <SessionReport />
           </RequireAuth>
         }
       />

@@ -129,15 +129,29 @@ sessionsRouter.put("/:id", requireAuth, async (req, res) => {
   res.json(updated);
 });
 
+// Deleting a session is a deliberate, irreversible instructor action (confirmed client-side
+// before this ever gets called) — it cascades through every dependent record rather than being
+// blocked by them, since "delete this session" should mean exactly that.
 sessionsRouter.delete("/:id", requireAuth, async (req, res) => {
-  try {
-    await db.prepare("DELETE FROM sessions WHERE id = ?").run(req.params.id);
-    res.status(204).end();
-  } catch {
-    res.status(400).json({
-      error: "Cannot delete a session that already has recorded participants or responses",
-    });
-  }
+  const id = req.params.id;
+
+  await db
+    .prepare("DELETE FROM poll_responses WHERE session_id = ?")
+    .run(id);
+  await db
+    .prepare(
+      "DELETE FROM poll_option_tallies WHERE question_id IN (SELECT pq.id FROM poll_questions pq JOIN polls p ON p.id = pq.poll_id WHERE p.session_id = ?)"
+    )
+    .run(id);
+  await db
+    .prepare("DELETE FROM poll_questions WHERE poll_id IN (SELECT id FROM polls WHERE session_id = ?)")
+    .run(id);
+  await db.prepare("DELETE FROM polls WHERE session_id = ?").run(id);
+  await db.prepare("DELETE FROM assessment_responses WHERE session_id = ?").run(id);
+  await db.prepare("DELETE FROM participants WHERE session_id = ?").run(id);
+  await db.prepare("DELETE FROM sessions WHERE id = ?").run(id);
+
+  res.status(204).end();
 });
 
 sessionsRouter.post("/:id/start", requireAuth, async (req, res) => {
@@ -160,15 +174,33 @@ sessionsRouter.post("/:id/start", requireAuth, async (req, res) => {
 
 sessionsRouter.get("/:id/participants", requireAuth, async (req, res) => {
   const participants = await db
-    .prepare("SELECT id, display_name, roll_number, joined_at FROM participants WHERE session_id = ? ORDER BY joined_at")
+    .prepare(
+      "SELECT id, display_name, class_name, section, roll_number, joined_at FROM participants WHERE session_id = ? ORDER BY joined_at"
+    )
     .all(req.params.id);
   res.json(participants);
 });
 
+// Every student taking a test — psychometry or otherwise — states their own full name, class,
+// section, and roll number, rather than inheriting it from the session (a walk-up psychometry
+// kiosk session can serve students from several different classes in one sitting). This is also
+// exactly the record the instructor later hands the Principal, so all four are mandatory here,
+// not just in the UI.
 sessionsRouter.post("/:id/participants", async (req, res) => {
-  const { display_name, roll_number } = req.body as { display_name?: string; roll_number?: string };
-  if (!display_name || !display_name.trim()) {
-    res.status(400).json({ error: "display_name is required" });
+  const { display_name, class_name, section, roll_number } = req.body as {
+    display_name?: string;
+    class_name?: string;
+    section?: string;
+    roll_number?: string;
+  };
+
+  const missing: string[] = [];
+  if (!display_name || !display_name.trim()) missing.push("full name");
+  if (!class_name || !class_name.trim()) missing.push("class");
+  if (!section || !section.trim()) missing.push("section");
+  if (!roll_number || !roll_number.trim()) missing.push("roll number");
+  if (missing.length > 0) {
+    res.status(400).json({ error: `Please enter your ${missing.join(", ")}.` });
     return;
   }
 
@@ -183,9 +215,17 @@ sessionsRouter.post("/:id/participants", async (req, res) => {
   const deviceToken = randomUUID();
   const result = await db
     .prepare(
-      "INSERT INTO participants (session_id, display_name, roll_number, joined_at, device_token) VALUES (?, ?, ?, ?, ?)"
+      "INSERT INTO participants (session_id, display_name, class_name, section, roll_number, joined_at, device_token) VALUES (?, ?, ?, ?, ?, ?, ?)"
     )
-    .run(req.params.id, display_name.trim(), roll_number?.trim() || null, new Date().toISOString(), deviceToken);
+    .run(
+      req.params.id,
+      display_name!.trim(),
+      class_name!.trim(),
+      section!.trim(),
+      roll_number!.trim(),
+      new Date().toISOString(),
+      deviceToken
+    );
 
   res.status(201).json({
     participant_id: Number(result.lastInsertRowid),

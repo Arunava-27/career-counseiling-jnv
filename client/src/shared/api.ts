@@ -21,7 +21,17 @@ async function request<T>(path: string, options?: RequestInit, retries = 3): Pro
         ...options,
       });
       if (!res.ok) {
-        lastError = new Error(`Request failed: ${res.status} ${res.statusText}`);
+        // Prefer the server's own explanation (e.g. "Cannot delete a session that already has
+        // recorded participants or responses") over a generic status line, so the instructor
+        // sees why an action was rejected, not just that it was.
+        let message = `Request failed: ${res.status} ${res.statusText}`;
+        try {
+          const body = await res.clone().json();
+          if (body && typeof body.error === "string") message = body.error;
+        } catch {
+          // Body wasn't JSON (or was empty) — fall back to the generic message above.
+        }
+        lastError = new Error(message);
         if (res.status === 401 && !path.startsWith("/auth/")) {
           // Session expired/missing — bounce to login rather than surfacing a raw error.
           window.location.href = "/login";
@@ -45,6 +55,14 @@ async function request<T>(path: string, options?: RequestInit, retries = 3): Pro
   throw lastError;
 }
 
+// `request()` throws a plain Error whose message is already the server's own explanation (e.g.
+// "Cannot delete a session that already has recorded participants or responses") — this just
+// strips the redundant "Error: " prefix that `String(err)` would otherwise leave in when
+// showing it to an instructor.
+export function errorMessage(err: unknown): string {
+  return err instanceof Error ? err.message : String(err);
+}
+
 export interface HelloResponse {
   message: string;
 }
@@ -60,6 +78,8 @@ export interface CurriculumTopic {
   title: string;
   description: string | null;
   content_markdown: string | null;
+  min_class_level: number | null;
+  max_class_level: number | null;
 }
 
 export interface ClassSection {
@@ -114,6 +134,8 @@ export interface JoinLookupResponse {
 export interface Participant {
   id: number;
   display_name: string;
+  class_name: string | null;
+  section: string | null;
   roll_number: string | null;
   joined_at: string;
 }
@@ -185,6 +207,10 @@ export interface AssessmentInstrument {
   name: string;
   type: string;
   description: string | null;
+  min_class_level: number | null;
+  max_class_level: number | null;
+  // Soft, non-clinical title to show a student taking the test. Falls back to `name` if unset.
+  student_label: string | null;
   questions: AssessmentQuestion[];
 }
 
@@ -246,10 +272,15 @@ export const api = {
   completeSession: (id: number) => request<Session>(`/sessions/${id}/complete`, { method: "POST" }),
 
   lookupJoinCode: (code: string) => request<JoinLookupResponse>(`/join/${code}`),
-  joinSession: (sessionId: number, displayName: string, rollNumber?: string) =>
+  joinSession: (sessionId: number, info: { displayName: string; className: string; section: string; rollNumber: string }) =>
     request<JoinedParticipant>(`/sessions/${sessionId}/participants`, {
       method: "POST",
-      body: JSON.stringify({ display_name: displayName, roll_number: rollNumber }),
+      body: JSON.stringify({
+        display_name: info.displayName,
+        class_name: info.className,
+        section: info.section,
+        roll_number: info.rollNumber,
+      }),
     }),
   participants: (sessionId: number) => request<Participant[]>(`/sessions/${sessionId}/participants`),
 

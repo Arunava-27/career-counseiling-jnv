@@ -26,22 +26,24 @@ reportsRouter.get("/psychometry", async (_req, res) => {
 
       const rows = (await db
         .prepare(
-          `SELECT ar.answers_json, ar.submitted_at, p.display_name, p.roll_number,
-                  s.date as session_date, c.name as class_section_name
+          `SELECT ar.answers_json, ar.submitted_at, p.display_name, p.class_name, p.section, p.roll_number,
+                  s.date as session_date, c.name as session_class_section_name
            FROM assessment_responses ar
            JOIN participants p ON p.id = ar.participant_id
            JOIN sessions s ON s.id = ar.session_id
            LEFT JOIN class_sections c ON c.id = s.class_section_id
            WHERE ar.instrument_id = ?
-           ORDER BY c.name, p.display_name`
+           ORDER BY p.class_name, p.section, p.display_name`
         )
         .all(instrument.id)) as {
         answers_json: string;
         submitted_at: string;
         display_name: string;
+        class_name: string | null;
+        section: string | null;
         roll_number: string | null;
         session_date: string | null;
-        class_section_name: string | null;
+        session_class_section_name: string | null;
       }[];
 
       const participants = rows.map((row) => {
@@ -54,10 +56,17 @@ reportsRouter.get("/psychometry", async (_req, res) => {
             dimensionTotals[dimension] = (dimensionTotals[dimension] ?? 0) + numeric;
           }
         }
+        // Prefer the student's own stated class/section (mandatory since every participant now
+        // enters it themselves) — falls back to the session's class for older records taken
+        // before that was captured per-student.
+        const classSection =
+          row.class_name || row.section
+            ? [row.class_name, row.section].filter(Boolean).join(" ")
+            : row.session_class_section_name;
         return {
           display_name: row.display_name,
           roll_number: row.roll_number,
-          class_section_name: row.class_section_name,
+          class_section_name: classSection,
           session_date: row.session_date,
           submitted_at: row.submitted_at,
           dimension_totals: dimensionTotals,

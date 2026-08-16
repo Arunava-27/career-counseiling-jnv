@@ -33,13 +33,12 @@ curriculumRouter.post("/class-sections", async (req, res) => {
   }
 });
 
+// Unlink (never delete) any session using this class section first — deleting the class
+// shouldn't delete the sessions/records that reference it, just detach the label from them.
 curriculumRouter.delete("/class-sections/:id", async (req, res) => {
-  try {
-    await db.prepare("DELETE FROM class_sections WHERE id = ?").run(req.params.id);
-    res.status(204).end();
-  } catch {
-    res.status(400).json({ error: "Cannot delete a class section already used by a session" });
-  }
+  await db.prepare("UPDATE sessions SET class_section_id = NULL WHERE class_section_id = ?").run(req.params.id);
+  await db.prepare("DELETE FROM class_sections WHERE id = ?").run(req.params.id);
+  res.status(204).end();
 });
 
 // Reusable poll/quiz templates for a topic (session_id IS NULL, topic_id set) —

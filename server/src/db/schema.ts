@@ -9,7 +9,10 @@ CREATE TABLE IF NOT EXISTS curriculum_topics (
   order_index INTEGER NOT NULL,
   title TEXT NOT NULL,
   description TEXT,
-  content_markdown TEXT
+  content_markdown TEXT,
+  -- Recommended class range this topic suits, e.g. 9-12. Nullable: unset means "not yet tagged".
+  min_class_level INTEGER,
+  max_class_level INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS sessions (
@@ -34,6 +37,11 @@ CREATE TABLE IF NOT EXISTS participants (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   session_id INTEGER NOT NULL REFERENCES sessions(id),
   display_name TEXT NOT NULL,
+  -- Captured per-student, not inherited from the session's own class_section_id — a
+  -- psychometry-only walk-up kiosk session can serve students from several different
+  -- classes/sections in one sitting, so each student states their own.
+  class_name TEXT,
+  section TEXT,
   roll_number TEXT,
   joined_at TEXT NOT NULL,
   device_token TEXT NOT NULL UNIQUE
@@ -85,7 +93,17 @@ CREATE TABLE IF NOT EXISTS assessment_instruments (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
   type TEXT NOT NULL,
-  description TEXT
+  description TEXT,
+  -- Recommended class range this instrument suits, e.g. 9-12. Different age groups need
+  -- genuinely different instruments (wording, length, concept difficulty) rather than one
+  -- assessment used everywhere. Nullable: unset means "not yet tagged".
+  min_class_level INTEGER,
+  max_class_level INTEGER,
+  -- Soft, non-clinical title shown to the student taking the test (e.g. "Discover Your
+  -- Interests"), distinct from the name column which is the clear/technical label instructors
+  -- see on the console ("Career Interest Assessment (Psychometric Test)"). Nullable: falls
+  -- back to name if unset.
+  student_label TEXT
 );
 
 CREATE TABLE IF NOT EXISTS assessment_questions (

@@ -49,5 +49,27 @@ export const db = {
   },
 };
 
+async function addColumnIfMissing(table: string, column: string, type: string) {
+  try {
+    await db.exec(`ALTER TABLE ${table} ADD COLUMN ${column} ${type};`);
+  } catch (err) {
+    // SQLite/libSQL has no "ADD COLUMN IF NOT EXISTS" — ignore if it's already there
+    // (a database that was created before this column existed and has since been migrated).
+    if (!(err instanceof Error) || !/duplicate column/i.test(err.message)) {
+      throw err;
+    }
+  }
+}
+
 await db.exec("PRAGMA foreign_keys = ON;");
 await db.exec(SCHEMA_SQL);
+
+// Additive migrations for databases created before a column was added to schema.ts above.
+// CREATE TABLE IF NOT EXISTS only affects brand-new tables, so existing ones need this too.
+await addColumnIfMissing("curriculum_topics", "min_class_level", "INTEGER");
+await addColumnIfMissing("curriculum_topics", "max_class_level", "INTEGER");
+await addColumnIfMissing("assessment_instruments", "min_class_level", "INTEGER");
+await addColumnIfMissing("assessment_instruments", "max_class_level", "INTEGER");
+await addColumnIfMissing("assessment_instruments", "student_label", "TEXT");
+await addColumnIfMissing("participants", "class_name", "TEXT");
+await addColumnIfMissing("participants", "section", "TEXT");
