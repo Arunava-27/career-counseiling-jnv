@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { QRCodeSVG } from "qrcode.react";
 import { api, type Participant, type Session } from "../shared/api";
-import { PollManager } from "./PollManager";
-import { TopicContent } from "./TopicContent";
 import { AssessmentManager } from "./AssessmentManager";
+import { DeckViewer } from "./DeckViewer";
+import { parseGradeFromClassName } from "../shared/classLevels";
 
 export function SessionRunner() {
   const { id } = useParams<{ id: string }>();
@@ -73,14 +73,13 @@ export function SessionRunner() {
       <div className="topbar" style={{ marginBottom: "0.5rem" }}>
         <div>
           <h1>
-            Session {session.session_number}: {session.topic_title ?? "Psychometry Test"}
+            Session {session.session_number} — {session.class_section_name ?? "No class set"}
           </h1>
           <p className="muted">
-            {[session.class_section_name, session.instructor_name].filter(Boolean).join(" · ") || " "}
+            {[session.date, session.scheduled_start_time, session.instructor_name].filter(Boolean).join(" · ") || " "}
           </p>
         </div>
         <div className="row">
-          {!session.topic_id && <span className="badge badge-accent">🧭 Psychometry only</span>}
           {session.status !== "in_progress" && (
             <span className="badge badge-neutral">{session.status.replace("_", " ")}</span>
           )}
@@ -147,12 +146,8 @@ export function SessionRunner() {
         </div>
       )}
 
-      {/* No topic assigned = a deliberate psychometry-only session (see the Dashboard's "Start
-          Psychometry Test" shortcut) — Topic Content and Polls have nothing to show and would
-          just be clutter, so only the Psychometry Test panel renders. */}
-      {session.status === "in_progress" && session.topic_id && <TopicContent topicId={session.topic_id} />}
-      {session.status === "in_progress" && session.topic_id && (
-        <PollManager sessionId={sessionId} topicId={session.topic_id} />
+      {session.status === "in_progress" && (
+        <DeckViewer grade={session.class_section_name ? parseGradeFromClassName(session.class_section_name) : null} />
       )}
       {session.status === "in_progress" && <AssessmentManager session={session} />}
     </div>

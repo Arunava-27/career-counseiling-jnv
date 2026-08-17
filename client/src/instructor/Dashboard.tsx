@@ -4,11 +4,11 @@ import {
   api,
   errorMessage,
   type ClassSection,
-  type CurriculumTopic,
   type Session,
   type SessionStatus,
 } from "../shared/api";
-import { CLASS_BANDS, bandForRange, classRangeLabel, parseGradeFromClassName } from "../shared/classLevels";
+import { parseGradeFromClassName } from "../shared/classLevels";
+import { deckForGrade } from "../shared/decks";
 
 const NEW_CLASS_SENTINEL = "__new__";
 
@@ -31,7 +31,6 @@ function StatusBadge({ status }: { status: SessionStatus }) {
 export function Dashboard() {
   const navigate = useNavigate();
   const [sessions, setSessions] = useState<Session[]>([]);
-  const [topics, setTopics] = useState<CurriculumTopic[]>([]);
   const [classSections, setClassSections] = useState<ClassSection[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [showAddClass, setShowAddClass] = useState(false);
@@ -42,7 +41,6 @@ export function Dashboard() {
     date: "",
     scheduled_start_time: "",
     scheduled_end_time: "",
-    topic_id: "",
     class_section_id: "",
     instructor_name: "",
   });
@@ -57,61 +55,40 @@ export function Dashboard() {
 
   useEffect(() => {
     refresh();
-    api.curriculum().then(setTopics).catch(() => undefined);
     refreshClassSections();
   }, []);
+
+  // Date, start time, class, and instructor(s) are all mandatory now — this app is purely for
+  // taking tests and tracking sessions, so a session with none of that recorded isn't useful,
+  // and there's no longer a "quick start, fill in details later" shortcut for it.
+  const requiredFilled =
+    form.session_number.trim() && form.date.trim() && form.scheduled_start_time.trim() && form.class_section_id && form.instructor_name.trim();
 
   async function handleAddSession(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
+    if (!requiredFilled) {
+      setError("Please fill in the session number, date, start time, class, and instructor(s) first.");
+      return;
+    }
     try {
       await api.createSession({
         session_number: Number(form.session_number),
-        date: form.date || undefined,
-        scheduled_start_time: form.scheduled_start_time || undefined,
+        date: form.date,
+        scheduled_start_time: form.scheduled_start_time,
         scheduled_end_time: form.scheduled_end_time || undefined,
-        topic_id: form.topic_id ? Number(form.topic_id) : undefined,
-        class_section_id: form.class_section_id ? Number(form.class_section_id) : undefined,
-        instructor_name: form.instructor_name || undefined,
+        class_section_id: Number(form.class_section_id),
+        instructor_name: form.instructor_name.trim(),
       });
       setForm({
         session_number: "",
         date: "",
         scheduled_start_time: "",
         scheduled_end_time: "",
-        topic_id: "",
         class_section_id: "",
         instructor_name: "",
       });
       refresh();
-    } catch (err) {
-      setError(errorMessage(err));
-    }
-  }
-
-  // Psychometry is an independent thing, not a curriculum topic — this creates a session with
-  // NO topic at all (so SessionRunner shows only the Psychometry Test panel, no Topic Content
-  // or Polls section) and jumps straight into it, skipping the topic-picking step entirely.
-  // Reuses whatever's already filled in the Add Session form (date/class/instructor), auto-
-  // numbering the session if that field was left blank.
-  async function handleStartPsychometryOnly() {
-    setError(null);
-    try {
-      const nextNumber =
-        form.session_number.trim() !== ""
-          ? Number(form.session_number)
-          : (sessions.reduce((max, s) => Math.max(max, s.session_number), 0) || 0) + 1;
-
-      const created = await api.createSession({
-        session_number: nextNumber,
-        date: form.date || undefined,
-        scheduled_start_time: form.scheduled_start_time || undefined,
-        scheduled_end_time: form.scheduled_end_time || undefined,
-        class_section_id: form.class_section_id ? Number(form.class_section_id) : undefined,
-        instructor_name: form.instructor_name || undefined,
-      });
-      await api.startSession(created.id);
-      navigate(`/console/sessions/${created.id}`);
     } catch (err) {
       setError(errorMessage(err));
     }
@@ -131,38 +108,6 @@ export function Dashboard() {
       setError(errorMessage(err));
     }
   }
-
-  // Group the topic picker by school stage. If a class section is already selected and its
-  // grade can be parsed from its name, that section's matching band is bumped to the top of
-  // the dropdown so the most relevant topics for that class are the first thing the instructor
-  // sees — everything is still available in the other groups, this is just ordering.
-  const selectedGrade = (() => {
-    const section = classSections.find((c) => c.id === Number(form.class_section_id));
-    return section ? parseGradeFromClassName(section.name) : null;
-  })();
-
-  const groupedTopics = (() => {
-    const byBand = new Map<string, CurriculumTopic[]>();
-    for (const t of topics) {
-      const label = bandForRange(t);
-      if (!byBand.has(label)) byBand.set(label, []);
-      byBand.get(label)!.push(t);
-    }
-    for (const list of byBand.values()) list.sort((a, b) => a.order_index - b.order_index);
-
-    const bandOrder = [...CLASS_BANDS.map((b) => b.label), "Ungrouped"];
-    if (selectedGrade != null) {
-      const matching = CLASS_BANDS.find((b) => selectedGrade >= b.min && selectedGrade <= b.max);
-      if (matching) {
-        bandOrder.splice(bandOrder.indexOf(matching.label), 1);
-        bandOrder.unshift(matching.label);
-      }
-    }
-
-    return bandOrder
-      .filter((label) => byBand.has(label))
-      .map((label) => ({ label, topics: byBand.get(label)! }));
-  })();
 
   async function handleStart(id: number) {
     setError(null);
@@ -188,7 +133,7 @@ export function Dashboard() {
     // Deleting is unconditional server-side now (including any recorded participants/responses
     // for that session) — this confirmation is the only thing standing between a stray click
     // and permanently losing real student data, so it names what's actually at stake.
-    const label = `Session ${session.session_number}${session.topic_title ? `: ${session.topic_title}` : ""}`;
+    const label = `Session ${session.session_number}`;
     if (!window.confirm(`Delete ${label}? This permanently removes it and any recorded participants or responses. This cannot be undone.`)) {
       return;
     }
@@ -231,9 +176,6 @@ export function Dashboard() {
           <p className="muted">Session Tracker</p>
         </div>
         <div className="topbar-actions">
-          <button type="button" className="btn-primary btn-sm" onClick={handleStartPsychometryOnly}>
-            🧭 Start Psychometry Test
-          </button>
           <Link to="/console/session-report">🖨️ Session Records</Link>
           <Link to="/console/report">📋 Psychometry Report</Link>
           <Link to="/console/export">⬇️ Export Data</Link>
@@ -249,10 +191,6 @@ export function Dashboard() {
           </button>
         </div>
       </div>
-      <p className="faint" style={{ marginTop: "-0.9rem", marginBottom: "1rem" }}>
-        "Start Psychometry Test" jumps straight to the test — no topic needed. Fill in date/class/instructor below
-        first if you want them recorded, or leave blank and add them later.
-      </p>
 
       <div className="form-card">
         <h2 style={{ marginBottom: "0.9rem" }}>Add a session</h2>
@@ -269,6 +207,7 @@ export function Dashboard() {
             type="date"
             value={form.date}
             onChange={(e) => setForm({ ...form, date: e.target.value })}
+            required
           />
           <label style={{ fontSize: "0.85rem", display: "flex", alignItems: "center", gap: "0.35rem" }}>
             Start
@@ -276,6 +215,7 @@ export function Dashboard() {
               type="time"
               value={form.scheduled_start_time}
               onChange={(e) => setForm({ ...form, scheduled_start_time: e.target.value })}
+              required
             />
           </label>
           <label style={{ fontSize: "0.85rem", display: "flex", alignItems: "center", gap: "0.35rem" }}>
@@ -287,25 +227,6 @@ export function Dashboard() {
             />
           </label>
           <select
-            value={form.topic_id}
-            onChange={(e) => setForm({ ...form, topic_id: e.target.value })}
-          >
-            <option value="">Topic...</option>
-            {groupedTopics.map((group) => (
-              <optgroup key={group.label} label={group.label}>
-                {group.topics.map((t) => {
-                  const range = classRangeLabel(t);
-                  return (
-                    <option key={t.id} value={t.id}>
-                      {t.title}
-                      {range ? ` (${range})` : ""}
-                    </option>
-                  );
-                })}
-              </optgroup>
-            ))}
-          </select>
-          <select
             value={form.class_section_id}
             onChange={(e) => {
               if (e.target.value === NEW_CLASS_SENTINEL) {
@@ -315,6 +236,7 @@ export function Dashboard() {
                 setForm({ ...form, class_section_id: e.target.value });
               }
             }}
+            required
           >
             <option value="">Class...</option>
             {classSections.map((c) => (
@@ -325,12 +247,13 @@ export function Dashboard() {
             <option value={NEW_CLASS_SENTINEL}>+ New class...</option>
           </select>
           <input
-            placeholder="Instructor"
+            placeholder="Instructor(s), e.g. Arunava, Khushi"
             value={form.instructor_name}
             onChange={(e) => setForm({ ...form, instructor_name: e.target.value })}
-            style={{ width: "9rem" }}
+            required
+            style={{ width: "13rem" }}
           />
-          <button type="submit" className="btn-primary">
+          <button type="submit" className="btn-primary" disabled={!requiredFilled}>
             + Add Session
           </button>
         </form>
@@ -371,79 +294,82 @@ export function Dashboard() {
         <table className="table">
           <thead>
             <tr>
-              {["No.", "Date", "Time", "Instructor", "Class", "Topic", "Status", "Attendance", "Activity Notes", "Actions"].map((h) => (
+              {["No.", "Date", "Time", "Instructor(s)", "Class", "Deck", "Status", "Attendance", "Activity Notes", "Actions"].map((h) => (
                 <th key={h}>{h}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {sessions.map((s) => (
-              <tr key={s.id}>
-                <td>{s.session_number}</td>
-                <td>{s.date ?? "—"}</td>
-                <td>
-                  <div className="row" style={{ gap: "0.3rem", flexWrap: "nowrap" }}>
-                    <span className="faint">{s.scheduled_start_time ?? "—"}</span>–
+            {sessions.map((s) => {
+              const deck = deckForGrade(s.class_section_name ? parseGradeFromClassName(s.class_section_name) : null);
+              return (
+                <tr key={s.id}>
+                  <td>{s.session_number}</td>
+                  <td>{s.date ?? "—"}</td>
+                  <td>
+                    <div className="row" style={{ gap: "0.3rem", flexWrap: "nowrap" }}>
+                      <span className="faint">{s.scheduled_start_time ?? "—"}</span>–
+                      <input
+                        type="time"
+                        title="End time — fine to leave blank and fill in after the session actually runs"
+                        key={`end-${s.id}-${s.scheduled_end_time}`}
+                        defaultValue={s.scheduled_end_time ?? ""}
+                        onBlur={(e) => handleEndTimeBlur(s.id, e.target.value, s.scheduled_end_time)}
+                        style={{ width: "6.5rem" }}
+                      />
+                    </div>
+                  </td>
+                  <td>{s.instructor_name ?? "—"}</td>
+                  <td>{s.class_section_name ?? "—"}</td>
+                  <td>{deck ? `Class ${deck.grade}` : <span className="faint">no deck</span>}</td>
+                  <td>
+                    <StatusBadge status={s.status} />
+                  </td>
+                  <td>
                     <input
-                      type="time"
-                      title="End time — fine to leave blank and fill in after the session actually runs"
-                      key={`end-${s.id}-${s.scheduled_end_time}`}
-                      defaultValue={s.scheduled_end_time ?? ""}
-                      onBlur={(e) => handleEndTimeBlur(s.id, e.target.value, s.scheduled_end_time)}
-                      style={{ width: "6.5rem" }}
+                      type="number"
+                      min={0}
+                      key={`att-${s.id}-${s.attendance_count}`}
+                      defaultValue={s.attendance_count ?? ""}
+                      onBlur={(e) => handleAttendanceBlur(s.id, e.target.value)}
+                      style={{ width: "3.8rem" }}
                     />
-                  </div>
-                </td>
-                <td>{s.instructor_name ?? "—"}</td>
-                <td>{s.class_section_name ?? "—"}</td>
-                <td>{s.topic_title ?? "—"}</td>
-                <td>
-                  <StatusBadge status={s.status} />
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    min={0}
-                    key={`att-${s.id}-${s.attendance_count}`}
-                    defaultValue={s.attendance_count ?? ""}
-                    onBlur={(e) => handleAttendanceBlur(s.id, e.target.value)}
-                    style={{ width: "3.8rem" }}
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    placeholder="What was covered..."
-                    key={`notes-${s.id}-${s.notes}`}
-                    defaultValue={s.notes ?? ""}
-                    onBlur={(e) => handleNotesBlur(s.id, e.target.value, s.notes)}
-                    style={{ width: "11rem" }}
-                  />
-                </td>
-                <td>
-                  <div className="row" style={{ flexWrap: "nowrap" }}>
-                    {s.status === "scheduled" && (
-                      <button className="btn-primary btn-sm" onClick={() => handleStart(s.id)}>
-                        Start
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      placeholder="What was covered..."
+                      key={`notes-${s.id}-${s.notes}`}
+                      defaultValue={s.notes ?? ""}
+                      onBlur={(e) => handleNotesBlur(s.id, e.target.value, s.notes)}
+                      style={{ width: "11rem" }}
+                    />
+                  </td>
+                  <td>
+                    <div className="row" style={{ flexWrap: "nowrap" }}>
+                      {s.status === "scheduled" && (
+                        <button className="btn-primary btn-sm" onClick={() => handleStart(s.id)}>
+                          Start
+                        </button>
+                      )}
+                      {s.status === "in_progress" && (
+                        <>
+                          <button className="btn-sm" onClick={() => navigate(`/console/sessions/${s.id}`)}>
+                            Manage
+                          </button>
+                          <button className="btn-sm" onClick={() => handleComplete(s.id)}>
+                            Complete
+                          </button>
+                        </>
+                      )}
+                      <button className="btn-danger btn-sm" onClick={() => handleDelete(s.id, s)}>
+                        Delete
                       </button>
-                    )}
-                    {s.status === "in_progress" && (
-                      <>
-                        <button className="btn-sm" onClick={() => navigate(`/console/sessions/${s.id}`)}>
-                          Manage
-                        </button>
-                        <button className="btn-sm" onClick={() => handleComplete(s.id)}>
-                          Complete
-                        </button>
-                      </>
-                    )}
-                    <button className="btn-danger btn-sm" onClick={() => handleDelete(s.id, s)}>
-                      Delete
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
             {sessions.length === 0 && (
               <tr>
                 <td colSpan={10} className="empty-state">

@@ -48,8 +48,18 @@ sessionsRouter.post("/", requireAuth, async (req, res) => {
     attendance_count,
   } = req.body as SessionInput;
 
-  if (!session_number) {
-    res.status(400).json({ error: "session_number is required" });
+  // The app is purely for taking tests and tracking sessions now — a session with no date,
+  // time, class, or instructor recorded isn't useful, so all four are required at creation,
+  // not just suggested by the UI. (topic_id stays optional/unused going forward — the topic
+  // curriculum is retired for now, not removed from the schema.)
+  const missing: string[] = [];
+  if (!session_number) missing.push("session_number");
+  if (!date) missing.push("date");
+  if (!scheduled_start_time) missing.push("scheduled_start_time");
+  if (!class_section_id) missing.push("class_section_id");
+  if (!instructor_name || !instructor_name.trim()) missing.push("instructor_name");
+  if (missing.length > 0) {
+    res.status(400).json({ error: `Missing required field(s): ${missing.join(", ")}` });
     return;
   }
 
