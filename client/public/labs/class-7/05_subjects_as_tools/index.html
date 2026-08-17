@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Subjects Are Tools — Career Lab</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#F2EBDE;--off:#FBF7F0;--olive:#2F3A2A;--olive2:#4A5942;--sage:#9FB08C;--burnt:#D2622A;--terra:#B34A32;--char:#1C1A17;
+--serif:'Caprasimo',Georgia,'Iowan Old Style','Times New Roman',serif;--sans:'Figtree','Segoe UI',system-ui,sans-serif}
+html,body{height:100%;background:var(--char);overflow:hidden;font-family:var(--sans);-webkit-tap-highlight-color:transparent}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:50% 50%;background:var(--cream);color:var(--olive);padding:56px 80px 48px;display:flex;flex-direction:column;overflow:hidden}
+.kicker{font-size:22px;letter-spacing:.3em;text-transform:uppercase;color:var(--burnt);font-weight:700}
+h1{font-family:var(--serif);font-weight:400;font-size:100px;line-height:.98;letter-spacing:-.005em;color:var(--olive)}
+h2{font-family:var(--serif);font-weight:400;font-size:56px;line-height:1.04}
+h3{font-family:var(--sans);font-weight:700;font-size:26px;letter-spacing:.16em;text-transform:uppercase;color:var(--burnt)}
+p{font-size:30px;line-height:1.4;text-wrap:pretty}
+.bar{margin-top:auto;display:flex;gap:18px;align-items:center;padding-top:26px}
+.btn{font-family:var(--sans);font-size:24px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:22px 38px;min-height:74px;border:3px solid var(--olive);border-radius:10px;background:transparent;color:var(--olive);cursor:pointer;transition:background .18s,color .18s,transform .1s,opacity .2s}
+.btn:hover{background:rgba(47,58,42,.08)}
+.btn:active{transform:translateY(2px)}
+.btn.primary{background:var(--burnt);border-color:var(--burnt);color:var(--off)}
+.btn.primary:hover{background:var(--terra);border-color:var(--terra)}
+.btn.ghost{border-color:rgba(47,58,42,.32);color:var(--olive2)}
+.btn[disabled]{opacity:.3;pointer-events:none}
+.btn:focus-visible{outline:4px solid var(--terra);outline-offset:4px}
+.spacer{flex:1}
+.fade{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.fade.in{opacity:1;transform:none}
+::selection{background:rgba(210,98,42,.25)}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+.sub{font-size:32px;color:var(--olive2);margin-top:10px}
+.tools{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;margin-top:34px}
+.tool{background:var(--off);border:3px solid var(--olive);border-radius:16px;padding:26px 24px 22px;cursor:pointer;text-align:left;font-family:var(--sans);transition:background .2s,transform .2s;display:flex;flex-direction:column;gap:16px;min-height:230px}
+.tool:hover{background:var(--sage)}
+.tool.sel{background:var(--olive)}
+.tool.sel .tn{color:var(--off)}
+.tool.sel svg{stroke:var(--sage)}
+.tool svg{stroke:var(--burnt);stroke-width:5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.tn{font-size:28px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--olive);line-height:1.1;margin-top:auto}
+.tool:focus-visible{outline:4px solid var(--terra);outline-offset:4px}
+.out{margin-top:34px;min-height:270px}
+.outh{font-size:22px;letter-spacing:.26em;text-transform:uppercase;color:var(--burnt);font-weight:700;margin-bottom:20px;opacity:0;transition:opacity .3s}
+.outh.in{opacity:1}
+.pills{display:flex;flex-wrap:wrap;gap:18px}
+.pill{font-size:30px;font-weight:600;border:3px solid var(--olive);border-radius:999px;padding:16px 34px;background:var(--off);opacity:0;transform:translateY(14px);transition:opacity .35s,transform .35s}
+.pill.in{opacity:1;transform:none}
+.hint{font-size:28px;color:var(--olive2)}
+#mB{display:none}
+#mB.on{display:block}
+#mA.off{display:none}
+.careerrow{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+.cbtn{font-size:24px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:18px 30px;border:3px solid var(--olive);border-radius:10px;background:transparent;color:var(--olive);cursor:pointer}
+.cbtn.sel{background:var(--burnt);border-color:var(--burnt);color:var(--off)}
+.buildarea{position:relative;height:430px;margin-top:26px}
+.q{font-family:var(--serif);font-size:44px;margin-bottom:22px}
+.chips{display:flex;flex-wrap:wrap;gap:16px;width:1080px}
+.chip{font-size:28px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:3px solid var(--olive);border-radius:999px;padding:18px 32px;background:var(--off);color:var(--olive);cursor:pointer;transition:transform .8s cubic-bezier(.5,0,.2,1),opacity .8s,background .2s}
+.chip.sel{background:var(--sage)}
+.target{position:absolute;right:0;top:0;width:620px;min-height:380px;background:var(--olive);color:var(--off);border-radius:18px;padding:36px 40px;display:flex;flex-direction:column;justify-content:center;transition:transform .5s}
+.target.pulse{transform:scale(1.05)}
+.tk{font-size:20px;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);font-weight:700}
+.tt{font-family:var(--serif);font-size:64px;line-height:1.02;margin-top:12px}
+.tnote{font-size:24px;color:#E4DCCB;margin-top:18px;opacity:0;transition:opacity .5s}
+.tnote.in{opacity:1}
+
+</style></head>
+<body><div id="stage">
+<div class="kicker">Career Lab &middot; Visual 05</div>
+<h1>Subjects are tools</h1>
+<div class="sub">Careers combine tools.</div>
+<div id="mA">
+  <div class="tools" id="tools"></div>
+  <div class="out"><div class="outh" id="outh">Careers that use this tool</div><div class="pills" id="pills"><div class="hint">Touch a subject to see the work it opens up.</div></div></div>
+</div>
+<div id="mB">
+  <div class="careerrow" id="careerrow"></div>
+  <div class="buildarea">
+    <div class="q" id="q">Which tools might this career use?</div>
+    <div class="chips" id="chips"></div>
+    <div class="target" id="target"></div>
+  </div>
+</div>
+<div class="bar"><button class="btn primary" id="mode">Build a career</button><button class="btn ghost" id="converge">Combine the tools</button><div class="spacer"></div><button class="btn ghost" id="reset">Reset</button></div>
+</div>
+<script>
+(function(){function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);document.getElementById('stage').style.transform='translate(-50%,-50%) scale('+s+')';}
+addEventListener('resize',fit);fit();})();
+
+var ICONS=[
+ '<svg width="88" height="88" viewBox="0 0 64 64"><path d="M12 52 32 10l20 42"/><path d="M20 38h24"/></svg>',
+ '<svg width="88" height="88" viewBox="0 0 64 64"><path d="M26 8v18L12 50a6 6 0 0 0 5 8h30a6 6 0 0 0 5-8L38 26V8"/><path d="M22 8h20"/><path d="M19 40h26"/></svg>',
+ '<svg width="88" height="88" viewBox="0 0 64 64"><path d="M8 14h48v30H32l-12 10V44H8z"/><path d="M20 26h24"/><path d="M20 34h14"/></svg>',
+ '<svg width="88" height="88" viewBox="0 0 64 64"><circle cx="32" cy="32" r="24"/><path d="M8 32h48"/><path d="M32 8c9 8 9 40 0 48-9-8-9-40 0-48z"/></svg>',
+ '<svg width="88" height="88" viewBox="0 0 64 64"><circle cx="24" cy="28" r="20"/><circle cx="18" cy="22" r="3"/><circle cx="30" cy="20" r="3"/><circle cx="18" cy="36" r="3"/><path d="M46 58L58 34l4 2-10 24z"/></svg>'
+];
+var SUBJ=[
+ ['Mathematics',['Engineer','Architect','Economist','Accountant','Data Analyst','Statistician','Banker','Sports Analyst']],
+ ['Science',['Doctor','Researcher','Agricultural Scientist','Environmental Scientist','Food Technologist','Engineer','Veterinarian']],
+ ['Languages',['Teacher','Lawyer','Journalist','Writer','Translator','Editor','Entrepreneur','Software Engineer']],
+ ['Social Science',['Economist','Historian','Civil Servant','Lawyer','Policy Researcher','Urban Planner','Social Worker']],
+ ['Art & Sport',['Designer','Animator','Athlete','Coach','Sports Scientist','Photographer','Musician','Physiotherapist']]
+];
+var CAREERS=['Engineer','Software Engineer','Doctor','Architect','Journalist','Sports Scientist'];
+var TOOLS=['Mathematics','Science','Languages','Social Science','Art & Sport','Problem solving','Teamwork'];
+var timers=[];
+function clearT(){timers.forEach(clearTimeout);timers=[];}
+var tools=document.getElementById('tools');
+SUBJ.forEach(function(s,i){
+  var b=document.createElement('button');b.className='tool';b.innerHTML=ICONS[i]+'<div class="tn">'+s[0]+'</div>';
+  b.addEventListener('click',function(){pickSubject(i);});tools.appendChild(b);
+});
+function pickSubject(i){
+  clearT();
+  tools.querySelectorAll('.tool').forEach(function(t,k){t.classList.toggle('sel',k===i);});
+  document.getElementById('outh').classList.add('in');
+  var p=document.getElementById('pills');
+  p.innerHTML=SUBJ[i][1].map(function(c){return '<div class="pill">'+c+'</div>';}).join('');
+  p.querySelectorAll('.pill').forEach(function(el,k){timers.push(setTimeout(function(){el.classList.add('in');},k*80));});
+}
+var row=document.getElementById('careerrow');
+CAREERS.forEach(function(c,i){
+  var b=document.createElement('button');b.className='cbtn';b.textContent=c;
+  b.addEventListener('click',function(){pickCareer(i);});row.appendChild(b);
+});
+var chipsEl=document.getElementById('chips'),target=document.getElementById('target'),ci=0;
+function drawChips(){
+  chipsEl.innerHTML=TOOLS.map(function(t){return '<button class="chip">'+t+'</button>';}).join('');
+  chipsEl.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click',function(){c.classList.toggle('sel');});});
+}
+function pickCareer(i){
+  ci=i;clearT();
+  row.querySelectorAll('.cbtn').forEach(function(b,k){b.classList.toggle('sel',k===i);});
+  target.innerHTML='<div class="tk">Career</div><div class="tt">'+CAREERS[i]+'</div><div class="tnote" id="tnote">There is no single correct set. Most careers use several tools, in different amounts.</div>';
+  drawChips();
+}
+function converge(){
+  var sel=chipsEl.querySelectorAll('.chip.sel');
+  if(!sel.length)return;
+  var tx=target.offsetLeft+target.offsetWidth/2, ty=target.offsetTop+target.offsetHeight/2;
+  sel.forEach(function(c,k){
+    var dx=tx-(c.offsetLeft+c.offsetWidth/2), dy=ty-(c.offsetTop+c.offsetHeight/2)+document.getElementById('q').offsetHeight+22;
+    timers.push(setTimeout(function(){c.style.transform='translate('+dx+'px,'+dy+'px) scale(.6)';c.style.opacity='0';},k*110));
+  });
+  timers.push(setTimeout(function(){target.classList.add('pulse');document.getElementById('tnote').classList.add('in');},900));
+  timers.push(setTimeout(function(){target.classList.remove('pulse');},1400));
+}
+var modeB=false;
+function setMode(b){
+  modeB=b;
+  document.getElementById('mA').classList.toggle('off',b);
+  document.getElementById('mB').classList.toggle('on',b);
+  document.getElementById('mode').textContent=b?'Explore subjects':'Build a career';
+  document.getElementById('converge').style.display=b?'':'none';
+  if(b&&!row.querySelector('.sel'))pickCareer(0);
+}
+document.getElementById('mode').addEventListener('click',function(){setMode(!modeB);});
+document.getElementById('converge').addEventListener('click',converge);
+document.getElementById('reset').addEventListener('click',function(){
+  clearT();setMode(false);
+  tools.querySelectorAll('.tool').forEach(function(t){t.classList.remove('sel');});
+  document.getElementById('outh').classList.remove('in');
+  document.getElementById('pills').innerHTML='<div class="hint">Touch a subject to see the work it opens up.</div>';
+  pickCareer(0);row.querySelectorAll('.cbtn').forEach(function(b){b.classList.remove('sel');});
+});
+pickCareer(0);row.querySelectorAll('.cbtn').forEach(function(b){b.classList.remove('sel');});
+setMode(false);
+</script></body></html>

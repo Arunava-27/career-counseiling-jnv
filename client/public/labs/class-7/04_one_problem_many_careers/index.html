@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>One Problem, Many Careers — Career Lab</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#F2EBDE;--off:#FBF7F0;--olive:#2F3A2A;--olive2:#4A5942;--sage:#9FB08C;--burnt:#D2622A;--terra:#B34A32;--char:#1C1A17;
+--serif:'Caprasimo',Georgia,'Iowan Old Style','Times New Roman',serif;--sans:'Figtree','Segoe UI',system-ui,sans-serif}
+html,body{height:100%;background:var(--char);overflow:hidden;font-family:var(--sans);-webkit-tap-highlight-color:transparent}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:50% 50%;background:var(--cream);color:var(--olive);padding:56px 80px 48px;display:flex;flex-direction:column;overflow:hidden}
+.kicker{font-size:22px;letter-spacing:.3em;text-transform:uppercase;color:var(--burnt);font-weight:700}
+h1{font-family:var(--serif);font-weight:400;font-size:100px;line-height:.98;letter-spacing:-.005em;color:var(--olive)}
+h2{font-family:var(--serif);font-weight:400;font-size:56px;line-height:1.04}
+h3{font-family:var(--sans);font-weight:700;font-size:26px;letter-spacing:.16em;text-transform:uppercase;color:var(--burnt)}
+p{font-size:30px;line-height:1.4;text-wrap:pretty}
+.bar{margin-top:auto;display:flex;gap:18px;align-items:center;padding-top:26px}
+.btn{font-family:var(--sans);font-size:24px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:22px 38px;min-height:74px;border:3px solid var(--olive);border-radius:10px;background:transparent;color:var(--olive);cursor:pointer;transition:background .18s,color .18s,transform .1s,opacity .2s}
+.btn:hover{background:rgba(47,58,42,.08)}
+.btn:active{transform:translateY(2px)}
+.btn.primary{background:var(--burnt);border-color:var(--burnt);color:var(--off)}
+.btn.primary:hover{background:var(--terra);border-color:var(--terra)}
+.btn.ghost{border-color:rgba(47,58,42,.32);color:var(--olive2)}
+.btn[disabled]{opacity:.3;pointer-events:none}
+.btn:focus-visible{outline:4px solid var(--terra);outline-offset:4px}
+.spacer{flex:1}
+.fade{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.fade.in{opacity:1;transform:none}
+::selection{background:rgba(210,98,42,.25)}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+.field{position:relative;width:1760px;height:700px;margin-top:14px}
+.lines{position:absolute;inset:0}
+.lines line{stroke:var(--sage);stroke-width:4;stroke-dasharray:900;stroke-dashoffset:900;transition:stroke-dashoffset .8s ease,stroke .3s}
+.lines line.in{stroke-dashoffset:0}
+.lines line.hot{stroke:var(--burnt);stroke-width:6}
+.node{position:absolute;width:290px;min-height:120px;margin-left:-145px;margin-top:-60px;background:var(--off);border:3px solid var(--olive);border-radius:14px;padding:18px 20px;cursor:pointer;opacity:0;transform:translateY(14px) scale(.95);transition:opacity .45s,transform .45s,background .2s,border-color .2s;text-align:left;font-family:var(--sans)}
+.node.in{opacity:1;transform:none}
+.node:hover{background:var(--sage)}
+.node .d{font-size:17px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--burnt);margin-bottom:8px}
+.node .r{font-size:26px;font-weight:700;line-height:1.15;color:var(--olive)}
+.node.sel{background:var(--olive);border-color:var(--olive)}
+.node.sel .r{color:var(--off)}
+.node.sel .d{color:var(--sage)}
+.node:focus-visible{outline:4px solid var(--terra);outline-offset:4px}
+.hub{position:absolute;left:880px;top:350px;width:660px;min-height:330px;margin-left:-330px;margin-top:-165px;background:var(--olive);color:var(--off);border-radius:18px;padding:40px 46px;display:flex;flex-direction:column;justify-content:center;transition:background .4s}
+.hub .hk{font-size:20px;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);font-weight:700}
+.hub .ht{font-family:var(--serif);font-size:50px;line-height:1.08;margin-top:16px}
+.hub .hb{font-size:26px;line-height:1.4;color:#EDE6D8;margin-top:18px}
+.hub .hs{font-size:19px;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-top:22px}
+.hub .hv{font-size:26px;margin-top:6px}
+.hub.final{background:var(--terra)}
+
+</style></head>
+<body><div id="stage">
+<div class="kicker">Career Lab &middot; Visual 04</div>
+<h1>One problem, many careers</h1>
+<div class="field" id="field">
+  <svg class="lines" id="lines" viewBox="0 0 1760 700" preserveAspectRatio="none"></svg>
+  <div class="hub" id="hub"></div>
+</div>
+<div class="bar"><button class="btn primary" id="go">Build the team</button><div class="spacer"></div><button class="btn ghost" id="reset">Reset</button></div>
+</div>
+<script>
+(function(){function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);document.getElementById('stage').style.transform='translate(-50%,-50%) scale('+s+')';}
+addEventListener('resize',fit);fit();})();
+
+var PROBLEM='Our school wants to reduce plastic waste by 50%.';
+var ROLES=[
+ ['Science','Environmental Scientist','Measures environmental impact and identifies better solutions.','Careful measurement'],
+ ['Technology','Data Analyst','Measures how much waste is produced and whether the solution is working.','Reading patterns in numbers'],
+ ['Design','Product Designer','Creates products or systems that make better choices easier.','Designing for real behaviour'],
+ ['Engineering','Mechanical Engineer','Works out how materials can be collected, sorted and reused.','Understanding how things are built'],
+ ['Education','Teacher','Helps people understand and change behaviour.','Explaining clearly'],
+ ['Business','Entrepreneur','Finds a way to pay for the change so it continues after the first month.','Turning an idea into a working plan'],
+ ['Operations','Waste Management Technician','Runs the daily collection, sorting and disposal the plan depends on.','Making a system work every day'],
+ ['Public Service','Government Officer','Connects the school plan to local rules and municipal services.','Working within rules and institutions'],
+ ['Communication','Communications Specialist','Makes sure everyone in the school knows what changed and why.','Persuasion and clarity']
+];
+var field=document.getElementById('field'),lines=document.getElementById('lines'),hub=document.getElementById('hub');
+var NS='http://www.w3.org/2000/svg',cx=880,cy=350,timers=[];
+var nodes=[],lns=[];
+ROLES.forEach(function(r,i){
+  var a=(-90+i*40)*Math.PI/180,x=cx+Math.cos(a)*680,y=cy+Math.sin(a)*300;
+  var l=document.createElementNS(NS,'line');l.setAttribute('x1',cx);l.setAttribute('y1',cy);l.setAttribute('x2',x);l.setAttribute('y2',y);
+  lines.appendChild(l);lns.push(l);
+  var b=document.createElement('button');b.className='node';b.style.left=x+'px';b.style.top=y+'px';
+  b.innerHTML='<div class="d">'+r[0]+'</div><div class="r">'+r[1]+'</div>';
+  b.addEventListener('click',function(){select(i);});
+  field.appendChild(b);nodes.push(b);
+});
+var step=0,sel=-1;
+function hubProblem(){hub.className='hub';hub.innerHTML='<div class="hk">The problem</div><div class="ht">'+PROBLEM+'</div><div class="hb">'+(step===0?'Who would you need on the team?':'Touch any role to see what they contribute.')+'</div>';}
+function hubFinal(){hub.className='hub final';hub.innerHTML='<div class="hk">Together</div><div class="ht">Big problems rarely have only one profession as their answer.</div>';}
+function select(i){
+  if(step===0)return;
+  sel=i;var r=ROLES[i];
+  nodes.forEach(function(n,k){n.classList.toggle('sel',k===i);});
+  lns.forEach(function(l,k){l.classList.toggle('hot',k===i);});
+  hub.className='hub';
+  hub.innerHTML='<div class="hk">'+r[0]+' &middot; '+r[1]+'</div><div class="hk" style="color:#F2EBDE;letter-spacing:0;text-transform:none;font-family:var(--serif);font-size:44px;margin-top:14px">What they contribute</div><div class="hb">'+r[2]+'</div><div class="hs">One skill they use</div><div class="hv">'+r[3]+'</div>';
+}
+function apply(){
+  timers.forEach(clearTimeout);timers=[];
+  if(step===0){nodes.forEach(function(n){n.classList.remove('in','sel');});lns.forEach(function(l){l.classList.remove('in','hot');});hubProblem();}
+  document.getElementById('go').textContent = step===0?'Build the team':(step===1?'Connect the team':'Complete');
+  document.getElementById('go').disabled = step>=2;
+}
+document.getElementById('go').addEventListener('click',function(){
+  if(step===0){step=1;apply();nodes.forEach(function(n,k){timers.push(setTimeout(function(){n.classList.add('in');},k*130));});hubProblem();}
+  else if(step===1){step=2;apply();nodes.forEach(function(n){n.classList.remove('sel');});
+    lns.forEach(function(l,k){l.classList.remove('hot');timers.push(setTimeout(function(){l.classList.add('in');},k*90));});
+    timers.push(setTimeout(hubFinal,900));}
+});
+document.getElementById('reset').addEventListener('click',function(){step=0;sel=-1;apply();});
+apply();
+</script></body></html>

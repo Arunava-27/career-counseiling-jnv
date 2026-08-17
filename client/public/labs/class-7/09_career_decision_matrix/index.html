@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Career Decision Matrix — Career Lab</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#F2EBDE;--off:#FBF7F0;--olive:#2F3A2A;--olive2:#4A5942;--sage:#9FB08C;--burnt:#D2622A;--terra:#B34A32;--char:#1C1A17;
+--serif:'Caprasimo',Georgia,'Iowan Old Style','Times New Roman',serif;--sans:'Figtree','Segoe UI',system-ui,sans-serif}
+html,body{height:100%;background:var(--char);overflow:hidden;font-family:var(--sans);-webkit-tap-highlight-color:transparent}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:50% 50%;background:var(--cream);color:var(--olive);padding:56px 80px 48px;display:flex;flex-direction:column;overflow:hidden}
+.kicker{font-size:22px;letter-spacing:.3em;text-transform:uppercase;color:var(--burnt);font-weight:700}
+h1{font-family:var(--serif);font-weight:400;font-size:100px;line-height:.98;letter-spacing:-.005em;color:var(--olive)}
+h2{font-family:var(--serif);font-weight:400;font-size:56px;line-height:1.04}
+h3{font-family:var(--sans);font-weight:700;font-size:26px;letter-spacing:.16em;text-transform:uppercase;color:var(--burnt)}
+p{font-size:30px;line-height:1.4;text-wrap:pretty}
+.bar{margin-top:auto;display:flex;gap:18px;align-items:center;padding-top:26px}
+.btn{font-family:var(--sans);font-size:24px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:22px 38px;min-height:74px;border:3px solid var(--olive);border-radius:10px;background:transparent;color:var(--olive);cursor:pointer;transition:background .18s,color .18s,transform .1s,opacity .2s}
+.btn:hover{background:rgba(47,58,42,.08)}
+.btn:active{transform:translateY(2px)}
+.btn.primary{background:var(--burnt);border-color:var(--burnt);color:var(--off)}
+.btn.primary:hover{background:var(--terra);border-color:var(--terra)}
+.btn.ghost{border-color:rgba(47,58,42,.32);color:var(--olive2)}
+.btn[disabled]{opacity:.3;pointer-events:none}
+.btn:focus-visible{outline:4px solid var(--terra);outline-offset:4px}
+.spacer{flex:1}
+.fade{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.fade.in{opacity:1;transform:none}
+::selection{background:rgba(210,98,42,.25)}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+.wrap{flex:1;display:grid;grid-template-columns:600px 1fr;gap:60px;margin-top:16px;position:relative}
+.cc{background:var(--olive);color:var(--off);border-radius:18px;padding:40px 42px;display:flex;flex-direction:column}
+.cck{font-size:20px;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);font-weight:800}
+.cct{font-family:var(--serif);font-size:64px;line-height:1.02;margin-top:16px}
+.ccs{font-size:22px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-top:auto;margin-bottom:16px}
+.swap{display:flex;flex-wrap:wrap;gap:12px}
+.sw{font-size:21px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:14px 22px;border:3px solid var(--sage);border-radius:10px;background:transparent;color:var(--off);cursor:pointer;font-family:var(--sans)}
+.sw.sel{background:var(--sage);color:var(--olive)}
+.sw:focus-visible{outline:4px solid var(--terra);outline-offset:3px}
+.qgrid{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:22px}
+.qt{position:relative;background:var(--off);border:3px solid var(--olive);border-radius:16px;padding:28px 26px;cursor:pointer;text-align:left;font-family:var(--serif);font-size:36px;line-height:1.1;color:var(--olive);transition:background .2s;display:flex;align-items:flex-end}
+.qt:hover{background:var(--sage)}
+.qt .num{position:absolute;top:24px;left:26px;font-family:var(--sans);font-size:18px;letter-spacing:.2em;font-weight:800;color:var(--burnt)}
+.qt:focus-visible{outline:4px solid var(--terra);outline-offset:3px}
+.det{position:absolute;left:660px;right:0;top:0;bottom:0;background:var(--off);border:3px solid var(--olive);border-radius:18px;padding:44px 52px;display:none;flex-direction:column}
+.det.on{display:flex}
+.dk{font-size:22px;letter-spacing:.26em;text-transform:uppercase;color:var(--burnt);font-weight:800}
+.dt{font-family:var(--serif);font-size:60px;line-height:1.02;margin:14px 0 30px}
+.dl{list-style:none;display:flex;flex-direction:column;gap:18px}
+.di{font-size:32px;line-height:1.3;border-left:6px solid var(--sage);padding-left:22px;opacity:0;transform:translateX(-10px);transition:opacity .35s,transform .35s}
+.di.in{opacity:1;transform:none}
+.endc{position:absolute;inset:0;background:var(--terra);color:var(--off);border-radius:18px;display:none;flex-direction:column;justify-content:center;padding:0 90px;z-index:3}
+.endc.on{display:flex}
+.endc .e1{font-family:var(--serif);font-size:60px;line-height:1.1;opacity:.75}
+.endc .e2{font-family:var(--serif);font-size:76px;line-height:1.1;margin-top:34px}
+
+</style></head>
+<body><div id="stage">
+<div class="kicker">Career Lab &middot; Visual 09</div>
+<h1>How would you investigate a career?</h1>
+<div class="wrap" id="wrap">
+  <div class="cc"><div class="cck">Example career</div><div class="cct" id="cct"></div><div class="ccs">Switch the career</div><div class="swap" id="swap"></div></div>
+  <div class="qgrid" id="qgrid"></div>
+  <div class="det" id="det"></div>
+  <div class="endc" id="endc"><div class="e1">Don&rsquo;t ask only: &ldquo;What career should I choose?&rdquo;</div><div class="e2">Ask: &ldquo;What do I need to learn about it before I decide?&rdquo;</div></div>
+</div>
+<div class="bar"><button class="btn ghost" id="back">Back to the six questions</button><button class="btn primary" id="close">Final thought</button><div class="spacer"></div><button class="btn ghost" id="reset">Reset</button></div>
+</div>
+<script>
+(function(){function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);document.getElementById('stage').style.transform='translate(-50%,-50%) scale('+s+')';}
+addEventListener('resize',fit);fit();})();
+
+var Q=['What do they actually do?','What skills do they use?','What subjects help?','Where do they work?','What problems do they solve?','What could I try now?'];
+var C=[
+ ['Wildlife Biologist',[
+  ['Observes animals in their habitat','Records population and behaviour data','Analyses samples and field notes','Writes reports that guide conservation decisions'],
+  ['Patient observation','Careful record-keeping','Statistics','Writing clearly for non-scientists'],
+  ['Biology','Geography','Mathematics','English'],
+  ['Forests, wetlands and grasslands','Field research stations','Laboratories','Government and conservation organisations'],
+  ['Species losing their habitat','Conflict between people and wildlife','Effects of a changing climate on animals'],
+  ['Observe birds in the local area','Read about ecosystems','Visit a nature centre','Keep a field journal','Participate in a science project']]],
+ ['Software Engineer',[
+  ['Breaks a problem into steps a computer can follow','Writes and tests code','Fixes faults reported by users','Reviews teammates&rsquo; work'],
+  ['Logical reasoning','Debugging patiently','Reading documentation','Working in a team'],
+  ['Mathematics','Science','English','Any subject that trains careful reasoning'],
+  ['Offices and studios','From home, remotely','Banks, hospitals, railways','Research and government systems'],
+  ['Systems that are slow or unreliable','Work people repeat by hand','Reaching services from far away'],
+  ['Learn one simple programming language','Build a small quiz or calculator','Break a large task into written steps','Join a school computer club']]],
+ ['Architect',[
+  ['Understands what a building must do for the people using it','Draws plans and builds models','Checks designs against rules and budgets','Visits construction sites'],
+  ['Spatial imagination','Drawing and modelling','Estimating cost and material','Listening carefully to clients'],
+  ['Mathematics','Physics','Art','Geography'],
+  ['Design studios','Construction sites','Municipal and planning offices'],
+  ['Housing that is affordable and safe','Buildings that stay cool using less energy','Space in crowded cities'],
+  ['Draw your classroom to scale','Build a model from card','Study how nearby buildings handle sun and rain','Sketch something every day']]],
+ ['Doctor',[
+  ['Listens to patients and examines them','Orders and interprets tests','Decides on treatment','Explains the plan to patients and families'],
+  ['Careful observation','Reasoning from evidence','Communication','Staying calm under pressure'],
+  ['Biology','Chemistry','Physics','English'],
+  ['Hospitals','Clinics','Rural health centres','Research institutes'],
+  ['Illness found too late','Disease spreading through a community','Care that is far from where people live'],
+  ['Learn basic first aid','Read about how the body works','Help at a local health camp','Practise explaining difficult things simply']]],
+ ['Journalist',[
+  ['Finds out what actually happened','Interviews people','Checks facts against more than one source','Writes and edits the story'],
+  ['Asking good questions','Verifying information','Writing to a deadline','Judgement about what matters'],
+  ['Languages','Social Science','History','Any subject that builds knowledge of the world'],
+  ['Newsrooms','On location','Online publications','Radio and television'],
+  ['Decisions made without accountability','Rumour travelling faster than fact','Stories nobody is telling'],
+  ['Interview a family member and write it up','Write for the school magazine','Compare two newspapers on the same event','Keep a notebook of observations']]],
+ ['Agricultural Scientist',[
+  ['Studies crops, soil and pests','Runs field trials','Tests samples in a laboratory','Explains findings to farmers'],
+  ['Experimental method','Accurate measurement','Data analysis','Explaining technical work plainly'],
+  ['Biology','Chemistry','Mathematics','Geography'],
+  ['Research farms','Laboratories','Villages and fields','Agricultural universities'],
+  ['Tired soil giving low yields','Water used inefficiently','Crops lost to pests and weather'],
+  ['Grow two plants under different conditions and record the difference','Compare soil from two places','Ask a farmer which month is hardest','Keep a weather log']]]
+];
+var ci=0,timers=[];
+function clearT(){timers.forEach(clearTimeout);timers=[];}
+document.getElementById('qgrid').innerHTML=Q.map(function(q,i){return '<button class="qt"><span class="num">0'+(i+1)+'</span>'+q+'</button>';}).join('');
+document.getElementById('swap').innerHTML=C.map(function(c,i){return '<button class="sw'+(i===0?' sel':'')+'">'+c[0]+'</button>';}).join('');
+document.getElementById('qgrid').querySelectorAll('.qt').forEach(function(b,i){b.addEventListener('click',function(){openQ(i);});});
+document.getElementById('swap').querySelectorAll('.sw').forEach(function(b,i){b.addEventListener('click',function(){
+  ci=i;document.getElementById('swap').querySelectorAll('.sw').forEach(function(x,k){x.classList.toggle('sel',k===i);});
+  document.getElementById('cct').textContent=C[i][0];closeQ();});});
+function openQ(i){
+  clearT();
+  var d=document.getElementById('det');
+  d.innerHTML='<div class="dk">'+C[ci][0]+'</div><div class="dt">'+Q[i]+'</div><ul class="dl">'+C[ci][1][i].map(function(x){return '<li class="di">'+x+'</li>';}).join('')+'</ul>';
+  d.classList.add('on');
+  d.querySelectorAll('.di').forEach(function(el,k){timers.push(setTimeout(function(){el.classList.add('in');},k*110));});
+  document.getElementById('back').disabled=false;
+}
+function closeQ(){clearT();document.getElementById('det').classList.remove('on');document.getElementById('back').disabled=true;}
+document.getElementById('back').addEventListener('click',closeQ);
+document.getElementById('close').addEventListener('click',function(){
+  var e=document.getElementById('endc');e.classList.toggle('on');
+  document.getElementById('close').textContent=e.classList.contains('on')?'Back':'Final thought';
+});
+document.getElementById('reset').addEventListener('click',function(){
+  ci=0;closeQ();document.getElementById('endc').classList.remove('on');document.getElementById('close').textContent='Final thought';
+  document.getElementById('swap').querySelectorAll('.sw').forEach(function(x,k){x.classList.toggle('sel',k===0);});
+  document.getElementById('cct').textContent=C[0][0];
+});
+document.getElementById('cct').textContent=C[0][0];closeQ();
+</script></body></html>

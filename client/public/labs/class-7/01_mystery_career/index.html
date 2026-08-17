@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mystery Career — Career Lab</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#F2EBDE;--off:#FBF7F0;--olive:#2F3A2A;--olive2:#4A5942;--sage:#9FB08C;--burnt:#D2622A;--terra:#B34A32;--char:#1C1A17;
+--serif:'Caprasimo',Georgia,'Iowan Old Style','Times New Roman',serif;--sans:'Figtree','Segoe UI',system-ui,sans-serif}
+html,body{height:100%;background:var(--char);overflow:hidden;font-family:var(--sans);-webkit-tap-highlight-color:transparent}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:50% 50%;background:var(--cream);color:var(--olive);padding:56px 80px 48px;display:flex;flex-direction:column;overflow:hidden}
+.kicker{font-size:22px;letter-spacing:.3em;text-transform:uppercase;color:var(--burnt);font-weight:700}
+h1{font-family:var(--serif);font-weight:400;font-size:100px;line-height:.98;letter-spacing:-.005em;color:var(--olive)}
+h2{font-family:var(--serif);font-weight:400;font-size:56px;line-height:1.04}
+h3{font-family:var(--sans);font-weight:700;font-size:26px;letter-spacing:.16em;text-transform:uppercase;color:var(--burnt)}
+p{font-size:30px;line-height:1.4;text-wrap:pretty}
+.bar{margin-top:auto;display:flex;gap:18px;align-items:center;padding-top:26px}
+.btn{font-family:var(--sans);font-size:24px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:22px 38px;min-height:74px;border:3px solid var(--olive);border-radius:10px;background:transparent;color:var(--olive);cursor:pointer;transition:background .18s,color .18s,transform .1s,opacity .2s}
+.btn:hover{background:rgba(47,58,42,.08)}
+.btn:active{transform:translateY(2px)}
+.btn.primary{background:var(--burnt);border-color:var(--burnt);color:var(--off)}
+.btn.primary:hover{background:var(--terra);border-color:var(--terra)}
+.btn.ghost{border-color:rgba(47,58,42,.32);color:var(--olive2)}
+.btn[disabled]{opacity:.3;pointer-events:none}
+.btn:focus-visible{outline:4px solid var(--terra);outline-offset:4px}
+.spacer{flex:1}
+.fade{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.fade.in{opacity:1;transform:none}
+::selection{background:rgba(210,98,42,.25)}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+.cols{display:grid;grid-template-columns:800px 1fr;gap:60px;margin-top:24px;align-items:start}
+.clues{list-style:none;display:flex;flex-direction:column;gap:26px}
+.clue{display:flex;gap:26px;align-items:baseline;font-size:38px;line-height:1.25;font-weight:500}
+.clue .n{font-family:var(--serif);font-size:30px;color:var(--burnt);min-width:56px}
+.guess{margin-top:46px;border-top:4px solid var(--sage);padding-top:30px}
+.gt{font-family:var(--serif);font-size:64px;color:var(--terra);line-height:1}
+.gs{font-size:26px;color:var(--olive2);margin-top:12px}
+.dia{width:900px;height:534px}
+.lnk{stroke:var(--sage);stroke-width:4;stroke-dasharray:420;stroke-dashoffset:420;transition:stroke-dashoffset .7s ease}
+.lnk.in{stroke-dashoffset:0}
+.node{opacity:0;transform-box:fill-box;transition:opacity .45s ease}
+.node.in{opacity:1}
+.node rect{fill:var(--off);stroke:var(--olive);stroke-width:3}
+.node text{text-anchor:middle;font-family:var(--sans);font-size:24px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;fill:var(--olive)}
+.hub circle{fill:var(--olive)}
+.hub text{text-anchor:middle;fill:var(--cream);font-family:var(--serif);font-size:34px}
+#final{border-top:4px solid var(--olive);padding-top:24px;margin-top:18px}
+#final .f1{font-family:var(--serif);font-size:46px;line-height:1.12;max-width:1500px}
+#final .f2{font-size:28px;color:var(--olive2);margin-top:10px}
+
+</style><template id="__bundler_thumbnail" data-bg-color="#F2EBDE">
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="800" fill="#F2EBDE"/><g stroke="#9FB08C" stroke-width="10"><line x1="600" y1="420" x2="600" y2="180"/><line x1="600" y1="420" x2="880" y2="330"/><line x1="600" y1="420" x2="800" y2="640"/><line x1="600" y1="420" x2="400" y2="640"/><line x1="600" y1="420" x2="320" y2="330"/></g><g fill="#FBF7F0" stroke="#2F3A2A" stroke-width="10"><rect x="480" y="140" width="240" height="80" rx="16"/><rect x="770" y="290" width="240" height="80" rx="16"/><rect x="690" y="600" width="240" height="80" rx="16"/><rect x="280" y="600" width="240" height="80" rx="16"/><rect x="200" y="290" width="240" height="80" rx="16"/></g><circle cx="600" cy="420" r="115" fill="#2F3A2A"/><text x="600" y="450" text-anchor="middle" font-family="Georgia,serif" font-size="110" fill="#F2EBDE">?</text></svg>
+</template>
+</head>
+<body><div id="stage">
+<div class="kicker">Career Lab &middot; Visual 01</div>
+<h1>Who am I?</h1>
+<div class="cols">
+  <div>
+    <ol class="clues"><li class="clue fade"><span class="n">01</span><span>I solve problems.</span></li><li class="clue fade"><span class="n">02</span><span>I work with people.</span></li><li class="clue fade"><span class="n">03</span><span>I use information to make decisions.</span></li><li class="clue fade"><span class="n">04</span><span>Sometimes I use mathematics and computers.</span></li><li class="clue fade"><span class="n">05</span><span>My work can affect many other people.</span></li></ol>
+    <div id="guess" class="guess fade"><div class="gt">Make your guess</div><div class="gs">Say it out loud. There is more than one reasonable answer.</div></div>
+  </div>
+  <svg class="dia" viewBox="0 0 900 620" aria-label="Careers emerging from the same clues">
+    <g><line class="lnk" x1="450" y1="310" x2="450" y2="95"/><line class="lnk" x1="450" y1="310" x2="735" y2="244"/><line class="lnk" x1="450" y1="310" x2="626" y2="484"/><line class="lnk" x1="450" y1="310" x2="274" y2="484"/><line class="lnk" x1="450" y1="310" x2="165" y2="244"/></g>
+    <g><g class="node" id="nd0" transform="translate(450,95)"><rect x="-150" y="-46" width="300" height="92" rx="12"/><text y="10">Data Analyst</text></g><g class="node" id="nd1" transform="translate(735,244)"><rect x="-150" y="-46" width="300" height="92" rx="12"/><text y="10">Engineer</text></g><g class="node" id="nd2" transform="translate(626,484)"><rect x="-150" y="-46" width="300" height="92" rx="12"/><text y="10">Researcher</text></g><g class="node" id="nd3" transform="translate(274,484)"><rect x="-150" y="-46" width="300" height="92" rx="12"/><text y="10">Entrepreneur</text></g><g class="node" id="nd4" transform="translate(165,244)"><rect x="-150" y="-46" width="300" height="92" rx="12"/><text y="-4">Public Policy</text><text y="28">Professional</text></g></g>
+    <g class="hub"><circle cx="450" cy="310" r="118"/><text x="450" y="300">Five</text><text x="450" y="342">clues</text></g>
+  </svg>
+</div>
+<div id="final" class="fade">
+  <div class="f1">The same abilities can appear in very different careers.</div>
+  <div class="f2">A job title alone doesn&rsquo;t tell you what a person actually does.</div>
+</div>
+<div class="bar"><button class="btn primary" id="go">Next clue</button><div class="spacer"></div><button class="btn ghost" id="reset">Reset</button></div>
+</div>
+<script>
+(function(){function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);document.getElementById('stage').style.transform='translate(-50%,-50%) scale('+s+')';}
+addEventListener('resize',fit);fit();})();
+
+var step=0,timers=[];
+var clues=document.querySelectorAll('.clue'),go=document.getElementById('go');
+function clearT(){timers.forEach(clearTimeout);timers=[];}
+function apply(){
+  for(var i=0;i<clues.length;i++){clues[i].classList.toggle('in',step>i);}
+  document.getElementById('guess').classList.toggle('in',step>=6);
+  document.getElementById('final').classList.toggle('in',step>=8);
+  if(step<7){clearT();document.querySelectorAll('.node,.lnk').forEach(function(n){n.classList.remove('in');});}
+  go.textContent = step<5?'Next clue':(step===5?'Make your guess':(step===6?'Reveal':(step===7?'Continue':'Complete')));
+  go.disabled = step>=8;
+}
+function revealNodes(){clearT();for(var i=0;i<5;i++){(function(i){timers.push(setTimeout(function(){
+  document.querySelectorAll('.lnk')[i].classList.add('in');
+  document.getElementById('nd'+i).classList.add('in');},i*260));})(i);}}
+go.addEventListener('click',function(){step++;if(step===7)revealNodes();apply();});
+document.getElementById('reset').addEventListener('click',function(){step=0;apply();});
+apply();
+</script></body></html>

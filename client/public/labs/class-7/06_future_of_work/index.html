@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Future of Work — Career Lab</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#F2EBDE;--off:#FBF7F0;--olive:#2F3A2A;--olive2:#4A5942;--sage:#9FB08C;--burnt:#D2622A;--terra:#B34A32;--char:#1C1A17;
+--serif:'Caprasimo',Georgia,'Iowan Old Style','Times New Roman',serif;--sans:'Figtree','Segoe UI',system-ui,sans-serif}
+html,body{height:100%;background:var(--char);overflow:hidden;font-family:var(--sans);-webkit-tap-highlight-color:transparent}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:50% 50%;background:var(--cream);color:var(--olive);padding:56px 80px 48px;display:flex;flex-direction:column;overflow:hidden}
+.kicker{font-size:22px;letter-spacing:.3em;text-transform:uppercase;color:var(--burnt);font-weight:700}
+h1{font-family:var(--serif);font-weight:400;font-size:100px;line-height:.98;letter-spacing:-.005em;color:var(--olive)}
+h2{font-family:var(--serif);font-weight:400;font-size:56px;line-height:1.04}
+h3{font-family:var(--sans);font-weight:700;font-size:26px;letter-spacing:.16em;text-transform:uppercase;color:var(--burnt)}
+p{font-size:30px;line-height:1.4;text-wrap:pretty}
+.bar{margin-top:auto;display:flex;gap:18px;align-items:center;padding-top:26px}
+.btn{font-family:var(--sans);font-size:24px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:22px 38px;min-height:74px;border:3px solid var(--olive);border-radius:10px;background:transparent;color:var(--olive);cursor:pointer;transition:background .18s,color .18s,transform .1s,opacity .2s}
+.btn:hover{background:rgba(47,58,42,.08)}
+.btn:active{transform:translateY(2px)}
+.btn.primary{background:var(--burnt);border-color:var(--burnt);color:var(--off)}
+.btn.primary:hover{background:var(--terra);border-color:var(--terra)}
+.btn.ghost{border-color:rgba(47,58,42,.32);color:var(--olive2)}
+.btn[disabled]{opacity:.3;pointer-events:none}
+.btn:focus-visible{outline:4px solid var(--terra);outline-offset:4px}
+.spacer{flex:1}
+.fade{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.fade.in{opacity:1;transform:none}
+::selection{background:rgba(210,98,42,.25)}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+.intro{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:1560px}
+.i1{font-family:var(--serif);font-size:96px;line-height:1.04}
+.i2{font-size:38px;line-height:1.45;color:var(--olive2);margin-top:34px;opacity:0;transition:opacity .6s}
+.i2.in{opacity:1}
+.newjobs{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:48px}
+.nj{background:var(--off);border:3px solid var(--olive);border-radius:14px;padding:28px 26px;font-size:30px;font-weight:700;line-height:1.15;opacity:0;transform:translateY(16px);transition:opacity .4s,transform .4s}
+.nj.in{opacity:1;transform:none}
+.njk{font-size:18px;letter-spacing:.2em;text-transform:uppercase;color:var(--burnt);font-weight:800;margin-bottom:10px}
+.probwrap{flex:1;display:none;grid-template-columns:1fr 780px;gap:56px;margin-top:26px}
+.probwrap.on{display:grid}
+.probwrap>div:first-child{display:flex;flex-direction:column}
+.probwrap .pgrid{flex:1}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:1fr;gap:20px}
+.p{background:var(--off);border:3px solid var(--olive);border-radius:14px;font-family:var(--serif);font-size:44px;color:var(--olive);cursor:pointer;transition:background .2s,color .2s;display:flex;align-items:center;justify-content:center}
+.p:hover{background:var(--sage)}
+.p.sel{background:var(--olive);color:var(--off)}
+.p:focus-visible{outline:4px solid var(--terra);outline-offset:4px}
+.pdet{background:var(--off);border:3px solid var(--olive);border-radius:18px;padding:44px 48px;display:flex;flex-direction:column}
+.pdk{font-size:22px;letter-spacing:.26em;text-transform:uppercase;color:var(--burnt);font-weight:700}
+.pdt{font-family:var(--serif);font-size:66px;line-height:1;margin:14px 0 28px}
+.roles{list-style:none;display:flex;flex-direction:column;gap:16px}
+.role{font-size:32px;border-left:6px solid var(--sage);padding-left:20px;opacity:0;transform:translateX(-10px);transition:opacity .35s,transform .35s}
+.role.in{opacity:1;transform:none}
+.disc{margin-top:auto;font-size:24px;color:var(--olive2);border-top:3px solid var(--sage);padding-top:20px;line-height:1.35}
+.endc{position:absolute;inset:0;background:var(--olive);color:var(--off);display:none;flex-direction:column;justify-content:center;padding:0 140px}
+.endc.on{display:flex}
+.endc .e1{font-family:var(--serif);font-size:104px;line-height:1.04;max-width:1500px}
+.endc .e2{font-size:40px;color:var(--sage);margin-top:36px}
+
+</style></head>
+<body><div id="stage">
+<div class="kicker">Career Lab &middot; Visual 06</div>
+<h1>The future of work</h1>
+<div class="intro" id="intro">
+  <div class="i1" id="i1">When your parents were in Class 7&hellip;</div>
+  <div class="i2" id="i2">Many jobs changed. Some became important. Some new jobs appeared.</div>
+  <div class="newjobs" id="newjobs"></div>
+</div>
+<div class="probwrap" id="probwrap">
+  <div>
+    <div class="i1" style="font-size:56px;margin-bottom:24px">What problems will exist when you are 25?</div>
+    <div class="pgrid" id="pgrid"></div>
+  </div>
+  <div class="pdet" id="pdet"></div>
+</div>
+<div class="bar"><button class="btn primary" id="go">Continue</button><div class="spacer"></div><button class="btn ghost" id="reset">Reset</button></div>
+<div class="endc" id="endc"><div class="e1">You don&rsquo;t need to predict your future job.</div><div class="e2">You need to become good at learning new things.</div></div>
+</div>
+<script>
+(function(){function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);document.getElementById('stage').style.transform='translate(-50%,-50%) scale('+s+')';}
+addEventListener('resize',fit);fit();})();
+
+var NEW=[['Technology','Machine Learning Engineer'],['Sport','Sports Scientist'],['Media','Game Designer'],['Energy','Renewable Energy Technician']];
+var PROB=[
+ ['Climate',['Climate Scientist','Environmental Engineer','Renewable Energy Specialist','Sustainability Analyst']],
+ ['Energy',['Renewable Energy Technician','Power Grid Engineer','Energy Storage Researcher','Energy Analyst']],
+ ['Food',['Food Technologist','Agricultural Scientist','Soil Scientist','Supply Chain Analyst']],
+ ['Water',['Water Resource Specialist','Hydrologist','Irrigation Engineer','Water Quality Analyst']],
+ ['Health',['Biomedical Engineer','Public Health Analyst','Medical Data Specialist','Genetic Counsellor']],
+ ['Cybersecurity',['Security Engineer','Digital Forensics Specialist','Cybersecurity Analyst','Privacy Specialist']],
+ ['Space',['Aerospace Engineer','Robotics Engineer','Space Scientist','Mission Operations Specialist']],
+ ['Cities',['Urban Planner','Transport Engineer','Geospatial Analyst','Building Systems Specialist']],
+ ['AI',['Machine Learning Engineer','Data Engineer','AI Ethics Specialist','Human-AI Interaction Researcher']]
+];
+var timers=[],step=0;
+function clearT(){timers.forEach(clearTimeout);timers=[];}
+var nj=document.getElementById('newjobs');
+nj.innerHTML=NEW.map(function(n){return '<div class="nj"><div class="njk">'+n[0]+'</div>'+n[1]+'</div>';}).join('');
+var pg=document.getElementById('pgrid');
+PROB.forEach(function(p,i){
+  var b=document.createElement('button');b.className='p';b.textContent=p[0];
+  b.addEventListener('click',function(){pick(i);});pg.appendChild(b);
+});
+var pdet=document.getElementById('pdet');
+function blank(){pdet.innerHTML='<div class="pdk">Possible future roles</div><div class="pdt">Touch a problem</div><div class="disc">These are possible roles, not predictions. New roles may emerge that nobody has named yet.</div>';}
+function pick(i){
+  clearT();
+  pg.querySelectorAll('.p').forEach(function(b,k){b.classList.toggle('sel',k===i);});
+  pdet.innerHTML='<div class="pdk">Possible future roles</div><div class="pdt">'+PROB[i][0]+'</div><ul class="roles">'+
+    PROB[i][1].map(function(r){return '<li class="role">'+r+'</li>';}).join('')+
+    '</ul><div class="disc">These are possible roles, not predictions. New roles may emerge that nobody has named yet.</div>';
+  pdet.querySelectorAll('.role').forEach(function(r,k){timers.push(setTimeout(function(){r.classList.add('in');},k*120));});
+}
+function apply(){
+  clearT();
+  document.getElementById('i2').classList.toggle('in',step>=1);
+  if(step<2){document.querySelectorAll('.nj').forEach(function(n){n.classList.remove('in');});}
+  if(step===2){document.querySelectorAll('.nj').forEach(function(n,k){timers.push(setTimeout(function(){n.classList.add('in');},k*140));});}
+  document.getElementById('intro').style.display=step<3?'flex':'none';
+  document.getElementById('probwrap').classList.toggle('on',step===3);
+  document.getElementById('endc').classList.toggle('on',step>=4);
+  var g=document.getElementById('go');
+  g.textContent=step===0?'Continue':(step===1?'What appeared':(step===2?'Look forward':(step===3?'Close':'Complete')));
+  g.disabled=step>=4;
+}
+document.getElementById('go').addEventListener('click',function(){step++;apply();if(step===3){blank();pg.querySelectorAll('.p').forEach(function(b){b.classList.remove('sel');});}});
+document.getElementById('reset').addEventListener('click',function(){step=0;apply();});
+blank();apply();
+</script></body></html>

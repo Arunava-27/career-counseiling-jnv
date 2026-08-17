@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Career Radar — Career Lab</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#F2EBDE;--off:#FBF7F0;--olive:#2F3A2A;--olive2:#4A5942;--sage:#9FB08C;--burnt:#D2622A;--terra:#B34A32;--char:#1C1A17;
+--serif:'Caprasimo',Georgia,'Iowan Old Style','Times New Roman',serif;--sans:'Figtree','Segoe UI',system-ui,sans-serif}
+html,body{height:100%;background:var(--char);overflow:hidden;font-family:var(--sans);-webkit-tap-highlight-color:transparent}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:50% 50%;background:var(--cream);color:var(--olive);padding:56px 80px 48px;display:flex;flex-direction:column;overflow:hidden}
+.kicker{font-size:22px;letter-spacing:.3em;text-transform:uppercase;color:var(--burnt);font-weight:700}
+h1{font-family:var(--serif);font-weight:400;font-size:100px;line-height:.98;letter-spacing:-.005em;color:var(--olive)}
+h2{font-family:var(--serif);font-weight:400;font-size:56px;line-height:1.04}
+h3{font-family:var(--sans);font-weight:700;font-size:26px;letter-spacing:.16em;text-transform:uppercase;color:var(--burnt)}
+p{font-size:30px;line-height:1.4;text-wrap:pretty}
+.bar{margin-top:auto;display:flex;gap:18px;align-items:center;padding-top:26px}
+.btn{font-family:var(--sans);font-size:24px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:22px 38px;min-height:74px;border:3px solid var(--olive);border-radius:10px;background:transparent;color:var(--olive);cursor:pointer;transition:background .18s,color .18s,transform .1s,opacity .2s}
+.btn:hover{background:rgba(47,58,42,.08)}
+.btn:active{transform:translateY(2px)}
+.btn.primary{background:var(--burnt);border-color:var(--burnt);color:var(--off)}
+.btn.primary:hover{background:var(--terra);border-color:var(--terra)}
+.btn.ghost{border-color:rgba(47,58,42,.32);color:var(--olive2)}
+.btn[disabled]{opacity:.3;pointer-events:none}
+.btn:focus-visible{outline:4px solid var(--terra);outline-offset:4px}
+.spacer{flex:1}
+.fade{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.fade.in{opacity:1;transform:none}
+::selection{background:rgba(210,98,42,.25)}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+.rwrap{flex:1;display:grid;grid-template-columns:600px 1fr;gap:70px;align-items:center;margin-top:0}
+.radar{width:496px;height:496px;display:block;margin:0 auto}
+.ring{fill:none;stroke:var(--sage);stroke-width:3;opacity:.75}
+.ring.pulse{animation:br 7s ease-in-out infinite}
+@keyframes br{0%,100%{opacity:.35}50%{opacity:.9}}
+.sweep{transform-origin:320px 320px;animation:sp 26s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.dot{fill:var(--burnt);opacity:0;transition:opacity .6s}
+.dot.in{opacity:1}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.pc{background:var(--off);border:3px solid var(--olive);border-radius:16px;padding:26px 28px;min-height:168px;display:flex;flex-direction:column;gap:12px;opacity:.3;transform:translateY(14px);transition:opacity .7s,transform .7s}
+.pc>*{opacity:0;transition:opacity .6s}
+.pc.in>*{opacity:1}
+.pc.in{opacity:1;transform:none}
+.pn{font-family:var(--serif);font-size:30px;color:var(--burnt)}
+.pt{font-size:31px;line-height:1.25;font-weight:500}
+.note{font-size:25px;color:var(--olive2);margin-top:10px;line-height:1.35}
+.fin{font-family:var(--serif);font-size:44px;color:var(--terra);margin-top:14px;opacity:0;transition:opacity .7s}
+.fin.in{opacity:1}
+
+</style></head>
+<body><div id="stage">
+<div class="kicker">Career Lab &middot; Visual 08</div>
+<h1>My career radar</h1>
+<div class="rwrap">
+  <div>
+    <svg class="radar" viewBox="0 0 640 640">
+      <circle class="ring pulse" cx="320" cy="320" r="90"/>
+      <circle class="ring pulse" cx="320" cy="320" r="160" style="animation-delay:1.2s"/>
+      <circle class="ring pulse" cx="320" cy="320" r="230" style="animation-delay:2.4s"/>
+      <circle class="ring pulse" cx="320" cy="320" r="300" style="animation-delay:3.6s"/>
+      <g class="sweep"><line x1="320" y1="320" x2="320" y2="20" stroke="var(--burnt)" stroke-width="4" opacity=".5"/></g>
+      <g id="dots"></g>
+      <circle cx="320" cy="320" r="14" fill="var(--olive)"/>
+    </svg>
+    <div class="note">Copy these onto paper and answer in your own words.<br>Nothing is typed here and nothing is collected.</div>
+    <div class="fin" id="fin">Exploration comes before decisions.</div>
+  </div>
+  <div class="cards" id="cards"></div>
+</div>
+<div class="bar"><button class="btn primary" id="go">Reveal next</button><button class="btn ghost" id="all">Show all six</button><div class="spacer"></div><button class="btn ghost" id="reset">Reset</button></div>
+</div>
+<script>
+(function(){function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);document.getElementById('stage').style.transform='translate(-50%,-50%) scale('+s+')';}
+addEventListener('resize',fit);fit();})();
+
+var P=['Something I enjoy doing.','Something I&rsquo;m curious about.','Something I think I&rsquo;m good at.','A problem I&rsquo;d like to help solve.','A career I discovered today.','Something I want to explore this year.'];
+var cards=document.getElementById('cards'),dots=document.getElementById('dots'),NS='http://www.w3.org/2000/svg';
+cards.innerHTML=P.map(function(p,i){return '<div class="pc"><div class="pn">0'+(i+1)+'</div><div class="pt">'+p+'</div></div>';}).join('');
+P.forEach(function(p,i){
+  var a=(-90+i*60)*Math.PI/180,r=[300,230,160,300,230,160][i];
+  var c=document.createElementNS(NS,'circle');
+  c.setAttribute('cx',320+Math.cos(a)*r);c.setAttribute('cy',320+Math.sin(a)*r);c.setAttribute('r',13);c.setAttribute('class','dot');
+  dots.appendChild(c);
+});
+var n=0,timers=[];
+function apply(){
+  var pc=cards.querySelectorAll('.pc'),dd=dots.querySelectorAll('.dot');
+  for(var i=0;i<6;i++){pc[i].classList.toggle('in',i<n);dd[i].classList.toggle('in',i<n);}
+  document.getElementById('fin').classList.toggle('in',n>=6);
+  document.getElementById('go').disabled=n>=6;
+  document.getElementById('go').textContent=n>=6?'All revealed':'Reveal next';
+}
+document.getElementById('go').addEventListener('click',function(){if(n<6){n++;apply();}});
+document.getElementById('all').addEventListener('click',function(){
+  timers.forEach(clearTimeout);timers=[];
+  var start=n;for(var i=start;i<6;i++){(function(i){timers.push(setTimeout(function(){n=i+1;apply();},(i-start)*350));})(i);}
+});
+document.getElementById('reset').addEventListener('click',function(){timers.forEach(clearTimeout);timers=[];n=0;apply();});
+apply();
+</script></body></html>

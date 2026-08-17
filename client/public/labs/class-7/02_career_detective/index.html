@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Career Detective — Career Lab</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#F2EBDE;--off:#FBF7F0;--olive:#2F3A2A;--olive2:#4A5942;--sage:#9FB08C;--burnt:#D2622A;--terra:#B34A32;--char:#1C1A17;
+--serif:'Caprasimo',Georgia,'Iowan Old Style','Times New Roman',serif;--sans:'Figtree','Segoe UI',system-ui,sans-serif}
+html,body{height:100%;background:var(--char);overflow:hidden;font-family:var(--sans);-webkit-tap-highlight-color:transparent}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:50% 50%;background:var(--cream);color:var(--olive);padding:56px 80px 48px;display:flex;flex-direction:column;overflow:hidden}
+.kicker{font-size:22px;letter-spacing:.3em;text-transform:uppercase;color:var(--burnt);font-weight:700}
+h1{font-family:var(--serif);font-weight:400;font-size:100px;line-height:.98;letter-spacing:-.005em;color:var(--olive)}
+h2{font-family:var(--serif);font-weight:400;font-size:56px;line-height:1.04}
+h3{font-family:var(--sans);font-weight:700;font-size:26px;letter-spacing:.16em;text-transform:uppercase;color:var(--burnt)}
+p{font-size:30px;line-height:1.4;text-wrap:pretty}
+.bar{margin-top:auto;display:flex;gap:18px;align-items:center;padding-top:26px}
+.btn{font-family:var(--sans);font-size:24px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:22px 38px;min-height:74px;border:3px solid var(--olive);border-radius:10px;background:transparent;color:var(--olive);cursor:pointer;transition:background .18s,color .18s,transform .1s,opacity .2s}
+.btn:hover{background:rgba(47,58,42,.08)}
+.btn:active{transform:translateY(2px)}
+.btn.primary{background:var(--burnt);border-color:var(--burnt);color:var(--off)}
+.btn.primary:hover{background:var(--terra);border-color:var(--terra)}
+.btn.ghost{border-color:rgba(47,58,42,.32);color:var(--olive2)}
+.btn[disabled]{opacity:.3;pointer-events:none}
+.btn:focus-visible{outline:4px solid var(--terra);outline-offset:4px}
+.spacer{flex:1}
+.fade{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.fade.in{opacity:1;transform:none}
+::selection{background:rgba(210,98,42,.25)}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+.top{display:flex;align-items:flex-end;gap:36px}
+.casebadge{font-family:var(--serif);font-size:30px;color:var(--off);background:var(--olive);padding:10px 26px;border-radius:8px}
+.cols{display:grid;grid-template-columns:760px 1fr;gap:64px;margin-top:36px;align-items:start}
+.clues{list-style:none;display:flex;flex-direction:column;gap:24px}
+.clue{display:flex;gap:24px;align-items:baseline;font-size:36px;line-height:1.25;font-weight:500}
+.clue .n{font-family:var(--serif);font-size:28px;color:var(--burnt);min-width:52px}
+.panel{background:var(--off);border:3px solid var(--olive);border-radius:16px;padding:44px 48px;min-height:520px;position:relative}
+.hold{font-size:30px;color:var(--olive2);line-height:1.4}
+.hold .q{font-family:var(--serif);font-size:130px;color:var(--sage);line-height:1;display:block;margin-bottom:18px}
+.ans{font-family:var(--serif);font-size:76px;color:var(--terra);line-height:1;margin-bottom:8px}
+.sub{font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:var(--olive2);font-weight:700;margin:30px 0 14px}
+.dolist{list-style:none;display:flex;flex-direction:column;gap:12px}
+.doitem{font-size:30px;display:flex;gap:16px}
+.doitem::before{content:'';width:14px;height:14px;background:var(--burnt);border-radius:50%;margin-top:14px;flex:none}
+.tags{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px}
+.tag{font-size:24px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:3px solid var(--sage);border-radius:999px;padding:10px 24px;color:var(--olive2)}
+.enjoy{margin-top:34px;border-top:3px solid var(--sage);padding-top:24px}
+.eq{font-family:var(--serif);font-size:40px;margin-bottom:18px}
+.echoice{display:flex;gap:16px}
+.epick{font-size:22px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:18px 28px;border:3px solid var(--olive);border-radius:10px;background:transparent;color:var(--olive);cursor:pointer}
+.epick.sel{background:var(--olive);color:var(--off)}
+.enote{font-size:22px;color:var(--olive2);margin-top:14px;opacity:0;transition:opacity .3s}
+.enote.in{opacity:1}
+#endcard{position:absolute;inset:0;background:var(--olive);color:var(--off);display:flex;flex-direction:column;justify-content:center;padding:0 160px;opacity:0;pointer-events:none;transition:opacity .6s}
+#endcard.in{opacity:1;pointer-events:auto}
+#endcard .e1{font-family:var(--serif);font-size:92px;line-height:1.06;max-width:1400px}
+#endcard .e2{font-size:34px;color:var(--sage);margin-top:34px}
+
+</style></head>
+<body><div id="stage">
+<div class="top"><div><div class="kicker">Career Lab &middot; Visual 02</div><h1>Career Detective</h1></div><div class="casebadge" id="cbadge">Case 01</div></div>
+<div class="cols">
+  <ol class="clues" id="clues"></ol>
+  <div class="panel" id="panel"></div>
+</div>
+<div class="bar"><button class="btn primary" id="go">Next clue</button><button class="btn ghost" id="prevcase">Previous case</button><div class="spacer"></div><button class="btn ghost" id="reset">Reset</button></div>
+<div id="endcard"><div class="e1">Don&rsquo;t choose a career from its name.</div><div class="e2">Explore what the person actually does.</div></div>
+</div>
+<script>
+(function(){function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);document.getElementById('stage').style.transform='translate(-50%,-50%) scale('+s+')';}
+addEventListener('resize',fit);fit();})();
+
+var CASES=[
+ {clues:['Works with plants.','Collects information from fields.','Studies soil.','Performs laboratory tests.','Explains results to farmers.'],
+  answer:'Agricultural Scientist',
+  does:['Studies crops and soil','Conducts experiments','Helps improve farming practices'],
+  with:['plants','data','farmers']},
+ {clues:['Works with human movement.','Helps people recover after injury.','Observes how people move.','Designs exercises.','Works directly with patients.'],
+  answer:'Physiotherapist',
+  does:['Assesses how a person moves and where movement is limited','Designs and supervises exercise programmes','Tracks recovery over weeks and adjusts the plan'],
+  with:['people','the body','movement']},
+ {clues:['Works with drawings and software.','Creates movement frame by frame.','Thinks about timing and storytelling.','Revises work after feedback.','Works with artists and directors.'],
+  answer:'Animator',
+  does:['Plans shots, timing and how a movement should feel','Builds movement frame by frame in drawings or software','Revises the work after feedback from directors and artists'],
+  with:['drawing','software','directors']}
+];
+var ci=0,step=0;
+var cluesEl=document.getElementById('clues'),panel=document.getElementById('panel'),go=document.getElementById('go');
+function esc(s){return s;}
+function render(){
+  var c=CASES[ci];
+  document.getElementById('cbadge').textContent='Case 0'+(ci+1);
+  var h='';
+  for(var i=0;i<c.clues.length;i++){h+='<li class="clue fade'+(step>i?' in':'')+'"><span class="n">0'+(i+1)+'</span><span>'+c.clues[i]+'</span></li>';}
+  cluesEl.innerHTML=h;
+  var p='';
+  if(step<=5){
+    p='<div class="hold"><span class="q">?</span>'+(step<5?'Read the clues. Nothing is revealed yet.':'<b>Make your guess.</b><br>Say it out loud &mdash; guesses do not have to be right.')+'</div>';
+  }else{
+    p='<div class="ans fade in">'+c.answer+'</div>';
+    if(step>=7){
+      p+='<div class="sub">What they actually do</div><ul class="doList doitems">';
+      p+=c.does.map(function(d){return '<li class="doitem">'+d+'</li>';}).join('');
+      p+='</ul><div class="sub">Works with</div><div class="tags">'+c.with.map(function(t){return '<span class="tag">'+t+'</span>';}).join('')+'</div>';
+    }
+    if(step>=8){
+      p+='<div class="enjoy"><div class="eq">Would you enjoy this day?</div><div class="echoice">'+
+      ['Yes','Maybe','Not for me'].map(function(t,i){return '<button class="epick" data-e="'+i+'">'+t+'</button>';}).join('')+
+      '</div><div class="enote" id="enote">Nothing is recorded. There is no right answer.</div></div>';
+    }
+  }
+  panel.innerHTML=p;
+  panel.querySelectorAll('.epick').forEach(function(b){b.addEventListener('click',function(){
+    panel.querySelectorAll('.epick').forEach(function(x){x.classList.remove('sel');});
+    b.classList.add('sel');document.getElementById('enote').classList.add('in');});});
+  var last = ci===CASES.length-1;
+  go.textContent = step<5?'Next clue':(step===5?'Make your guess':(step===6?'Reveal':(step===7?'What do they actually do?':(step===8?'Would you enjoy this day?':(last?'Finish':'Next case')))));
+  document.getElementById('prevcase').disabled = ci===0;
+  document.getElementById('endcard').classList.toggle('in',step>9);
+  go.disabled = step>9;
+}
+go.addEventListener('click',function(){
+  if(step===9){ if(ci===CASES.length-1){step=10;} else {ci++;step=0;} }
+  else {step++;}
+  render();
+});
+document.getElementById('prevcase').addEventListener('click',function(){if(ci>0){ci--;step=9;render();}});
+document.getElementById('reset').addEventListener('click',function(){ci=0;step=0;render();});
+render();
+</script></body></html>
