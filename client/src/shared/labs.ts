@@ -94,6 +94,24 @@ export const LABS: LabInfo[] = [
     prompt: "How would you investigate a career before deciding anything about it?",
     file: "/labs/class-7/09_career_decision_matrix/index.html",
   },
+  {
+    id: "strengths-compass",
+    grade: 8,
+    order: 1,
+    title: "Strengths Compass",
+    minutes: "10 min",
+    prompt: "Which of these sound like you? Touch a strength, then try mixing two together.",
+    file: "/labs/class-8/01_strengths_compass/index.html",
+  },
+  {
+    id: "path-ahead",
+    grade: 8,
+    order: 2,
+    title: "Path Ahead",
+    minutes: "10 min",
+    prompt: "Touch a path — Science, Commerce, or Arts & Humanities — to see where it can lead.",
+    file: "/labs/class-8/02_path_ahead/index.html",
+  },
 ];
 
 export function labsForGrade(grade: number | null): LabInfo[] {

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Strengths Compass — Career Lab</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#F2EBDE;--off:#FBF7F0;--olive:#2F3A2A;--olive2:#4A5942;--sage:#9FB08C;--burnt:#D2622A;--terra:#B34A32;--char:#1C1A17;
+--serif:'Caprasimo',Georgia,'Iowan Old Style','Times New Roman',serif;--sans:'Figtree','Segoe UI',system-ui,sans-serif}
+html,body{height:100%;background:var(--char);overflow:hidden;font-family:var(--sans);-webkit-tap-highlight-color:transparent}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:50% 50%;background:var(--cream);color:var(--olive);padding:56px 80px 48px;display:flex;flex-direction:column;overflow:hidden}
+.kicker{font-size:22px;letter-spacing:.3em;text-transform:uppercase;color:var(--burnt);font-weight:700}
+h1{font-family:var(--serif);font-weight:400;font-size:100px;line-height:.98;letter-spacing:-.005em;color:var(--olive)}
+p{font-size:30px;line-height:1.4;text-wrap:pretty}
+.sub{font-size:32px;color:var(--olive2);margin-top:10px}
+.bar{margin-top:auto;display:flex;gap:18px;align-items:center;padding-top:26px}
+.btn{font-family:var(--sans);font-size:24px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:22px 38px;min-height:74px;border:3px solid var(--olive);border-radius:10px;background:transparent;color:var(--olive);cursor:pointer;transition:background .18s,color .18s,transform .1s,opacity .2s}
+.btn:hover{background:rgba(47,58,42,.08)}
+.btn:active{transform:translateY(2px)}
+.btn.primary{background:var(--burnt);border-color:var(--burnt);color:var(--off)}
+.btn.primary:hover{background:var(--terra);border-color:var(--terra)}
+.btn.ghost{border-color:rgba(47,58,42,.32);color:var(--olive2)}
+.btn[disabled]{opacity:.3;pointer-events:none}
+.btn:focus-visible{outline:4px solid var(--terra);outline-offset:4px}
+.spacer{flex:1}
+::selection{background:rgba(210,98,42,.25)}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+.wrap{position:relative;flex:1;margin-top:14px}
+.map{position:absolute;inset:0;transition:opacity .45s ease,transform .45s ease}
+.map.hide{opacity:0;transform:scale(.96);pointer-events:none}
+.mapsvg{width:100%;height:100%}
+.cl{cursor:pointer}
+.cl rect{fill:var(--off);stroke:var(--olive);stroke-width:3;transition:fill .2s,stroke .2s}
+.cl:hover rect,.cl:focus rect{fill:var(--sage)}
+.cl.sel rect{fill:var(--burnt);stroke:var(--burnt)}
+.cl.sel text{fill:var(--off)}
+.cl text{text-anchor:middle;font-family:var(--sans);font-size:23px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;fill:var(--olive);pointer-events:none}
+.cl tspan.tag{font-size:17px;font-weight:600;text-transform:none;letter-spacing:.02em;fill:var(--olive2)}
+.cl.sel tspan.tag{fill:#E4DCCB}
+.spoke{stroke:var(--sage);stroke-width:3}
+.core circle{fill:var(--olive)}
+.core text{text-anchor:middle;fill:var(--cream);font-family:var(--serif);font-size:30px}
+.detail{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .45s ease;display:grid;grid-template-columns:580px 1fr;gap:60px;align-items:start}
+.detail.show{opacity:1;pointer-events:auto}
+.dtitle{font-family:var(--serif);font-size:74px;line-height:1;color:var(--terra)}
+.dnote{font-size:28px;color:var(--olive2);margin-top:20px;line-height:1.4}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.ccard{background:var(--off);border:3px solid var(--olive);border-radius:14px;padding:26px 24px;font-size:28px;font-weight:600;line-height:1.2;min-height:110px;display:flex;align-items:center;opacity:0;transform:translateY(18px) scale(.97);transition:opacity .4s,transform .4s}
+.ccard.in{opacity:1;transform:none}
+.hint{font-size:26px;color:var(--olive2);margin-top:18px}
+.ov{position:absolute;inset:0;background:rgba(28,26,23,.88);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s;z-index:5}
+.ov.show{opacity:1;pointer-events:auto}
+.ovcard{background:var(--cream);border-radius:20px;padding:60px 68px;width:1220px}
+.ovk{font-size:22px;letter-spacing:.3em;text-transform:uppercase;color:var(--burnt);font-weight:700}
+.ovt{font-family:var(--serif);font-size:74px;line-height:1.02;margin:16px 0 24px}
+.ova{font-size:32px;line-height:1.4;color:var(--olive2)}
+.ovbar{display:flex;gap:18px;margin-top:34px}
+.modehint{font-size:24px;color:var(--olive2);margin-left:6px}
+</style></head>
+<body><div id="stage">
+<div class="kicker">Career Lab &middot; Visual 01</div>
+<h1>Strengths Compass</h1>
+<div class="sub">Everyone is a mix of several strengths.</div>
+<div class="wrap">
+  <div class="map" id="map"><svg class="mapsvg" viewBox="0 0 1760 760" id="mapsvg"></svg></div>
+  <div class="detail" id="detail">
+    <div><div class="kicker">Strength</div><div class="dtitle" id="dtitle"></div><div class="dnote" id="dnote"></div></div>
+    <div class="grid" id="dgrid"></div>
+  </div>
+</div>
+<div class="bar">
+  <button class="btn ghost" id="back">Back to compass</button>
+  <button class="btn primary" id="mixBtn">Mix two strengths</button>
+  <button class="btn primary" id="combine" disabled>Combine</button>
+  <span class="modehint" id="modehint"></span>
+  <div class="spacer"></div>
+  <button class="btn ghost" id="reset">Reset</button>
+</div>
+<div class="ov" id="ov"><div class="ovcard">
+  <div class="ovk" id="ovk">Most careers blend strengths</div>
+  <div class="ovt" id="ovt"></div>
+  <div class="ova" id="ova"></div>
+  <div class="ovbar"><button class="btn primary" id="ovclose">Back to compass</button></div>
+</div></div>
+</div>
+<script>
+(function(){function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);document.getElementById('stage').style.transform='translate(-50%,-50%) scale('+s+')';}
+addEventListener('resize',fit);fit();})();
+
+var TRAITS=[
+ ['Realistic','Hands-on & practical','Likes fixing, building and working with tools, machines or the outdoors.',
+   ['Mechanical Engineer','Electrician','Agricultural Scientist','Pilot','Chef','Carpenter']],
+ ['Investigative','Curious & analytical','Likes figuring out how and why things work, testing ideas carefully.',
+   ['Scientist','Doctor','Data Analyst','Researcher','Software Engineer','Forensic Scientist']],
+ ['Artistic','Creative & expressive','Likes original ideas, design, music, writing or performing.',
+   ['Animator','Graphic Designer','Architect','Writer','Musician','Filmmaker']],
+ ['Social','Caring & people-focused','Likes helping, teaching, listening and working closely with people.',
+   ['Teacher','Counsellor','Nurse','Social Worker','Physiotherapist','Doctor']],
+ ['Enterprising','Persuasive & driven','Likes leading, competing, convincing others and starting new things.',
+   ['Entrepreneur','Manager','Lawyer','Sales Lead','Marketing Professional','Politician']],
+ ['Conventional','Organised & precise','Likes structure, accuracy, records and clear systems.',
+   ['Accountant','Banker','Civil Servant','Operations Analyst','Librarian','Logistics Planner']]
+];
+var KEY={Realistic:'R',Investigative:'I',Artistic:'A',Social:'S',Enterprising:'E',Conventional:'C'};
+var BLEND={
+ RI:['Aerospace / Robotics Engineer','Designs and tests machines by combining scientific research with hands-on building.'],
+ RA:['Industrial / Product Designer','Shapes physical objects that must be both useful and good to look at.'],
+ RS:['Physiotherapist / Sports Coach','Hands-on work that directly helps another person’s body or performance.'],
+ RE:['Farm Owner / Construction Contractor','Runs a hands-on operation while also managing the business side of it.'],
+ RC:['Quality Control Engineer / Surveyor','Hands-on work that must follow precise standards and careful records.'],
+ IA:['Animator / Game Designer','Uses research and technical skill to build original visual worlds.'],
+ IS:['Doctor / Clinical Psychologist','Uses scientific knowledge directly in the service of people.'],
+ IE:['Tech Entrepreneur / Product Manager','Turns research and analysis into a new venture or product.'],
+ IC:['Actuary / Data Analyst','Uses precise analysis inside a structured, rule-based system.'],
+ AS:['Art Therapist / Design Teacher','Uses creativity to help or teach other people.'],
+ AE:['Advertising Creative / Fashion Entrepreneur','Turns original ideas into a business people want to pay for.'],
+ AC:['Architect / UX Designer','Creative work that must also follow exact technical standards.'],
+ SE:['School Principal / NGO Founder','Leads people and organisations built around helping others.'],
+ SC:['HR Manager / Hospital Administrator','Keeps people-focused systems organised and fair.'],
+ EC:['Chartered Accountant / Operations Manager','Runs structured systems while driving business results.']
+};
+function blendKey(i,j){
+  var a=KEY[TRAITS[i][0]],b=KEY[TRAITS[j][0]];
+  return BLEND[a+b]?a+b:b+a;
+}
+
+var svg=document.getElementById('mapsvg'),NS='http://www.w3.org/2000/svg',cx=880,cy=378,R=280;
+function mk(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+var nodes=[];
+TRAITS.forEach(function(c,i){
+  var ang=(-90+i*60)*Math.PI/180,x=cx+Math.cos(ang)*R*1.65,y=cy+Math.sin(ang)*R*1.15;
+  var l=mk('line',{x1:cx,y1:cy,x2:x,y2:y,'class':'spoke'});svg.appendChild(l);
+  var g=mk('g',{'class':'cl',transform:'translate('+x+','+y+')',tabindex:'0',role:'button'});
+  g.appendChild(mk('rect',{x:-175,y:-48,width:350,height:96,rx:12}));
+  var t=mk('text',{y:2});t.textContent=c[0];
+  var tag=mk('tspan',{x:0,y:26,'class':'tag'});tag.textContent=c[1];t.appendChild(tag);
+  g.appendChild(t);
+  g.addEventListener('click',function(){clickNode(i);});
+  g.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();clickNode(i);}});
+  svg.appendChild(g);
+  nodes.push(g);
+});
+var core=mk('g',{'class':'core'});core.appendChild(mk('circle',{cx:cx,cy:cy,r:120}));
+['Your','strengths'].forEach(function(s,i){var t=mk('text',{x:cx,y:cy-4+i*38});t.textContent=s;core.appendChild(t);});
+svg.appendChild(core);
+
+var timers=[],mixMode=false,selected=[];
+function clearT(){timers.forEach(clearTimeout);timers=[];}
+
+function openDetail(i){
+  clearT();
+  document.getElementById('dtitle').textContent=TRAITS[i][0];
+  document.getElementById('dnote').textContent=TRAITS[i][2];
+  var g=document.getElementById('dgrid');
+  g.innerHTML=TRAITS[i][3].map(function(c){return '<div class="ccard">'+c+'</div>';}).join('');
+  document.getElementById('back').disabled=false;
+  document.getElementById('map').classList.add('hide');
+  document.getElementById('detail').classList.add('show');
+  g.querySelectorAll('.ccard').forEach(function(c,k){timers.push(setTimeout(function(){c.classList.add('in');},k*90));});
+}
+function closeDetail(){
+  document.getElementById('back').disabled=true;
+  document.getElementById('map').classList.remove('hide');
+  document.getElementById('detail').classList.remove('show');
+}
+function clickNode(i){
+  if(!mixMode){openDetail(i);return;}
+  var idx=selected.indexOf(i);
+  if(idx>-1){selected.splice(idx,1);}
+  else{
+    if(selected.length>=2)selected.shift();
+    selected.push(i);
+  }
+  nodes.forEach(function(n,k){n.classList.toggle('sel',selected.indexOf(k)>-1);});
+  document.getElementById('combine').disabled=selected.length!==2;
+}
+function setMix(on){
+  mixMode=on;
+  selected=[];
+  nodes.forEach(function(n){n.classList.remove('sel');});
+  document.getElementById('combine').disabled=true;
+  document.getElementById('mixBtn').textContent=on?'Explore one at a time':'Mix two strengths';
+  document.getElementById('modehint').textContent=on?'Touch any two on the compass, then Combine.':'';
+  closeDetail();
+}
+function showBlend(){
+  if(selected.length!==2)return;
+  var key=blendKey(selected[0],selected[1]);
+  var b=BLEND[key];
+  document.getElementById('ovk').textContent=TRAITS[selected[0]][0]+' + '+TRAITS[selected[1]][0];
+  document.getElementById('ovt').textContent=b[0];
+  document.getElementById('ova').textContent=b[1]+' Most careers, in real life, draw on more than one strength.';
+  document.getElementById('ov').classList.add('show');
+}
+document.getElementById('back').addEventListener('click',closeDetail);
+document.getElementById('back').disabled=true;
+document.getElementById('mixBtn').addEventListener('click',function(){setMix(!mixMode);});
+document.getElementById('combine').addEventListener('click',showBlend);
+document.getElementById('ovclose').addEventListener('click',function(){document.getElementById('ov').classList.remove('show');});
+document.getElementById('reset').addEventListener('click',function(){
+  clearT();closeDetail();setMix(false);
+  document.getElementById('ov').classList.remove('show');
+});
+</script></body></html>

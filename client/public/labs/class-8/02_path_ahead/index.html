@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Path Ahead — Career Lab</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#F2EBDE;--off:#FBF7F0;--olive:#2F3A2A;--olive2:#4A5942;--sage:#9FB08C;--burnt:#D2622A;--terra:#B34A32;--char:#1C1A17;
+--serif:'Caprasimo',Georgia,'Iowan Old Style','Times New Roman',serif;--sans:'Figtree','Segoe UI',system-ui,sans-serif}
+html,body{height:100%;background:var(--char);overflow:hidden;font-family:var(--sans);-webkit-tap-highlight-color:transparent}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:50% 50%;background:var(--cream);color:var(--olive);padding:56px 80px 48px;display:flex;flex-direction:column;overflow:hidden}
+.kicker{font-size:22px;letter-spacing:.3em;text-transform:uppercase;color:var(--burnt);font-weight:700}
+h1{font-family:var(--serif);font-weight:400;font-size:100px;line-height:.98;letter-spacing:-.005em;color:var(--olive)}
+p{font-size:30px;line-height:1.4;text-wrap:pretty}
+.sub{font-size:32px;color:var(--olive2);margin-top:10px}
+.bar{margin-top:auto;display:flex;gap:18px;align-items:center;padding-top:26px}
+.btn{font-family:var(--sans);font-size:24px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:22px 38px;min-height:74px;border:3px solid var(--olive);border-radius:10px;background:transparent;color:var(--olive);cursor:pointer;transition:background .18s,color .18s,transform .1s,opacity .2s}
+.btn:hover{background:rgba(47,58,42,.08)}
+.btn:active{transform:translateY(2px)}
+.btn.primary{background:var(--burnt);border-color:var(--burnt);color:var(--off)}
+.btn.primary:hover{background:var(--terra);border-color:var(--terra)}
+.btn.ghost{border-color:rgba(47,58,42,.32);color:var(--olive2)}
+.btn[disabled]{opacity:.3;pointer-events:none}
+.btn:focus-visible{outline:4px solid var(--terra);outline-offset:4px}
+.spacer{flex:1}
+::selection{background:rgba(210,98,42,.25)}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+.wrap{position:relative;flex:1;margin-top:24px}
+.paths{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;transition:opacity .4s ease,transform .4s ease}
+.paths.hide{opacity:0;transform:scale(.96);pointer-events:none}
+.path{background:var(--off);border:3px solid var(--olive);border-radius:20px;padding:36px 32px;cursor:pointer;display:flex;flex-direction:column;gap:14px;transition:background .2s,transform .15s}
+.path:hover{background:var(--sage)}
+.path:active{transform:translateY(2px)}
+.pk{font-size:20px;letter-spacing:.26em;text-transform:uppercase;color:var(--burnt);font-weight:700}
+.pt{font-family:var(--serif);font-size:58px;line-height:1.02;color:var(--olive)}
+.psub{font-size:25px;color:var(--olive2);line-height:1.35}
+.ptags{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto}
+.ptag{font-size:19px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border:2px solid var(--olive);border-radius:999px;padding:8px 16px;color:var(--olive2)}
+.detail{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .45s ease;display:grid;grid-template-columns:560px 1fr;gap:56px;align-items:start}
+.detail.show{opacity:1;pointer-events:auto}
+.dtitle{font-family:var(--serif);font-size:72px;line-height:1;color:var(--terra)}
+.dnote{font-size:27px;color:var(--olive2);margin-top:18px;line-height:1.4}
+.dsubjects{font-size:24px;color:var(--olive2);margin-top:22px;line-height:1.5}
+.dsubjects b{color:var(--olive);font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.ccard{background:var(--off);border:3px solid var(--olive);border-radius:14px;padding:24px 22px;font-size:27px;font-weight:600;line-height:1.2;min-height:96px;display:flex;align-items:center;opacity:0;transform:translateY(18px) scale(.97);transition:opacity .4s,transform .4s}
+.ccard.in{opacity:1;transform:none}
+.ov{position:absolute;inset:0;background:rgba(28,26,23,.88);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s;z-index:5}
+.ov.show{opacity:1;pointer-events:auto}
+.ovcard{background:var(--cream);border-radius:20px;padding:60px 68px;width:1260px}
+.ovk{font-size:22px;letter-spacing:.3em;text-transform:uppercase;color:var(--terra);font-weight:700}
+.ovt{font-family:var(--serif);font-size:56px;line-height:1.08;margin:18px 0 8px;color:var(--olive)}
+.ovq{font-size:24px;letter-spacing:.2em;text-transform:uppercase;color:var(--burnt);font-weight:700;margin-top:26px}
+.ova{font-size:34px;line-height:1.4;color:var(--olive2);margin-top:14px}
+.ovbar{display:flex;gap:18px;margin-top:34px}
+</style></head>
+<body><div id="stage">
+<div class="kicker">Career Lab &middot; Visual 02</div>
+<h1>Path Ahead</h1>
+<div class="sub">Touch a path to see where it can lead.</div>
+<div class="wrap">
+  <div class="paths" id="paths"></div>
+  <div class="detail" id="detail">
+    <div><div class="kicker">Stream</div><div class="dtitle" id="dtitle"></div><div class="dnote" id="dnote"></div><div class="dsubjects" id="dsubjects"></div></div>
+    <div class="grid" id="dgrid"></div>
+  </div>
+</div>
+<div class="bar">
+  <button class="btn ghost" id="back">Back to paths</button>
+  <button class="btn primary" id="myth">Bust a career myth</button>
+  <div class="spacer"></div>
+  <button class="btn ghost" id="reset">Reset</button>
+</div>
+<div class="ov" id="ov"><div class="ovcard">
+  <div class="ovk">Myth</div>
+  <div class="ovt" id="ovm"></div>
+  <div class="ovq">Fact</div>
+  <div class="ova" id="ovf"></div>
+  <div class="ovbar"><button class="btn primary" id="ovclose">Back to paths</button></div>
+</div></div>
+</div>
+<script>
+(function(){function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);document.getElementById('stage').style.transform='translate(-50%,-50%) scale('+s+')';}
+addEventListener('resize',fit);fit();})();
+
+var STREAMS=[
+ ['Science','PCM / PCB','Physics, Chemistry, Maths or Biology, English, plus one optional subject.',
+   'For students who enjoy investigating how things work and solving technical problems.',
+   ['Engineer','Doctor','Researcher','Data Scientist','Architect','Pilot']],
+ ['Commerce','Business & Money','Accountancy, Business Studies, Economics, English, plus one optional subject.',
+   'For students who enjoy how money, business and organisations actually work.',
+   ['Chartered Accountant','Entrepreneur','Banker','Company Secretary','Economist','Financial Analyst']],
+ ['Arts & Humanities','People & Society','History, Political Science, Psychology, Economics, Languages and more.',
+   'For students who enjoy people, society, ideas, culture and expression.',
+   ['Civil Servant (IAS/IPS)','Lawyer','Journalist','Psychologist','Fashion / Graphic Designer','Teacher']]
+];
+var MYTHS=[
+ ['Only Science leads to good careers.','Commerce and Arts both lead to well-paid, respected careers — Chartered Accountants, IAS officers, judges and successful entrepreneurs regularly come from Commerce and Arts streams, not only Science.'],
+ ['Once you choose a stream, you can never change direction.','Many people change direction later — through additional exams, diplomas, or further study. A stream is a strong start, not a locked door.'],
+ ['Arts is only for students who "could not manage" Science.','Fields like Law, Design, Civil Services, Psychology and Journalism need their own strong skills, and are deliberately chosen by many top-scoring students.'],
+ ['Commerce is only about becoming an accountant.','Commerce also leads to banking, business management, entrepreneurship, economics research and company law — accountancy is just one of many roads.'],
+ ['You have to decide your whole future right now.','This stream choice comes after Class 10 — two years away. Right now is the time to explore widely, not to commit.']
+];
+
+var paths=document.getElementById('paths');
+STREAMS.forEach(function(s,i){
+  var d=document.createElement('div');d.className='path';
+  d.innerHTML='<div class="pk">Stream '+(i+1)+'</div><div class="pt">'+s[0]+'</div><div class="psub">'+s[3]+'</div><div class="ptags"><span class="ptag">'+s[1]+'</span></div>';
+  d.setAttribute('tabindex','0');d.setAttribute('role','button');
+  d.addEventListener('click',function(){open(i);});
+  d.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open(i);}});
+  paths.appendChild(d);
+});
+var timers=[];
+function clearT(){timers.forEach(clearTimeout);timers=[];}
+function open(i){
+  clearT();
+  document.getElementById('dtitle').textContent=STREAMS[i][0];
+  document.getElementById('dnote').textContent=STREAMS[i][3];
+  document.getElementById('dsubjects').innerHTML='<b>Typical subjects:</b> '+STREAMS[i][2];
+  var g=document.getElementById('dgrid');
+  g.innerHTML=STREAMS[i][4].map(function(c){return '<div class="ccard">'+c+'</div>';}).join('');
+  document.getElementById('back').disabled=false;
+  paths.classList.add('hide');
+  document.getElementById('detail').classList.add('show');
+  g.querySelectorAll('.ccard').forEach(function(c,k){timers.push(setTimeout(function(){c.classList.add('in');},k*90));});
+}
+function closeD(){
+  document.getElementById('back').disabled=true;
+  paths.classList.remove('hide');
+  document.getElementById('detail').classList.remove('show');
+}
+document.getElementById('back').addEventListener('click',closeD);
+document.getElementById('back').disabled=true;
+var ov=document.getElementById('ov'),mi=-1;
+document.getElementById('myth').addEventListener('click',function(){
+  var next=Math.floor(Math.random()*MYTHS.length);
+  if(MYTHS.length>1){while(next===mi)next=Math.floor(Math.random()*MYTHS.length);}
+  mi=next;
+  document.getElementById('ovm').textContent=MYTHS[mi][0];
+  document.getElementById('ovf').textContent=MYTHS[mi][1];
+  ov.classList.add('show');
+});
+document.getElementById('ovclose').addEventListener('click',function(){ov.classList.remove('show');});
+document.getElementById('reset').addEventListener('click',function(){clearT();closeD();ov.classList.remove('show');mi=-1;});
+</script></body></html>
